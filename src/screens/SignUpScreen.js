@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { supabase } from "../lib/supabase/supabase";
+// import { supabase } from "../lib/supabase/supabase";
 
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");

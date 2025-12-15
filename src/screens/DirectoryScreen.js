@@ -6,18 +6,26 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { Video } from "expo-av";
-import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
-import { useSettingsContext } from "../lib/supabase/hooks/useSettingsContext";
-import SignOutButton from "../lib/supabase/components/SignOutButton";
+// import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
+// import { useSettingsContext } from "../lib/supabase/hooks/useSettingsContext";
+// import SignOutButton from "../lib/supabase/components/SignOutButton";
 
 const DirectoryScreen = ({ navigation }) => {
   const [metadata, setMetadata] = useState(null);
-  const { session } = useAuthContext();
-  const { settings } = useSettingsContext();
+  //   const { session } = useAuthContext();
+  //   const { settings } = useSettingsContext();
+
+  const settings = {
+    button_style: "Default", // or "Glass"
+    font_color: "#FFFFFF",
+    background_color: "#F5F5F5",
+    allow_video_bg: "Disabled", // Disable video for now
+    allow_btn_animations: "Static", // or "Animated"
+  };
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
@@ -38,13 +46,13 @@ const DirectoryScreen = ({ navigation }) => {
     ).start();
   }, [scaleAnim]);
 
-  useEffect(() => {
-    if (session?.user) {
-      setMetadata(session.user.user_metadata);
-    } else {
-      setMetadata(null);
-    }
-  }, [session]);
+  //   useEffect(() => {
+  //     if (session?.user) {
+  //       setMetadata(session.user.user_metadata);
+  //     } else {
+  //       setMetadata(null);
+  //     }
+  //   }, [session]);
 
   const handleSignOut = async () => {
     try {
@@ -55,12 +63,15 @@ const DirectoryScreen = ({ navigation }) => {
   };
 
   const EventButton = ({ title, image, onPress }) => {
-
     if (settings.button_style == "Glass") {
       return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
           <BlurView intensity={10} tint="light" style={styles.eventButtonGlass}>
-            <Text style={[styles.eventTextGlass, { color: settings.font_color }]}>{title}</Text>   
+            <Text
+              style={[styles.eventTextGlass, { color: settings.font_color }]}
+            >
+              {title}
+            </Text>
           </BlurView>
         </TouchableOpacity>
       );
@@ -69,10 +80,13 @@ const DirectoryScreen = ({ navigation }) => {
     return (
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
         <View style={styles.eventButton}>
-          {(settings.allow_btn_animations == "Animated") ? (
+          {settings.allow_btn_animations == "Animated" ? (
             <Animated.Image
               source={image}
-              style={[styles.animatedImage, { transform: [{ scale: scaleAnim }] }]}
+              style={[
+                styles.animatedImage,
+                { transform: [{ scale: scaleAnim }] },
+              ]}
               resizeMode="contain"
             />
           ) : (
@@ -82,14 +96,18 @@ const DirectoryScreen = ({ navigation }) => {
               resizeMode="contain"
             />
           )}
-          <Text style={[styles.eventText, { color: settings.font_color }]}>{title}</Text>
+          <Text style={[styles.eventText, { color: settings.font_color }]}>
+            {title}
+          </Text>
         </View>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: settings.background_color }]}>
+    <View
+      style={[styles.container, { backgroundColor: settings.background_color }]}
+    >
       {settings.allow_video_bg == "Enabled" && (
         <Video
           source={require("../../assets/Background_Videos/water_feature_1.mp4")}
@@ -101,7 +119,9 @@ const DirectoryScreen = ({ navigation }) => {
         />
       )}
       <View style={styles.titleBlockStyle}>
-        <Text style={[styles.titleStyle, { color: settings.font_color }]}>Current Events</Text>
+        <Text style={[styles.titleStyle, { color: settings.font_color }]}>
+          Current Events
+        </Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -151,14 +171,14 @@ const DirectoryScreen = ({ navigation }) => {
         />
       </ScrollView>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
           handleSignOut();
         }}
       >
         <SignOutButton>Sign Out</SignOutButton>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {metadata ? (
         <Text style={styles.welcomeText}>
@@ -224,7 +244,7 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0,0,0,0.7)", // optional for extra pop
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
-    top : 10,
+    top: 10,
   },
   scrollContainer: {
     paddingVertical: 20,
@@ -254,7 +274,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
-    
   },
   eventText: {
     color: "white",
@@ -271,7 +290,7 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
-  },  
+  },
   welcomeText: {
     textAlign: "center",
     // marginVertical: 10,

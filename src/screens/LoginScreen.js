@@ -9,12 +9,12 @@ import {
   Image,
 } from "react-native";
 import { CommonActions } from "@react-navigation/native";
-import { supabase } from "../lib/supabase/supabase";
-import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
+// import { supabase } from "../lib/supabase/supabase";
+// import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
 import { Video } from "expo-av";
 
 const LoginScreen = ({ navigation }) => {
-  const { isLoading: authLoading } = useAuthContext(); // optional: read global loading
+  //   const { isLoading: authLoading } = useAuthContext(); // optional: read global loading
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
