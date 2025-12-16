@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import { CommonActions } from "@react-navigation/native";
 // import { supabase } from "../lib/supabase/supabase";
@@ -64,19 +66,40 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Video
-        source={require("../../assets/Background_Videos/seal_video_2.mp4")}
+      {/* -------------------------------------VIDEO------------------------------------- */}
+
+      {/* <Video
+        source={require("../../assets/Background_Videos/Fitness_Video_Five.mp4")}
         style={StyleSheet.absoluteFill}
         shouldPlay
         isLooping
         isMuted
         resizeMode="cover"
-      />
+      /> */}
 
-      <Image
+      {/* ---------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------IMAGES------------------------------------- */}
+      <ImageBackground
+        source={require("/Users/oscarlazo/Documents/Client_Deliverables/On_Core_Fitness/assets/Background_Images/Holiday_Images/Christmas/Christmas_One.jpg")}
+        style={styles.background}
+        resizeMode="cover"
+      ></ImageBackground>
+      {/* ---------------------------------------------------------------------------------- */}
+      {/* --------------------------------------------LOGO---------------------------------- */}
+      <View style={styles.logoStack}>
+        <Text style={[styles.logoBase, styles.logoOn]}>ON</Text>
+        <Text style={[styles.logoBase, styles.logoCore]}>CORE</Text>
+        <Text style={[styles.logoBase, styles.logoFitness]}>FITNESS</Text>
+        {/* <Image
+          source={require("/Users/oscarlazo/Documents/Client_Deliverables/On_Core_Fitness/assets/logo/kettlebell_transparent.png")}
+          style={styles.kettlebell}
+        /> */}
+      </View>
+      {/* ---------------------------------------------------------------------------------- */}
+      {/* <Image
         source={require("../../assets/login-icon.png")}
         style={styles.logoImage}
-      />
+      /> */}
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
@@ -135,7 +158,8 @@ const LoginScreen = ({ navigation }) => {
 //   headerShown: true, // Show the header
 //   title: "Login",
 // };
-
+const { width, height } = Dimensions.get("window");
+const scale = width / 375;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -210,6 +234,75 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 24,
     paddingBottom: 12,
+    marginTop: 190,
+    color: "#ffffff",
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logoStack: {
+    position: "absolute",
+    top: 120,
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  logoBase: {
+    fontSize: 60 * scale,
+    fontWeight: "bold",
+    letterSpacing: 3,
+    textAlign: "center",
+    // textShadowColor: "#000",
+    // textShadowOffset: { width: 3, height: 3 },
+    // textShadowRadius: 3,
+
+    // textShadowColor: "rgba(0,0,0,0.9)",
+    // textShadowOffset: { width: 4, height: 5 },
+    // textShadowRadius: 6,
+
+    // textShadowColor: "#000",
+    // textShadowOffset: { width: 5, height: 6 },
+    // textShadowRadius: 8,
+
+    textShadowColor: "#000",
+    textShadowOffset: { width: 6, height: 7 },
+    textShadowRadius: 10,
+    fontFamily: "BlackOpsOne",
+    // fontFamily: "sans-serif-condensed",
+    // fontFamily: "DarkUnderground",
+    // fontFamily: "RussoOne",
+    // fontFamily: "ScratchedLetters",
+    // fontFamily: "SquadaOne",
+    // fontFamily: "Staatliches",
+  },
+  logoOn: {
+    color: "#ffffff",
+  },
+
+  logoCore: {
+    color: "#c62828", // brand red
+    marginVertical: 4,
+  },
+
+  logoFitness: {
+    color: "#ffffff",
+  },
+  kettlebell: {
+    width: 104 * scale,
+    height: 104 * scale,
+    marginTop: 2,
+
+    // shadow to match logo text
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 3,
+
+    elevation: 8, // Android
   },
 });
 export default LoginScreen;
