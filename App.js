@@ -68,6 +68,7 @@ function RootApp() {
           component={DirectoryScreen}
           options={({ navigation }) => ({
             headerShown: true,
+            headerTransparent: true,
             headerRight: () => <SettingsButton navigation={navigation} />,
           })}
         />
