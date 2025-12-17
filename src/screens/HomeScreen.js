@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("/Users/oscarlazo/Documents/Client_Deliverables/On_Core_Fitness/assets/Background_Images/home_screen/background_3.jpg")}
+        source={require("../../assets/Background_Images/home_screen/background_3.jpg")}
         style={styles.background}
         resizeMode="cover"
       ></ImageBackground>
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
           <Text style={[styles.logoBase, styles.logoCore]}>CORE</Text>
           <Text style={[styles.logoBase, styles.logoFitness]}>FITNESS</Text>
           <Image
-            source={require("/Users/oscarlazo/Documents/Client_Deliverables/On_Core_Fitness/assets/logo/kettlebell_transparent.png")}
+            source={require("../../assets/logo/kettlebell_transparent.png")}
             style={styles.kettlebell}
           />
         </View>
