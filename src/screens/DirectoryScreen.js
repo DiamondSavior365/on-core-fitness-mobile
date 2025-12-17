@@ -1,59 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Animated,
   Text,
   StyleSheet,
   View,
   TouchableOpacity,
   ScrollView,
-  Image,
 } from "react-native";
-import { BlurView } from "expo-blur";
-import { Video } from "expo-av";
 // import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
 // import { useSettingsContext } from "../lib/supabase/hooks/useSettingsContext";
 // import SignOutButton from "../lib/supabase/components/SignOutButton";
 
 const DirectoryScreen = ({ navigation }) => {
+  // ------------------------------------Supabase------------------------------------------
   const [metadata, setMetadata] = useState(null);
   //   const { session } = useAuthContext();
   //   const { settings } = useSettingsContext();
-
-  const settings = {
-    button_style: "Default", // or "Glass"
-    font_color: "#FFFFFF",
-    background_color: "#F5F5F5",
-    allow_video_bg: "Disabled", // Disable video for now
-    allow_btn_animations: "Static", // or "Animated"
-  };
-
-  const scaleAnim = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(scaleAnim, {
-          toValue: 1.1,
-          duration: 4500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(scaleAnim, {
-          toValue: 1,
-          duration: 4500,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  }, [scaleAnim]);
-
-  //   useEffect(() => {
-  //     if (session?.user) {
-  //       setMetadata(session.user.user_metadata);
-  //     } else {
-  //       setMetadata(null);
-  //     }
-  //   }, [session]);
-
   const handleSignOut = async () => {
     try {
       navigation.navigate("Home");
@@ -62,124 +23,66 @@ const DirectoryScreen = ({ navigation }) => {
     }
   };
 
-  const EventButton = ({ title, image, onPress }) => {
-    if (settings.button_style == "Glass") {
-      return (
-        <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-          <BlurView intensity={10} tint="light" style={styles.eventButtonGlass}>
-            <Text
-              style={[styles.eventTextGlass, { color: settings.font_color }]}
-            >
-              {title}
-            </Text>
-          </BlurView>
-        </TouchableOpacity>
-      );
-    }
+  {
+    /* <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => {
+            handleSignOut();
+          }}
+        >
+          <SignOutButton>Sign Out</SignOutButton>
+        </TouchableOpacity> */
+  }
 
+  // ---------------------------------------------------------------------------------------
+
+  const EventButton = ({ title, onPress }) => {
     return (
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
         <View style={styles.eventButton}>
-          {settings.allow_btn_animations == "Animated" ? (
-            <Animated.Image
-              source={image}
-              style={[
-                styles.animatedImage,
-                { transform: [{ scale: scaleAnim }] },
-              ]}
-              resizeMode="contain"
-            />
-          ) : (
-            <Image
-              source={image}
-              style={styles.animatedImage}
-              resizeMode="contain"
-            />
-          )}
-          <Text style={[styles.eventText, { color: settings.font_color }]}>
-            {title}
-          </Text>
+          <Text style={styles.eventText}>{title}</Text>
         </View>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: settings.background_color }]}
-    >
-      {settings.allow_video_bg == "Enabled" && (
-        <Video
-          source={require("../../assets/Background_Videos/water_feature_1.mp4")}
-          style={StyleSheet.absoluteFill}
-          shouldPlay
-          isLooping
-          isMuted
-          resizeMode="cover"
-        />
-      )}
-      <View style={styles.titleBlockStyle}>
-        <Text style={[styles.titleStyle, { color: settings.font_color }]}>
-          Current Events
-        </Text>
+    <View style={styles.container}>
+      <View style={styles.titleBlock}>
+        <Text style={styles.titleText}>On Core Fitness</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <EventButton
-          title="Halloween Events"
-          image={require("../../assets/button_Images/halloween_button.png")}
-          // onPress={() => navigation.navigate("Halloween_Screen")} // old navigation
+          title="Personal Training"
           onPress={() =>
             navigation.navigate("EventListScreen", { category: "halloween" })
           }
         />
 
         <EventButton
-          title="Thanksgiving Events"
-          image={require("../../assets/button_Images/thanksgiving_button.png")}
-          // onPress={() => navigation.navigate("Thanksgiving_Screen")}
+          title="Wellness"
           onPress={() =>
-            navigation.navigate("EventListScreen", { category: "thanksgiving" })
+            navigation.navigate("EventListScreen", { category: "wellness" })
           }
         />
 
         <EventButton
-          title="Christmas Events"
-          image={require("../../assets/button_Images/christmas_button.png")}
-          // onPress={() => navigation.navigate("Christmas_Screen")}
+          title="About Us"
           onPress={() =>
-            navigation.navigate("EventListScreen", { category: "christmas" })
+            navigation.navigate("EventListScreen", { category: "about" })
           }
         />
 
         <EventButton
-          title="F1 Racer Events"
-          image={require("../../assets/button_Images/f1_button.png")}
-          // onPress={() => navigation.navigate("F1_Racer_Screen")}
+          title="Pricing Plans"
           onPress={() =>
-            navigation.navigate("EventListScreen", { category: "f1" })
-          }
-        />
-
-        <EventButton
-          title="Sports Events"
-          image={require("../../assets/button_Images/sports_button.png")}
-          // onPress={() => navigation.navigate("Sports_Screeen")}
-          onPress={() =>
-            navigation.navigate("EventListScreen", { category: "sports" })
+            navigation.navigate("EventListScreen", { category: "pricing" })
           }
         />
       </ScrollView>
 
-      {/* <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => {
-          handleSignOut();
-        }}
-      >
-        <SignOutButton>Sign Out</SignOutButton>
-      </TouchableOpacity> */}
-
+      {/* ----------------------------------Supabase------------------------------------------ */}
       {metadata ? (
         <Text style={styles.welcomeText}>
           Welcome, {metadata.full_name}. You are logged in.
@@ -193,117 +96,49 @@ const DirectoryScreen = ({ navigation }) => {
   );
 };
 
-// DirectoryScreen.navigationOptions = {
-//   headerShown: true,
-//   title: "Directory",
-// };
-// DirectoryScreen.navigationOptions = ({ navigation }) => ({
-//   headerShown: true,
-//   title: "Directory",
-//   headerLeft: () => (
-//     <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-//       <Text
-//         style={{
-//           color: "#007AFF",
-//           marginLeft: 15,
-//           fontSize: 16,
-//           fontWeight: "bold",
-//         }}
-//       >
-//         &lt; Home
-//       </Text>
-//     </TouchableOpacity>
-//   ),
-// });
+{
+  /* ----------------------------------------------------------------------------------- */
+}
 
 const styles = StyleSheet.create({
-  animatedImage: {
-    position: "absolute",
-    width: "120%",
-    height: "120%",
-    top: "-10%",
-    left: "-10%",
-    opacity: 0.95,
-    borderRadius: 16,
-  },
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#FFFFFF",
   },
-  titleBlockStyle: {
-    // backgroundColor: "#455A64",
-    backgroundColor: "rgba(69, 90, 100, 0.6)",
+
+  titleBlock: {
     height: 90,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#9AA5A9",
   },
-  titleStyle: {
+
+  titleText: {
     fontSize: 30,
     fontWeight: "600",
-    color: "#FFFFFF", // pure white
-    textShadowColor: "rgba(0,0,0,0.7)", // optional for extra pop
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-    top: 10,
+    color: "#FFFFFF",
+    marginTop: 10,
   },
+
   scrollContainer: {
     paddingVertical: 20,
     alignItems: "center",
-    gap: 15,
+    gap: 20,
   },
+
   eventButton: {
-    width: 380,
-    height: 150,
+    width: 360,
+    height: 140,
+    backgroundColor: "#000000",
+    borderRadius: 20,
     justifyContent: "center",
-    outlineColor: "black",
-    outlineStyle: "solid",
-    outlineWidth: 2,
     alignItems: "center",
-    borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: "#f0f0f0",
   },
-  eventButtonGlass: {
-    width: 380,
-    height: 150,
-    justifyContent: "center",
-    outlineColor: "rgba(255, 255, 255, 0.2)",
-    outlineStyle: "solid",
-    outlineWidth: 2,
-    alignItems: "center",
-    borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-  },
+
   eventText: {
-    color: "white",
-    fontSize: 30,
+    color: "#FFFFFF",
+    fontSize: 28,
     fontWeight: "600",
-    textShadowColor: "#000",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
-  },
-  eventTextGlass: {
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: 30,
-    fontWeight: "600",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 5,
-  },
-  welcomeText: {
-    textAlign: "center",
-    // marginVertical: 10,
-    paddingBottom: 30,
-  },
-  loginButton: {
-    alignSelf: "center",
-    width: 100,
-    height: 50,
-    textAlign: "center",
-    marginTop: 5,
-    color: "#007AFF",
-    justifyContent: "center",
   },
 });
 

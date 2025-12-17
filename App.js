@@ -10,6 +10,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import EventListScreen from "./src/screens/EventListScreen";
 // import SettingsScreen from "./src/screens/SettingsScreen";
 import { View, Image, TouchableOpacity } from "react-native";
+
 import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
