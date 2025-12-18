@@ -5,6 +5,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import DirectoryScreen from "./src/screens/DirectoryScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
+import PersonalTrainingScreen from "./src/screens/PersonalTrainingScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 import EventListScreen from "./src/screens/EventListScreen";
@@ -78,6 +79,15 @@ function RootApp() {
           options={({ navigation }) => ({
             headerShown: true,
             headerRight: () => <SettingsButton navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="Personal_Training_Screen"
+          component={PersonalTrainingScreen}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerTransparent: true,
+            // headerRight: () => <SettingsButton navigation={navigation} />,
           })}
         />
       </Stack.Navigator>

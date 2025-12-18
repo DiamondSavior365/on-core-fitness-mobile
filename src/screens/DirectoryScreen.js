@@ -51,7 +51,7 @@ const DirectoryScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require("../../assets/Background_Images/Holiday_Images/Christmas/Christmas_Five.jpg")}
+      source={require("../../assets/Background_Images/Holiday_Images/Christmas/Christmas_Five_Screenshot.jpg")}
       style={styles.background}
       resizeMode="cover"
     >
@@ -74,9 +74,7 @@ const DirectoryScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.eventButton}
           activeOpacity={0.7}
-          onPress={() =>
-            navigation.navigate("EventListScreen", { category: "halloween" })
-          }
+          onPress={() => navigation.navigate("Personal_Training_Screen")}
         >
           <Text style={styles.eventText}>Personal Training</Text>
         </TouchableOpacity>
