@@ -10,23 +10,20 @@ import WellnessScreen from "./src/screens/WellnessScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 import EventListScreen from "./src/screens/EventListScreen";
-// import SettingsScreen from "./src/screens/SettingsScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
+import Lines from "./assets/icons/lines-menu.svg";
+import Header from "./src/screens/Components/Header.js";
 import { View, Image, TouchableOpacity } from "react-native";
-
 import { useFonts } from "expo-font";
 
 const Stack = createStackNavigator();
 
 const SettingsButton = ({ navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate("Settings_Screen")}>
-    <View style={{ paddingRight: 2 }}>
-      <Image
-        source={require("./assets/settings.png")}
-        style={{
-          width: 36,
-          length: 36,
-          resizeMode: "contain",
-        }}
+    <View style={{ height: 42, justifyContent: "center" }}>
+      <Lines
+        width={36}
+        height={36}
       />
     </View>
   </TouchableOpacity>
@@ -38,7 +35,7 @@ function RootApp() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          title: "",
+          header: (props) => <Header {...props}/>,
           headerShown: false,
         }}
       >
@@ -58,7 +55,7 @@ function RootApp() {
         <Stack.Screen
           name="Login_Screen"
           component={LoginScreen}
-          options={{ headerShown: true, headerTransparent: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Sign_Up_Screen"
@@ -71,6 +68,7 @@ function RootApp() {
           options={({ navigation }) => ({
             headerShown: true,
             headerTransparent: true,
+            title: "Directory",
             headerRight: () => <SettingsButton navigation={navigation} />,
           })}
         />
@@ -81,6 +79,17 @@ function RootApp() {
             headerShown: true,
             headerRight: () => <SettingsButton navigation={navigation} />,
           })}
+        />
+        <Stack.Screen
+          name="Settings_Screen"
+          component={SettingsScreen}
+          options={{ 
+            title: "My Account", 
+            headerTitleStyle: {color: "#FFFFFF"}, 
+            headerShown: true, 
+            headerTransparent: true,
+            animation: "fade"
+          }}
         />
         <Stack.Screen
           name="Personal_Training_Screen"
