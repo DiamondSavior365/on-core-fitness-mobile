@@ -8,6 +8,8 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import PersonalTrainingScreen from "./src/screens/PersonalTrainingScreen";
 import WellnessScreen from "./src/screens/WellnessScreen";
 import AboutUsScreen from "./src/screens/AboutUsScreen";
+import PricingPlanScreen from "./src/screens/PricingPlanScreen";
+import ContactUsScreen from "./src/screens/ContactUsScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 import EventListScreen from "./src/screens/EventListScreen";
@@ -110,15 +112,24 @@ function RootApp() {
             // headerRight: () => <SettingsButton navigation={navigation} />,
           })}
         />
-        {/* <Stack.Screen
-          name="Wellness_Screen"
-          component={WellnessScreen}
+        <Stack.Screen
+          name="Pricing_Plan_Screen"
+          component={PricingPlanScreen}
           options={({ navigation }) => ({
             headerShown: true,
             headerTransparent: true,
             // headerRight: () => <SettingsButton navigation={navigation} />,
           })}
-        /> */}
+        />
+        <Stack.Screen
+          name="Contact_Us_Screen"
+          component={ContactUsScreen}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerTransparent: true,
+            // headerRight: () => <SettingsButton navigation={navigation} />,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

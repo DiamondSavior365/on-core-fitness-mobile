@@ -99,9 +99,7 @@ const DirectoryScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.eventButton}
           activeOpacity={0.7}
-          onPress={() =>
-            navigation.navigate("EventListScreen", { category: "pricing" })
-          }
+          onPress={() => navigation.navigate("Pricing_Plan_Screen")}
         >
           <Text style={styles.eventText}>Pricing Plans</Text>
         </TouchableOpacity>

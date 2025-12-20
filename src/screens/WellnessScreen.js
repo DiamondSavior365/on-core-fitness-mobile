@@ -9,7 +9,7 @@ import {
   Dimentions,
   TouchableOpacity,
 } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 
 const WellnessScreen = ({ navigation }) => {
@@ -43,7 +43,11 @@ const WellnessScreen = ({ navigation }) => {
           source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_5.png")}
           style={styles.heroImage}
         />
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
           {/* <Text style={styles.contactLabel}>BOOK A SESSION</Text> */}
           <Text style={styles.contactLabel}>FIND YOUR RECOVERY</Text>
@@ -88,7 +92,11 @@ const WellnessScreen = ({ navigation }) => {
             marginTop: 10,
           }}
         />
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
           {/* <Text style={styles.contactLabel}>LEARN MORE</Text> */}
           {/* <Text style={styles.contactLabel}>DISCOVER BEMER</Text> */}
@@ -132,7 +140,11 @@ const WellnessScreen = ({ navigation }) => {
             marginTop: 10,
           }}
         />
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
           <Text style={styles.contactLabel}>PRIORITIZE RECOVERY</Text>
           <View style={styles.contactArrowCircle}>
@@ -172,7 +184,11 @@ const WellnessScreen = ({ navigation }) => {
             marginTop: 10,
           }}
         />
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           {/* <Text style={styles.contactLabel}>TEST IT OUT? LET US KNOW</Text> */}
           {/* <Text style={styles.contactLabel}>VIEW YOUR RESULTS</Text> */}
           {/* <Text style={styles.contactLabel}>DISCOVER INBODY</Text> */}
@@ -236,19 +252,27 @@ const WellnessScreen = ({ navigation }) => {
     </View>
   );
 };
-const PricingCard = ({ title, price, subtitle }) => (
-  <View style={styles.cardWrapper}>
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>{title}</Text>
-      <Text style={styles.cardPrice}>{price}</Text>
-      <Text style={styles.cardSubtitle}>{subtitle}</Text>
-    </View>
+const PricingCard = ({ title, price, subtitle }) => {
+  const navigation = useNavigation(); // Use hook here since PricingCard is not a screen component
 
-    <TouchableOpacity style={styles.signupButton} activeOpacity={0.85}>
-      <Text style={styles.signupText}>SIGN UP →</Text>
-    </TouchableOpacity>
-  </View>
-);
+  return (
+    <View style={styles.cardWrapper}>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <Text style={styles.cardPrice}>{price}</Text>
+        <Text style={styles.cardSubtitle}>{subtitle}</Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.signupButton}
+        activeOpacity={0.85}
+        onPress={() => navigation.navigate("Contact_Us_Screen")}
+      >
+        <Text style={styles.signupText}>SIGN UP →</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const scale = width / 375;
 const styles = StyleSheet.create({

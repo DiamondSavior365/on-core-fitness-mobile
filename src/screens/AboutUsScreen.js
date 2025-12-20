@@ -9,6 +9,7 @@ import {
   Dimentions,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -67,7 +68,11 @@ const AboutUsScreen = ({ navigation }) => {
           enjoy the journey along the way.
         </Text>
 
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           <Text style={styles.contactLabel}>START YOUR JOURNEY</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
@@ -102,7 +107,11 @@ const AboutUsScreen = ({ navigation }) => {
             movement, steady progression, and training with intention.
           </Text>
         </Text>
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           <Text style={styles.contactLabel}>FIND YOUR COMMUNITY</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
@@ -136,7 +145,11 @@ const AboutUsScreen = ({ navigation }) => {
           proper movement, consistency, and sustainable progress.
         </Text>
 
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           {/* <Text style={styles.contactLabel}>BUILD YOUR ENDURANCE</Text> */}
           <Text style={styles.contactLabel}>ELEVATE YOUR ENERGY</Text>
           <View style={styles.contactArrowCircle}>
@@ -174,7 +187,11 @@ const AboutUsScreen = ({ navigation }) => {
           results driven.
         </Text>
 
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           <Text style={styles.contactLabel}>BUILD REAL STRENGTH</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
@@ -227,19 +244,40 @@ const AboutUsScreen = ({ navigation }) => {
     </View>
   );
 };
-const PricingCard = ({ title, price, subtitle }) => (
-  <View style={styles.cardWrapper}>
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>{title}</Text>
-      <Text style={styles.cardPrice}>{price}</Text>
-      <Text style={styles.cardSubtitle}>{subtitle}</Text>
-    </View>
+// const PricingCard = ({ title, price, subtitle }) => (
+//   <View style={styles.cardWrapper}>
+//     <View style={styles.card}>
+//       <Text style={styles.cardTitle}>{title}</Text>
+//       <Text style={styles.cardPrice}>{price}</Text>
+//       <Text style={styles.cardSubtitle}>{subtitle}</Text>
+//     </View>
 
-    <TouchableOpacity style={styles.signupButton} activeOpacity={0.85}>
-      <Text style={styles.signupText}>SIGN UP →</Text>
-    </TouchableOpacity>
-  </View>
-);
+//     <TouchableOpacity style={styles.signupButton} activeOpacity={0.85}>
+//       <Text style={styles.signupText}>SIGN UP →</Text>
+//     </TouchableOpacity>
+//   </View>
+// );
+const PricingCard = ({ title, price, subtitle }) => {
+  const navigation = useNavigation(); // Use hook here since PricingCard is not a screen component
+
+  return (
+    <View style={styles.cardWrapper}>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <Text style={styles.cardPrice}>{price}</Text>
+        <Text style={styles.cardSubtitle}>{subtitle}</Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.signupButton}
+        activeOpacity={0.85}
+        onPress={() => navigation.navigate("Contact_Us_Screen")}
+      >
+        <Text style={styles.signupText}>SIGN UP →</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const scale = width / 375;
 const styles = StyleSheet.create({

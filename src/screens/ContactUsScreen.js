@@ -9,11 +9,10 @@ import {
   Dimentions,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-const PersonalTrainingScreen = ({ navigation }) => {
+const ContactUsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoStack}>
@@ -23,44 +22,45 @@ const PersonalTrainingScreen = ({ navigation }) => {
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_1.png")}
+          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_15.png")}
           style={styles.heroImage}
         />
-        <Text style={styles.sectionTextOne}>PERSONAL TRAINING!</Text>
-        <Text style={styles.sectionTextTwo}>
-          TRANSFORM YOUR BODY WITH PERSONAL TRAINING
-        </Text>
-        <Text style={styles.sectionTextThree}>
-          At On Core Fitness, our Personal Training Program is designed to
-          deliver real results through customized workouts, expert coaching, and
-          consistent motivation. Whether you're new to fitness or looking to
-          break through a plateau, our certified trainers create tailored plans
-          that align with your goals - be it weight loss, muscle gain, improved
-          mobility, or overall wellness. Located in Orange, CA, we provide a
-          supportive, high-energy environment where every session is focused on
-          you. Experience accountability, progress, and transformation—one
-          personalized session at a time.
-        </Text>
-        <TouchableOpacity
-          style={styles.contactButton}
-          activeOpacity={0.85}
-          onPress={() => navigation.navigate("Contact_Us_Screen")}
-        >
+        <Text style={[styles.sectionTextOne, styles.logoCore]}>CONTACT US</Text>
+
+        <View style={styles.membershipCard}>
+          {/* <Text style={styles.sectionTextOne}>MEMBERSHIP</Text> */}
+
+          <Text style={styles.sectionTextThree}>
+            ✓ Private, spacious, uncrowded 6,000 sq ft facility designed for
+            comfort and focus
+          </Text>
+
+          <Text style={styles.sectionTextThree}>
+            ✓ Friendly, personalized service with supportive staff dedicated to
+            your success
+          </Text>
+
+          <Text style={styles.sectionTextThree}>
+            ✓ Expert personal fitness training with custom plans tailored to
+            your goals and your pace
+          </Text>
+
+          <Text style={styles.sectionTextThree}>
+            ✓ Wellness therapies available including Red Light Therapy, BEMER
+            Circulation Therapy, and Infrared Sauna
+          </Text>
+
+          <Text style={styles.sectionTextThree}>
+            ✓ $75 per month or $50 per month with the purchase of personal
+            training
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
           <Text style={styles.contactLabel}>CONTACT</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
           </View>
         </TouchableOpacity>
-
-        <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_2.png")}
-          style={{
-            width: "100%",
-            height: Math.round(width * 1),
-            resizeMode: "contain",
-            marginTop: 10,
-          }}
-        />
         <View style={styles.sectionTextFiveStack}>
           <Text style={styles.sectionTextFour}>TRAIN </Text>
           <Text style={styles.sectionTextFour}>SMARTER. </Text>
@@ -105,27 +105,20 @@ const PersonalTrainingScreen = ({ navigation }) => {
     </View>
   );
 };
-const PricingCard = ({ title, price, subtitle }) => {
-  const navigation = useNavigation(); // Use hook here since PricingCard is not a screen component
-
-  return (
-    <View style={styles.cardWrapper}>
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{title}</Text>
-        <Text style={styles.cardPrice}>{price}</Text>
-        <Text style={styles.cardSubtitle}>{subtitle}</Text>
-      </View>
-
-      <TouchableOpacity
-        style={styles.signupButton}
-        activeOpacity={0.85}
-        onPress={() => navigation.navigate("Contact_Us_Screen")}
-      >
-        <Text style={styles.signupText}>SIGN UP →</Text>
-      </TouchableOpacity>
+const PricingCard = ({ title, price, subtitle }) => (
+  <View style={styles.cardWrapper}>
+    <View style={styles.card}>
+      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={styles.cardPrice}>{price}</Text>
+      <Text style={styles.cardSubtitle}>{subtitle}</Text>
     </View>
-  );
-};
+
+    <TouchableOpacity style={styles.signupButton} activeOpacity={0.85}>
+      <Text style={styles.signupText}>SIGN UP →</Text>
+    </TouchableOpacity>
+  </View>
+);
+
 const scale = width / 375;
 const styles = StyleSheet.create({
   container: {
@@ -367,6 +360,15 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     fontFamily: "RussoOne",
   },
+  membershipCard: {
+    backgroundColor: "rgba(255, 255, 255, 0.07)", // soft contrast on black
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginHorizontal: 16,
+    marginBottom: -20,
+    elevation: 8, // Android
+  },
 });
 
-export default PersonalTrainingScreen;
+export default ContactUsScreen;
