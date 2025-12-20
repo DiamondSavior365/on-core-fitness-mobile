@@ -9,6 +9,7 @@ import {
   Dimentions,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -55,7 +56,11 @@ const PricingPlanScreen = ({ navigation }) => {
             training
           </Text>
         </View>
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("Contact_Us_Screen")}
+        >
           <Text style={styles.contactLabel}>CONTACT</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
@@ -105,19 +110,27 @@ const PricingPlanScreen = ({ navigation }) => {
     </View>
   );
 };
-const PricingCard = ({ title, price, subtitle }) => (
-  <View style={styles.cardWrapper}>
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>{title}</Text>
-      <Text style={styles.cardPrice}>{price}</Text>
-      <Text style={styles.cardSubtitle}>{subtitle}</Text>
-    </View>
+const PricingCard = ({ title, price, subtitle }) => {
+  const navigation = useNavigation(); // Use hook here since PricingCard is not a screen component
 
-    <TouchableOpacity style={styles.signupButton} activeOpacity={0.85}>
-      <Text style={styles.signupText}>SIGN UP →</Text>
-    </TouchableOpacity>
-  </View>
-);
+  return (
+    <View style={styles.cardWrapper}>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <Text style={styles.cardPrice}>{price}</Text>
+        <Text style={styles.cardSubtitle}>{subtitle}</Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.signupButton}
+        activeOpacity={0.85}
+        onPress={() => navigation.navigate("Contact_Us_Screen")}
+      >
+        <Text style={styles.signupText}>SIGN UP →</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const scale = width / 375;
 const styles = StyleSheet.create({
