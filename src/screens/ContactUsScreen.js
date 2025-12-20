@@ -26,80 +26,15 @@ const ContactUsScreen = ({ navigation }) => {
           style={styles.heroImage}
         />
         <Text style={[styles.sectionTextOne, styles.logoCore]}>CONTACT US</Text>
-        {/* <Text style={styles.sectionTextTwo}>
-          TRANSFORM YOUR BODY WITH PERSONAL TRAINING
+        <Text style={styles.sectionTextTwo}>
+          We're here to support your fitness journey - reach out and connect
+          with our team.
         </Text>
-        <Text style={styles.sectionTextThree}>
-          At On Core Fitness, our Personal Training Program is designed to
-          deliver real results through customized workouts, expert coaching, and
-          consistent motivation. Whether you're new to fitness or looking to
-          break through a plateau, our certified trainers create tailored plans
-          that align with your goals - be it weight loss, muscle gain, improved
-          mobility, or overall wellness. Located in Orange, CA, we provide a
-          supportive, high-energy environment where every session is focused on
-          you. Experience accountability, progress, and transformation—one
-          personalized session at a time.
+        <Text style={styles.sectionTextTwo}>
+          2688 Santiago Blvd., Orange, CA 92867
         </Text>
-        <TouchableOpacity
-          style={styles.contactButton}
-          activeOpacity={0.85}
-          onPress={() => navigation.navigate("Contact_Us_Screen")}
-        >
-          <Text style={styles.contactLabel}>CONTACT</Text>
-          <View style={styles.contactArrowCircle}>
-            <Text style={styles.contactArrow}>↗</Text>
-          </View>
-        </TouchableOpacity>
-
-        <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_2.png")}
-          style={{
-            width: "100%",
-            height: Math.round(width * 1),
-            resizeMode: "contain",
-            marginTop: 10,
-          }}
-        />
-        <View style={styles.sectionTextFiveStack}>
-          <Text style={styles.sectionTextFour}>TRAIN </Text>
-          <Text style={styles.sectionTextFour}>SMARTER. </Text>
-          <Text style={styles.sectionTextFour}>GET </Text>
-          <Text style={styles.sectionTextFive}>STRONGER. </Text>
-        </View>
-        <Text style={styles.sectionTextSix}>
-          At On Core Fitness in Orange, CA, our expert trainers create custom
-          workout plans tailored to your goals. One-on-one coaching, real
-          accountability, and visible progress.
-        </Text>
-        <Text style={styles.sectionTextOne}>PERSONAL TRAINING PRICING</Text>
-        <Text style={styles.sectionTextSix}>
-          Strength, Functional, & General Fitness
-        </Text>
-        <View style={styles.pricingGrid}>
-          <PricingCard
-            title="1 SESSION"
-            price="$100"
-            subtitle="$100 · One Session Only"
-          />
-
-          <PricingCard
-            title="8 SESSIONS"
-            price="$760"
-            subtitle="$95 × 8 sessions"
-          />
-
-          <PricingCard
-            title="12 SESSIONS"
-            price="$1,080"
-            subtitle="$90 × 12 sessions"
-          />
-
-          <PricingCard
-            title="24 SESSIONS"
-            price="$2,040"
-            subtitle="$85 × 24 sessions"
-          />
-        </View> */}
+        <Text style={styles.sectionTextTwo}>Everyday from 4AM – 11PM</Text>
+        <Text style={styles.sectionTextTwo}>Phone: 714-988-7987</Text>
       </ScrollView>
     </View>
   );
@@ -159,59 +94,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  sectionTextTwo: {
-    paddingTop: 12,
-    color: "#fff",
-    fontSize: 16,
-    lineHeight: 22,
-    // fontWeight: "600", // semi-bold
-    fontFamily: "RussoOne",
-    textAlign: "center",
-  },
+  // sectionTextTwo: {
+  //   paddingTop: 12,
+  //   color: "#fff",
+  //   fontSize: 16,
+  //   lineHeight: 22,
+  //   // fontWeight: "600", // semi-bold
+  //   fontFamily: "RussoOne",
+  //   textAlign: "center",
+  // },
 
-  sectionTextThree: {
-    paddingTop: 9,
+  sectionTextTwo: {
+    marginVertical: -5,
+    paddingHorizontal: 5,
     color: "#fff",
     fontSize: 15,
     lineHeight: 21,
     fontWeight: "400", // regular
-    // fontFamily: "RussoOne",
-    paddingBottom: 5,
-  },
-  sectionTextFour: {
-    paddingTop: 9,
-    color: "#fff",
-    fontSize: 20,
-    lineHeight: 21,
-    fontWeight: "400", // regular
-    // fontFamily: "RussoOne",
-    fontFamily: "BlackOpsOne",
-    textAlign: "center",
-  },
-  sectionTextFive: {
-    paddingTop: 20,
-    color: "#fff",
-    fontSize: 30,
-    lineHeight: 21,
-    fontWeight: "400", // regular
-    // fontFamily: "RussoOne",
-    fontFamily: "BlackOpsOne",
-    textAlign: "center",
-    color: "#c62828", // brand red
-  },
-  sectionTextFiveStack: {
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-  },
-  sectionTextSix: {
-    // paddingTop: 9,
-    color: "#fff",
-    fontSize: 15,
-    lineHeight: 21,
-    fontWeight: "400", // regular
-    // fontFamily: "RussoOne",
-    justifyContent: "center",
     textAlign: "center",
   },
   logoBase: {
@@ -219,28 +119,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 3,
     textAlign: "center",
-    // textShadowColor: "#000",
-    // textShadowOffset: { width: 3, height: 3 },
-    // textShadowRadius: 3,
-
-    // textShadowColor: "rgba(0,0,0,0.9)",
-    // textShadowOffset: { width: 4, height: 5 },
-    // textShadowRadius: 6,
-
-    // textShadowColor: "#000",
-    // textShadowOffset: { width: 5, height: 6 },
-    // textShadowRadius: 8,
 
     textShadowColor: "#000",
     textShadowOffset: { width: 6, height: 7 },
     textShadowRadius: 10,
     fontFamily: "BlackOpsOne",
-    // fontFamily: "sans-serif-condensed",
-    // fontFamily: "DarkUnderground",
-    // fontFamily: "RussoOne",
-    // fontFamily: "ScratchedLetters",
-    // fontFamily: "SquadaOne",
-    // fontFamily: "Staatliches",
   },
   logoOn: {
     color: "#ffffff",
@@ -254,19 +137,6 @@ const styles = StyleSheet.create({
   logoFitness: {
     color: "#ffffff",
   },
-  kettlebell: {
-    width: 50 * scale,
-    height: 50 * scale,
-    marginTop: 2,
-
-    // shadow to match logo text
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.7,
-    shadowRadius: 3,
-    elevation: 8, // Android
-    alignSelf: "center",
-  },
   logoStack: {
     flexDirection: "row", // 👈 THIS is the key
     alignItems: "center",
@@ -278,93 +148,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     alignItems: "center",
     gap: 20,
-  },
-  contactButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    alignSelf: "center",
-    width: "80%",
-    paddingVertical: 14,
-    paddingHorizontal: 26,
-    marginVertical: 24,
-    borderWidth: 1.5,
-    borderColor: "#fff",
-    borderRadius: 999,
-  },
-
-  contactLabel: {
-    color: "#fff",
-    fontSize: 16,
-    letterSpacing: 2,
-    fontFamily: "RussoOne",
-  },
-
-  contactArrowCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 999,
-    borderWidth: 1.5,
-    borderColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  contactArrow: {
-    color: "#fff",
-    fontSize: 20,
-  },
-  pricingGrid: {
-    gap: 30,
-    marginTop: 30,
-  },
-
-  cardWrapper: {
-    alignItems: "center",
-  },
-
-  card: {
-    width: "120%",
-    backgroundColor: "#f2f2f2",
-    borderRadius: 28,
-    padding: 24,
-    alignItems: "center",
-  },
-
-  cardTitle: {
-    color: "#c62828",
-    fontSize: 25,
-    fontWeight: "700",
-    letterSpacing: 1.5,
-    marginBottom: 8,
-    fontFamily: "RussoOne",
-  },
-
-  cardPrice: {
-    fontSize: 36,
-    fontWeight: "900",
-    color: "#000",
-    marginBottom: 10,
-  },
-
-  cardSubtitle: {
-    fontSize: 14,
-    color: "#333",
-  },
-
-  signupButton: {
-    marginTop: 14,
-    backgroundColor: "#8b1e16",
-    paddingVertical: 12,
-    paddingHorizontal: 26,
-    borderRadius: 6,
-  },
-
-  signupText: {
-    color: "#fff",
-    fontSize: 14,
-    letterSpacing: 1.5,
-    fontFamily: "RussoOne",
   },
 });
 
