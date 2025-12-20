@@ -7,6 +7,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import PersonalTrainingScreen from "./src/screens/PersonalTrainingScreen";
 import WellnessScreen from "./src/screens/WellnessScreen";
+import AboutUsScreen from "./src/screens/AboutUsScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 import EventListScreen from "./src/screens/EventListScreen";
@@ -94,6 +95,15 @@ function RootApp() {
         <Stack.Screen
           name="Wellness_Screen"
           component={WellnessScreen}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerTransparent: true,
+            // headerRight: () => <SettingsButton navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="About_Us_Screen"
+          component={AboutUsScreen}
           options={({ navigation }) => ({
             headerShown: true,
             headerTransparent: true,

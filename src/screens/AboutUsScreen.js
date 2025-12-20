@@ -12,7 +12,7 @@ import {
 
 const { width, height } = Dimensions.get("window");
 
-const WellnessScreen = ({ navigation }) => {
+const AboutUsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoStack}>
@@ -21,177 +21,168 @@ const WellnessScreen = ({ navigation }) => {
         <Text style={[styles.logoBase, styles.logoFitness]}>FITNESS</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {/* ---------------------- Scroll View Section One ---------------------------- */}
         <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_3.png")}
+          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_9.png")}
           style={styles.heroImage}
         />
-        {/* ------------------------------------------------------------------------------------ */}
-        <Text style={styles.sectionTextOne}>RED LIGHT THERAPY</Text>
-        {/* <Text style={styles.sectionTextTwo}>LIGHT UP YOUR RECOVERY</Text> */}
-        {/* <Text style={styles.sectionTextTwo}>BETTER RECOVERY STARTS HERE</Text> */}
-        <Text style={styles.sectionTextTwo}>SCIENCE SUPPORTED RECOVERY</Text>
-        <Text style={styles.sectionTextThree}>
-          Red Light Therapy is a non-invasive treatment that uses low-level red
-          and near-infrared light to stimulate cellular repair, reduce
-          inflammation, and accelerate recovery. At On Core Fitness, it’s a
-          powerful tool to support muscle healing, joint health, and skin
-          rejuvenation. Whether you're recovering from intense workouts or
-          looking to improve overall wellness, Red Light Therapy helps you
-          recover faster and feel stronger.
+        <Text style={styles.sectionTextOne}>TRAINING WITH PURPOSE</Text>
+        {/* <Text style={styles.sectionTextOne}>PERSONALIZED PERFORMANCE</Text> */}
+        {/* <Text style={styles.sectionTextTwo}>TRANSFORM YOUR BODY TODAY</Text> */}
+        <Text style={styles.sectionTextTwo}>
+          Built for Strength, Confidence, and Longevity
         </Text>
-        <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_5.png")}
-          style={styles.heroImage}
-        />
-        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
-          {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
-          {/* <Text style={styles.contactLabel}>BOOK A SESSION</Text> */}
-          <Text style={styles.contactLabel}>FIND YOUR RECOVERY</Text>
-          <View style={styles.contactArrowCircle}>
-            <Text style={styles.contactArrow}>↗</Text>
-          </View>
-        </TouchableOpacity>
-        {/* ------------------------------------------------------------------------------------ */}
-        {/* ------------------------------------------------------------------------------------ */}
-        <Text style={styles.sectionTextOne}>BEMER CIRCULATION THERAPY</Text>
         {/* <Text style={styles.sectionTextTwo}>
-          REVIVE YOUR LEGS. RECHARGE YOUR LIFE.
+          Your Goals. Your Journey. Our Commitment.
         </Text> */}
-        {/* <Text style={styles.sectionTextTwo}>SUPPORT HEALTHY CIRCULATION</Text> */}
-        <Text style={styles.sectionTextTwo}>ADVANCED CIRCULATION SUPPORT</Text>
         {/* <Text style={styles.sectionTextThree}>
-          Experience next-level recovery with the Normatec 3 Legs at On Core
-          Fitness. This dynamic air compression system is designed to enhance
-          circulation, reduce muscle soreness, and speed up recovery after
-          workouts or long days on your feet. Whether you're an athlete, a
-          fitness enthusiast, or simply looking to feel better and move easier,
-          Normatec delivers targeted leg compression therapy that helps you
-          bounce back faster. Book your session today and give your legs the
-          recovery they deserve.
+          Joining On Core Fitness in Orange, CA, is more than just signing up
+          for a gym membership; it’s stepping into a thriving fitness community
+          built on family values and a commitment to excellence. As a
+          family-owned gym, On Core Fitness prioritizes personalized attention
+          and genuine care for each member, ensuring a welcoming and supportive
+          environment for all fitness levels. Our goal is not just to help you
+          achieve your fitness objectives but also to foster meaningful
+          connections and friendships within our community. With
+          state-of-the-art equipment, expert trainers, and fun classes, On Core
+          Fitness offers a holistic approach to health and wellness. Whether
+          you’re a seasoned athlete or new to fitness, join us and experience
+          the difference of a high-quality fitness community dedicated to
+          helping you reach your goals.
         </Text> */}
         <Text style={styles.sectionTextThree}>
-          BEMER Circulation Therapy uses low level electromagnetic signals to
-          support healthy blood flow and improve microcirculation throughout the
-          body. At On Core Fitness, it is used to aid recovery, reduce muscle
-          tension, and support overall wellness after training or long periods
-          of activity. Whether you are focused on performance or daily recovery,
-          BEMER provides a comfortable and restorative experience designed to
-          help you feel better and move with greater ease.
+          Joining On Core Fitness in Orange, CA is more than joining a gym it’s
+          becoming part of a supportive, results-driven community built on
+          family values and excellence. As a family-owned training facility, we
+          focus on personalized coaching, genuine relationships, and an
+          environment where every member feels welcomed and supported.
         </Text>
 
-        <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_6.png")}
-          style={{
-            width: "100%",
-            height: Math.round(width * 1),
-            resizeMode: "contain",
-            marginTop: 10,
-          }}
-        />
+        <Text style={[styles.sectionTextSeven]}>
+          Our mission is to help you move better, feel stronger, and build
+          confidence that lasts. With expert trainers, modern equipment, and
+          thoughtfully designed programs, we take a holistic approach to fitness
+          that adapts to you. Whether you’re just starting out or refining your
+          performance, On Core Fitness is here to help you reach your goals and
+          enjoy the journey along the way.
+        </Text>
+
         <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
-          {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
-          {/* <Text style={styles.contactLabel}>LEARN MORE</Text> */}
-          {/* <Text style={styles.contactLabel}>DISCOVER BEMER</Text> */}
-          <Text style={styles.contactLabel}>SCHEDULE A SESSION</Text>
+          <Text style={styles.contactLabel}>START YOUR JOURNEY</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
           </View>
         </TouchableOpacity>
-        {/* ------------------------------------------------------------------------------------ */}
-
-        {/* ------------------------------------------------------------------------------------ */}
-        <Text style={styles.sectionTextOne}>INFRARED SAUNA</Text>
-        {/* <Text style={styles.sectionTextTwo}>DETOX. RELAX. RESTORE.</Text> */}
-        <Text style={styles.sectionTextTwo}>RESTORATIVE HEAT THERAPY</Text>
-
-        {/* <Text style={styles.sectionTextThree}>
-          Unwind, detoxify, and recharge in our state-of-the-art Infrared Sauna
-          at On Core Fitness. Using gentle infrared heat, this therapy
-          penetrates deep into your muscles and joints to promote circulation,
-          reduce inflammation, and support natural detoxification. Whether
-          you're recovering from a tough workout or looking to boost your
-          overall wellness, our infrared sauna offers a relaxing and restorative
-          experience that helps you feel refreshed from the inside out.
-        </Text> */}
-        <Text style={styles.sectionTextThree}>
-          Our Infrared Sauna uses gentle radiant heat to support relaxation,
-          circulation, and muscle recovery in a calm and controlled environment.
-          Unlike traditional saunas, infrared heat warms the body more
-          comfortably, helping reduce muscle tension and promote overall
-          wellness. Whether you are winding down after training or prioritizing
-          recovery, the infrared sauna offers a restorative experience designed
-          to help you feel relaxed and refreshed.
-        </Text>
-
+        {/* ---------------------- Scroll View Section Two ---------------------------- */}
         <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_7.png")}
+          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_10.png")}
           style={{
             width: "100%",
             height: Math.round(width * 1),
             resizeMode: "contain",
             marginTop: 10,
+            marginBottom: -30,
           }}
         />
+        <Text style={styles.sectionTextTwo}>
+          Where Community Meets Performance
+        </Text>
+
+        <Text style={styles.sectionTextThree}>
+          Our group fitness classes combine expert coaching, intentional
+          programming, and a supportive environment that keeps you motivated and
+          accountable. Designed for all fitness levels, each class challenges
+          you to move better, build strength, and push past limits while
+          training alongside a community that supports your progress every step
+          of the way.
+        </Text>
+        <Text style={styles.sectionTextThree}>
+          <Text style={styles.sectionTextThree}>
+            Led by experienced coaches, every session emphasizes proper
+            movement, steady progression, and training with intention.
+          </Text>
+        </Text>
         <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
-          {/* <Text style={styles.contactLabel}>CHECK IT OUT? GIVE US A CALL.</Text> */}
-          <Text style={styles.contactLabel}>PRIORITIZE RECOVERY</Text>
+          <Text style={styles.contactLabel}>FIND YOUR COMMUNITY</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
           </View>
         </TouchableOpacity>
-        {/* ------------------------------------------------------------------------------------ */}
 
-        {/* ------------------------------------------------------------------------------------ */}
-        <Text style={styles.sectionTextOne}>INBODY MEASUREMENT SCAN</Text>
-        {/* <Text style={styles.sectionTextTwo}>DATA THAT DRIVES RESULTS..</Text> */}
-        <Text style={styles.sectionTextTwo}>INSIGHT THAT DRIVES PROGRESS</Text>
-
-        {/* <Text style={styles.sectionTextThree}>
-          The InBody Result Sheet delivers your body composition measurements in
-          a clear, easy-to-read format, providing an effective overview that
-          helps you quickly understand your physical health and track progress
-          with confidence. Every InBody Test includes a full-page Result Sheet
-          printout that details muscle, fat, and water measurements and
-          highlights specific areas to focus on.
-        </Text> */}
-        <Text style={styles.sectionTextThree}>
-          The InBody Measurement Scan provides a clear and detailed view of your
-          body composition, helping you understand key metrics such as muscle
-          mass, body fat, and water distribution. Each scan includes a
-          comprehensive results report that highlights areas of strength and
-          opportunities for improvement, giving you reliable data to track
-          progress and guide smarter training and recovery decisions.
-        </Text>
-
+        {/* ---------------------- Scroll View Section Three ---------------------------- */}
         <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_8.png")}
+          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_11.png")}
           style={{
             width: "100%",
             height: Math.round(width * 1),
             resizeMode: "contain",
             marginTop: 10,
+            marginBottom: -30,
           }}
         />
+        <Text style={styles.sectionTextTwo}>Cardio With Intention</Text>
+
+        <Text style={styles.sectionTextThree}>
+          Our cardio sessions combine structured conditioning, expert coaching,
+          and purposeful movement to improve endurance and elevate overall
+          energy. Designed for all fitness levels, each class challenges you to
+          move with efficiency, build stamina, and maintain proper form while
+          training in a motivating group environment that encourages consistency
+          and progress.
+        </Text>
+
+        <Text style={styles.sectionTextThree}>
+          Fast paced sessions that challenge your limits while emphasizing
+          proper movement, consistency, and sustainable progress.
+        </Text>
+
         <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
-          {/* <Text style={styles.contactLabel}>TEST IT OUT? LET US KNOW</Text> */}
-          {/* <Text style={styles.contactLabel}>VIEW YOUR RESULTS</Text> */}
-          {/* <Text style={styles.contactLabel}>DISCOVER INBODY</Text> */}
-          <Text style={styles.contactLabel}>SCHEDULE A SCAN</Text>
+          {/* <Text style={styles.contactLabel}>BUILD YOUR ENDURANCE</Text> */}
+          <Text style={styles.contactLabel}>ELEVATE YOUR ENERGY</Text>
           <View style={styles.contactArrowCircle}>
             <Text style={styles.contactArrow}>↗</Text>
           </View>
         </TouchableOpacity>
-        {/* ------------------------------------------------------------------------------------ */}
 
-        {/* <Image
-          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_2.png")}
+        {/* ---------------------- Scroll View Section Five ---------------------------- */}
+        <Image
+          source={require("../../assets/On_Core_Fitness_Images/on_core_fitness_image_12.png")}
           style={{
             width: "100%",
             height: Math.round(width * 1),
             resizeMode: "contain",
             marginTop: 10,
+            marginBottom: -30,
           }}
-        /> */}
+        />
+        <Text style={styles.sectionTextTwo}>
+          Purpose Driven Strength Training
+        </Text>
+        {/* <Text style={styles.sectionTextTwo}>Strength Built With Purpose</Text> */}
+
+        <Text style={styles.sectionTextThree}>
+          Our weight room sessions focus on proper form, progressive loading,
+          and intentional strength training under the guidance of experienced
+          coaches. Designed for all fitness levels, each session helps you build
+          strength, refine technique, and develop confidence through structured
+          training in a focused and supportive environment.
+        </Text>
+
+        <Text style={styles.sectionTextThree}>
+          Every lift is coached with close attention to detail, safety, and
+          consistent long term progress, ensuring each session is purposeful and
+          results driven.
+        </Text>
+
+        <TouchableOpacity style={styles.contactButton} activeOpacity={0.85}>
+          <Text style={styles.contactLabel}>BUILD REAL STRENGTH</Text>
+          <View style={styles.contactArrowCircle}>
+            <Text style={styles.contactArrow}>↗</Text>
+          </View>
+        </TouchableOpacity>
+
+        {/* ---------------------- Scroll View Section Six ---------------------------- */}
+
         <View style={styles.sectionTextFiveStack}>
           <Text style={styles.sectionTextFour}>TRAIN </Text>
           <Text style={styles.sectionTextFour}>SMARTER. </Text>
@@ -285,7 +276,7 @@ const styles = StyleSheet.create({
   },
 
   sectionTextTwo: {
-    paddingTop: 12,
+    paddingTop: 0,
     color: "#fff",
     fontSize: 16,
     lineHeight: 22,
@@ -295,13 +286,12 @@ const styles = StyleSheet.create({
   },
 
   sectionTextThree: {
-    paddingTop: 9,
+    // paddingTop: 9,
     color: "#fff",
     fontSize: 15,
     lineHeight: 21,
     fontWeight: "400", // regular
     // fontFamily: "RussoOne",
-    paddingBottom: 5,
   },
   sectionTextFour: {
     paddingTop: 9,
@@ -338,6 +328,24 @@ const styles = StyleSheet.create({
     // fontFamily: "RussoOne",
     justifyContent: "center",
     textAlign: "center",
+  },
+  sectionTextSeven: {
+    paddingTop: -5,
+    color: "#fff",
+    fontSize: 15,
+    lineHeight: 21,
+    fontWeight: "400", // regular
+    // fontFamily: "RussoOne",
+    paddingBottom: 5,
+  },
+  sectionTextEight: {
+    paddingTop: -5,
+    color: "#fff",
+    fontSize: 15,
+    lineHeight: 21,
+    fontWeight: "400", // regular
+    // fontFamily: "RussoOne",
+    paddingBottom: 5,
   },
   logoBase: {
     fontSize: 33 * scale,
@@ -412,7 +420,7 @@ const styles = StyleSheet.create({
     width: "80%",
     paddingVertical: 14,
     paddingHorizontal: 26,
-    marginVertical: 24,
+    marginVertical: 10,
     borderWidth: 1.5,
     borderColor: "#fff",
     borderRadius: 999,
@@ -493,4 +501,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WellnessScreen;
+export default AboutUsScreen;
