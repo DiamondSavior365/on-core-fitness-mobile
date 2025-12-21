@@ -1,124 +1,22 @@
-import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import DirectoryScreen from "./src/screens/DirectoryScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
-import PersonalTrainingScreen from "./src/screens/PersonalTrainingScreen";
-import WellnessScreen from "./src/screens/WellnessScreen";
-// import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
-// import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
-import EventListScreen from "./src/screens/EventListScreen";
-import SettingsScreen from "./src/screens/SettingsScreen";
-import Lines from "./assets/icons/lines-menu.svg";
-import Header from "./src/screens/Components/Header.js";
-import { View, Image, TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font";
 
-const Stack = createStackNavigator();
+import Footer from "./src/screens/Components/Footer.js";
+import AuthStack from "./src/tabs/AuthStack.js";
 
-const SettingsButton = ({ navigation }) => (
-  <TouchableOpacity onPress={() => navigation.navigate("Settings_Screen")}>
-    <View style={{ height: 42, justifyContent: "center" }}>
-      <Lines
-        width={36}
-        height={36}
-      />
-    </View>
-  </TouchableOpacity>
-);
+// import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
+// import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 
-function RootApp() {
+const RootApp = () => {
+  const user = "Guest";
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          header: (props) => <Header {...props}/>,
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        {/* <Stack.Screen
-          name="Settings_Screen"
-          component={SettingsScreen}
-          options={{ title: "App Settings", headerShown: true }}
-        /> */}
-        {/* 
-        
-        */}
-        <Stack.Screen
-          name="Login_Screen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Sign_Up_Screen"
-          component={SignUpScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Directory_Screen"
-          component={DirectoryScreen}
-          options={({ navigation }) => ({
-            headerShown: true,
-            headerTransparent: true,
-            title: "Directory",
-            headerRight: () => <SettingsButton navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="EventListScreen"
-          component={EventListScreen}
-          options={({ navigation }) => ({
-            headerShown: true,
-            headerRight: () => <SettingsButton navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="Settings_Screen"
-          component={SettingsScreen}
-          options={{ 
-            title: "My Account", 
-            headerTitleStyle: {color: "#FFFFFF"}, 
-            headerShown: true, 
-            headerTransparent: true,
-            animation: "fade"
-          }}
-        />
-        <Stack.Screen
-          name="Personal_Training_Screen"
-          component={PersonalTrainingScreen}
-          options={({ navigation }) => ({
-            headerShown: true,
-            headerTransparent: true,
-            // headerRight: () => <SettingsButton navigation={navigation} />,
-          })}
-        />
-        <Stack.Screen
-          name="Wellness_Screen"
-          component={WellnessScreen}
-          options={({ navigation }) => ({
-            headerShown: true,
-            headerTransparent: true,
-            // headerRight: () => <SettingsButton navigation={navigation} />,
-          })}
-        />
-        {/* <Stack.Screen
-          name="Wellness_Screen"
-          component={WellnessScreen}
-          options={({ navigation }) => ({
-            headerShown: true,
-            headerTransparent: true,
-            // headerRight: () => <SettingsButton navigation={navigation} />,
-          })}
-        /> */}
-      </Stack.Navigator>
+      {(user) ? (
+        <Footer/>
+      ) : (
+        <AuthStack/>
+      )}
     </NavigationContainer>
   );
 }
@@ -137,7 +35,7 @@ export default function App() {
     return null;
   }
 
-  return <RootApp />;
+  return <RootApp/>;
 }
 
 // export default function App() {
