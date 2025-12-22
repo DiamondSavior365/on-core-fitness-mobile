@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
 
 import DumbellIcon from "../../assets/icons/dumbell.svg";
 import ClipboardIcon from "../../assets/icons/clipboard.svg";
@@ -10,7 +10,7 @@ const VerticalLine = () => (
 
 const HomeScreen = () => {
     return (
-        <View style={{ flex: 1, backgroundColor: "#202020" }}>
+        <ScrollView style={{ flex: 1, backgroundColor: "#131313" }}>
             <View style={{ flexDirection: "row", paddingVertical: 8, paddingHorizontal: 8, justifyContent: "space-evenly" }}>
                 <TouchableOpacity style={{ justifyContent: "center", alignItems: "center" }}>
                     <DumbellIcon width={42} height={42}/>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
                     <Image/>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
