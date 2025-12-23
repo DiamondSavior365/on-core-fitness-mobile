@@ -96,86 +96,145 @@ const ContactUsScreen = ({ navigation }) => {
             onChangeText={setPhoneNumber}
           />
           <Text style={styles.interestHeader}>I'm interested in:</Text>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("tour")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.tour && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.tour && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.tour && <Text style={styles.checkboxCheck}>✓</Text>}
+            </View>
             <Text style={styles.checkboxLabel}>Take a Tour</Text>
           </TouchableOpacity>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("freeSession")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.freeSession && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.freeSession && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.freeSession && (
+                <Text style={styles.checkboxCheck}>✓</Text>
+              )}
+            </View>
             <Text style={styles.checkboxLabel}>
               Free One Hour Start Up Training
             </Text>
           </TouchableOpacity>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("personalTraining")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.personalTraining && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.personalTraining && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.personalTraining && (
+                <Text style={styles.checkboxCheck}>✓</Text>
+              )}
+            </View>
             <Text style={styles.checkboxLabel}>Personal Training</Text>
           </TouchableOpacity>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("wellness")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.wellness && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.wellness && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.wellness && (
+                <Text style={styles.checkboxCheck}>✓</Text>
+              )}
+            </View>
             <Text style={styles.checkboxLabel}>Wellness</Text>
           </TouchableOpacity>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("specials")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.specials && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.specials && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.specials && (
+                <Text style={styles.checkboxCheck}>✓</Text>
+              )}
+            </View>
             <Text style={styles.checkboxLabel}>Our Specials</Text>
           </TouchableOpacity>
-
+          {/* -------------------------------------------------------------------------------------------------- */}
           <TouchableOpacity
             style={styles.checkboxRow}
             onPress={() => toggleInterest("freePass")}
           >
+            {/* <View
+              style={[
+                styles.checkbox,
+                interests.freePass && styles.checkboxChecked,
+              ]}
+            /> */}
             <View
               style={[
                 styles.checkbox,
                 interests.freePass && styles.checkboxChecked,
               ]}
-            />
+            >
+              {interests.freePass && (
+                <Text style={styles.checkboxCheck}>✓</Text>
+              )}
+            </View>
             <Text style={styles.checkboxLabel}>Free Pass</Text>
           </TouchableOpacity>
+          {/* -------------------------------------------------------------------------------------------------- */}
           <View style={styles.termsCard}>
             <TouchableOpacity
               style={styles.checkboxRow}
