@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { BlurView } from "expo-blur";
 import {
   Text,
   StyleSheet,
@@ -14,11 +15,20 @@ import {
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../../assets/Background_Images/home_screen/background_3.jpg")}
+      {/* <ImageBackground
+        source={require("../../assets/Background_Images/home_screen/background_5.jpg")}
         style={styles.background}
         resizeMode="cover"
-      ></ImageBackground>
+      ></ImageBackground> */}
+      <ImageBackground
+        source={require("../../assets/Background_Images/home_screen/background_6.jpg")}
+        style={styles.background}
+        resizeMode="cover"
+      />
+
+      <BlurView intensity={5} tint="dark" style={styles.blurOverlay} />
+
+      <View style={styles.darkOverlay} />
 
       <View style={styles.overlay}>
         <View style={styles.logoStack}>
@@ -26,14 +36,14 @@ const HomeScreen = ({ navigation }) => {
           <Text style={[styles.logoBase, styles.logoCore]}>CORE</Text>
           <Text style={[styles.logoBase, styles.logoFitness]}>FITNESS</Text>
           <Image
-            source={require("../../assets/logo/kettlebell_transparent.png")}
+            source={require("../../assets/logo/kettlebell_1.png")}
             style={styles.kettlebell}
           />
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Login_Screen")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Login_Screen")}>
           <Text style={styles.button}>Press to Enter</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -54,10 +64,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logoStack: {
-    position: "absolute",
-    top: 120,
-    alignSelf: "center",
+    // position: "absolute",
+    // top: 120,
+    // alignSelf: "center",
+    // alignItems: "center",
     alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 375,
   },
   logoBase: {
     fontSize: 60 * scale,
@@ -115,17 +128,33 @@ const styles = StyleSheet.create({
     borderColor: "rgba(209, 198, 198, 0.68)",
   },
   kettlebell: {
-    width: 104 * scale,
-    height: 104 * scale,
+    width: 95 * scale,
+    height: 95 * scale,
     marginTop: 2,
 
     // shadow to match logo text
     shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
+    // shadowOffset: { width: 4, height: 4 },
     shadowOpacity: 0.7,
     shadowRadius: 3,
 
     elevation: 8, // Android
+
+    transform: [{ scale: 0.98 }], // pulls edge inward
+  },
+  kettlebellWrap: {
+    backgroundColor: "rgba(0,0,0,0.6)",
+    borderRadius: 999,
+    padding: 2,
+  },
+
+  blurOverlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
+  darkOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.345)", // tweak 0.25–0.45
   },
 });
 

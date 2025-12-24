@@ -1,15 +1,15 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import DirectoryScreen from "./src/screens/DirectoryScreen";
+// import HomeScreen from "./src/screens/HomeScreen";
+import DirectoryScreen from "./src/screens/guestSection/DirectoryScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
-import PersonalTrainingScreen from "./src/screens/PersonalTrainingScreen";
-import WellnessScreen from "./src/screens/WellnessScreen";
-import AboutUsScreen from "./src/screens/AboutUsScreen";
-import PricingPlanScreen from "./src/screens/PricingPlanScreen";
-import ContactUsScreen from "./src/screens/ContactUsScreen";
+import PersonalTrainingScreen from "./src/screens/guestSection/PersonalTrainingScreen";
+import WellnessScreen from "./src/screens/guestSection/WellnessScreen";
+import AboutUsScreen from "./src/screens/guestSection/AboutUsScreen";
+import PricingPlanScreen from "./src/screens/guestSection/PricingPlanScreen";
+import ContactUsScreen from "./src/screens/guestSection/ContactUsScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 import EventListScreen from "./src/screens/EventListScreen";
@@ -39,17 +39,17 @@ function RootApp() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login_Screen"
         screenOptions={{
           title: "",
           headerShown: false,
         }}
       >
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
         {/* <Stack.Screen
           name="Settings_Screen"
           component={SettingsScreen}
