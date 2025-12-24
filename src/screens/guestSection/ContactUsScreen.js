@@ -27,6 +27,10 @@ const ContactUsScreen = ({ navigation }) => {
     freePass: false,
   });
   const [agreed, setAgreed] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // ----------------------------------------------------------------------------------------------
 
   const toggleInterest = (key) => {
     setInterests((prev) => ({
@@ -34,6 +38,70 @@ const ContactUsScreen = ({ navigation }) => {
       [key]: !prev[key],
     }));
   };
+
+  const validateForm = () => {
+    // Trim inputs to avoid "spaces only"
+    if (!firstName.trim()) {
+      return { valid: false, message: "First name is required." };
+    }
+
+    if (!lastName.trim()) {
+      return { valid: false, message: "Last name is required." };
+    }
+
+    if (!email.trim()) {
+      return { valid: false, message: "Email is required." };
+    }
+
+    // Basic email format check (frontend-safe)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      return { valid: false, message: "Please enter a valid email address." };
+    }
+
+    // Phone required only if SMS consent is checked
+    if (agreed && !phoneNumber.trim()) {
+      return {
+        valid: false,
+        message: "Phone number is required to receive text messages.",
+      };
+    }
+
+    // At least one interest selected
+    const hasInterest = Object.values(interests).some(
+      (value) => value === true
+    );
+    if (!hasInterest) {
+      return {
+        valid: false,
+        message: "Please select at least one interest.",
+      };
+    }
+
+    // If we reach here, everything is valid
+    return { valid: true };
+  };
+
+  const buildSubmissionPayload = () => {
+    return {
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.trim().toLowerCase(),
+      // phoneNumber: phoneNumber.trim() || null,
+      phoneNumber: normalizePhone(phoneNumber) || null,
+
+      interests: Object.keys(interests).filter(
+        (key) => interests[key] === true
+      ),
+
+      agreedToTerms: agreed,
+      submittedAt: new Date().toISOString(),
+    };
+  };
+
+  const normalizePhone = (phone) => phone.replace(/[^\d]/g, "");
+
+  // -------------------------------------------------------------------------------------------
 
   return (
     <View style={styles.container}>
@@ -58,6 +126,18 @@ const ContactUsScreen = ({ navigation }) => {
         <Text style={styles.sectionTextTwo}>Everyday from 4AM – 11PM</Text>
         <Text style={styles.sectionTextTwo}>Phone: 714-988-7987</Text>
         <View style={styles.formCard}>
+          {formError ? (
+            <Text
+              style={{
+                color: "#ff6b6b",
+                marginBottom: 10,
+                textAlign: "center",
+              }}
+            >
+              {formError}
+            </Text>
+          ) : null}
+
           <Text style={styles.formHeaderText}>
             Please fill out the form. Our team will be contacting you soon.
           </Text>
@@ -67,7 +147,11 @@ const ContactUsScreen = ({ navigation }) => {
             placeholder="First Name *"
             autoCapitalize="words"
             value={firstName}
-            onChangeText={setFirstName}
+            // onChangeText={setFirstName}
+            onChangeText={(text) => {
+              setFirstName(text);
+              if (formError) setFormError("");
+            }}
           />
 
           <TextInput
@@ -75,7 +159,11 @@ const ContactUsScreen = ({ navigation }) => {
             placeholder="Last Name *"
             autoCapitalize="words"
             value={lastName}
-            onChangeText={setLastName}
+            // onChangeText={setLastName}
+            onChangeText={(text) => {
+              setLastName(text);
+              if (formError) setFormError("");
+            }}
           />
 
           <TextInput
@@ -85,7 +173,11 @@ const ContactUsScreen = ({ navigation }) => {
             autoCapitalize="none"
             autoCorrect={false}
             value={email}
-            onChangeText={setEmail}
+            // onChangeText={setEmail}
+            onChangeText={(text) => {
+              setEmail(text);
+              if (formError) setFormError("");
+            }}
           />
 
           <TextInput
@@ -93,7 +185,11 @@ const ContactUsScreen = ({ navigation }) => {
             placeholder="Phone Number"
             keyboardType="phone-pad"
             value={phoneNumber}
-            onChangeText={setPhoneNumber}
+            // onChangeText={setPhoneNumber}
+            onChangeText={(text) => {
+              setPhoneNumber(text);
+              if (formError) setFormError("");
+            }}
           />
           <Text style={styles.interestHeader}>I'm interested in:</Text>
           {/* -------------------------------------------------------------------------------------------------- */}
@@ -253,17 +349,68 @@ const ContactUsScreen = ({ navigation }) => {
           </View>
 
           <TouchableOpacity
+            // style={[
+            //   styles.submitButton,
+            //   !agreed && styles.submitButtonDisabled,
+            // ]}
+            // disabled={!agreed}
             style={[
               styles.submitButton,
-              !agreed && styles.submitButtonDisabled,
+              (!agreed || isSubmitting) && styles.submitButtonDisabled,
             ]}
-            disabled={!agreed}
-            onPress={() => {
-              // submit handler goes here later
-              console.log("Form submitted");
+            disabled={!agreed || isSubmitting}
+            //---------------------------------- ALERT ERROR -----------------------------
+            // onPress={() => {
+            //   const result = validateForm();
+
+            //   if (!result.valid) {
+            //     alert(result.message); // simple UX for now
+            //     return;
+            //   }
+
+            //   console.log("Form is valid. Ready to submit.");
+            // }}
+            //---------------------------------- INLINE ERROR -----------------------------
+            // onPress={() => {
+            //   setFormError(""); // clear old errors
+
+            //   const result = validateForm();
+            //   if (!result.valid) {
+            //     setFormError(result.message);
+            //     return;
+            //   }
+
+            //   const payload = buildSubmissionPayload();
+            //   console.log("Validated payload:", payload);
+            // }}
+            //-------------------------------- UPDATED INLINE ---------------------------
+            onPress={async () => {
+              if (isSubmitting) return;
+
+              setFormError("");
+
+              const result = validateForm();
+              if (!result.valid) {
+                setFormError(result.message);
+                return;
+              }
+
+              setIsSubmitting(true);
+
+              try {
+                const payload = buildSubmissionPayload();
+                console.log("Submitting payload:", payload);
+
+                // 🚫 backend call goes here later
+              } finally {
+                setIsSubmitting(false);
+              }
             }}
           >
-            <Text style={styles.submitButtonText}>SUBMIT</Text>
+            {/* <Text style={styles.submitButtonText}>SUBMIT</Text> */}
+            <Text style={styles.submitButtonText}>
+              {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
