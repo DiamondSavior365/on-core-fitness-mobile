@@ -383,7 +383,7 @@ const ContactUsScreen = ({ navigation }) => {
             //   const payload = buildSubmissionPayload();
             //   console.log("Validated payload:", payload);
             // }}
-            //-------------------------------- UPDATED INLINE ---------------------------
+            //-------------------------------- UPDATED INLINE SUMBIT HANDLER ---------------------------
             onPress={async () => {
               if (isSubmitting) return;
 
@@ -402,6 +402,21 @@ const ContactUsScreen = ({ navigation }) => {
                 console.log("Submitting payload:", payload);
 
                 // 🚫 backend call goes here later
+                const response = await fetch(
+                  "https://ygonqyxztefdxkuifvcq.supabase.co/functions/v1/on-core-fitness-contact-form",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlnb25xeXh6dGVmZHhrdWlmdmNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY2ODc3MzMsImV4cCI6MjA4MjI2MzczM30.KuOtHOdNUZanSmhyIC_2gbq8QDOeyu5saCAlDh0j7QI`,
+                    },
+                    body: JSON.stringify(payload),
+                  }
+                );
+
+                console.log("HTTP status:", response.status);
+                const result = await response.json();
+                console.log("Server response:", result);
               } finally {
                 setIsSubmitting(false);
               }

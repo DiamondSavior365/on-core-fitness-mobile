@@ -2,17 +2,17 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // import HomeScreen from "./src/screens/HomeScreen";
-import DirectoryScreen from "./src/screens/guestSection/DirectoryScreen";
+import DirectoryScreen from "./src/screens/public/DirectoryScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
-import PersonalTrainingScreen from "./src/screens/guestSection/PersonalTrainingScreen";
-import WellnessScreen from "./src/screens/guestSection/WellnessScreen";
-import AboutUsScreen from "./src/screens/guestSection/AboutUsScreen";
-import PricingPlanScreen from "./src/screens/guestSection/PricingPlanScreen";
-import ContactUsScreen from "./src/screens/guestSection/ContactUsScreen";
+import PersonalTrainingScreen from "./src/screens/public/PersonalTrainingScreen";
+import WellnessScreen from "./src/screens/public/WellnessScreen";
+import AboutUsScreen from "./src/screens/public/AboutUsScreen";
+import PricingPlanScreen from "./src/screens/public/PricingPlanScreen";
+import ContactUsScreen from "./src/screens/public/ContactUsScreen";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
-import EventListScreen from "./src/screens/EventListScreen";
+// import EventListScreen from "./src/screens/other/EventListScreen";
 // import SettingsScreen from "./src/screens/SettingsScreen";
 import { View, Image, TouchableOpacity } from "react-native";
 
@@ -77,14 +77,14 @@ function RootApp() {
             headerRight: () => <SettingsButton navigation={navigation} />,
           })}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="EventListScreen"
           component={EventListScreen}
           options={({ navigation }) => ({
             headerShown: true,
             headerRight: () => <SettingsButton navigation={navigation} />,
           })}
-        />
+        /> */}
         <Stack.Screen
           name="Personal_Training_Screen"
           component={PersonalTrainingScreen}
