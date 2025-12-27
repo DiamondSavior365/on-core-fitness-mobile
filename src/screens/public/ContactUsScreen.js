@@ -417,6 +417,10 @@ const ContactUsScreen = ({ navigation }) => {
                 console.log("HTTP status:", response.status);
                 const result = await response.json();
                 console.log("Server response:", result);
+
+                if (response.ok && result.success) {
+                  navigation.navigate("Thank_You_Screen");
+                }
               } finally {
                 setIsSubmitting(false);
               }
