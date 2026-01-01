@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { useAuth } from "../auth/AuthContext"; // New Authentication Handling
 
@@ -59,6 +60,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Name"
+        placeholderTextColor="#999"
         autoCapitalize="words"
         autoCorrect={false}
         value={name}
@@ -68,6 +70,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#999"
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
@@ -78,6 +81,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#999"
         secureTextEntry
         autoCapitalize="none"
         autoCorrect={false}
@@ -88,6 +92,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Age"
+        placeholderTextColor="#999"
         autoCapitalize="none"
         autoCorrect={false}
         value={age}
@@ -120,19 +125,51 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
+    backgroundColor: "#0f0f0f", // or "#111", "#121212", "#1a1a1a"
   },
+  // title: {
+  //   fontSize: 28,
+  //   marginBottom: 12,
+  //   textAlign: "center",
+  // },
   title: {
     fontSize: 28,
     marginBottom: 12,
     textAlign: "center",
+    color: "white",
   },
+
+  // input: {
+  //   marginVertical: 8,
+  //   padding: 10,
+  //   borderColor: "black",
+  //   borderWidth: 1,
+  //   borderRadius: 6,
+  // },
+  // input: {
+  //   marginVertical: 8,
+  //   padding: 10,
+  //   borderColor: "#444",
+  //   borderWidth: 1,
+  //   borderRadius: 6,
+  //   color: "white",
+  // },
   input: {
     marginVertical: 8,
     padding: 10,
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 6,
+    backgroundColor: "white",
+    borderRadius: 8,
+    color: "#111",
+    fontSize: 16,
+
+    // subtle depth
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
+    elevation: 2, // Android
   },
+
   button: {
     marginTop: 12,
     backgroundColor: "#2b8aef",
@@ -147,8 +184,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "600",
   },
+  // link: {
+  //   color: "blue",
+  //   marginTop: 12,
+  //   textAlign: "center",
+  // },
   link: {
-    color: "blue",
+    color: "#4da3ff",
     marginTop: 12,
     textAlign: "center",
   },
@@ -156,6 +198,9 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: 6,
     textAlign: "center",
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
 

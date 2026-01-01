@@ -106,7 +106,8 @@ const LoginScreen = ({ navigation }) => {
       {/* ---------------------------------------------------------------------------------- */}
       {/* ----------------------------------------IMAGES------------------------------------- */}
       <ImageBackground
-        source={require("../../assets/Background_Images/Holiday_Images/Christmas/Christmas_One_ScreenShot1.jpg")}
+        // source={require("../../assets/Background_Images/Holiday_Images/Christmas/Christmas_One_ScreenShot1.jpg")}
+        source={require("../../assets/Background_Images/Season_Images/Winter/winter_image_1.jpeg")}
         style={styles.background}
         resizeMode="cover"
       ></ImageBackground>

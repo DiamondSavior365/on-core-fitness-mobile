@@ -21,6 +21,7 @@ const HomeScreen = ({ navigation }) => {
         resizeMode="cover"
       ></ImageBackground> */}
       <ImageBackground
+        // source={require("../../assets/Background_Images/home_screen/background_6.jpg")}
         source={require("../../assets/Background_Images/home_screen/background_6.jpg")}
         style={styles.background}
         resizeMode="cover"
