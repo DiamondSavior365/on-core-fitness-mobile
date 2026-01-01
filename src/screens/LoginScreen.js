@@ -11,11 +11,14 @@ import {
   Dimensions,
 } from "react-native";
 import { CommonActions } from "@react-navigation/native";
-// import { supabase } from "../lib/supabase/supabase";
-// import { useAuthContext } from "../lib/supabase/hooks/useAuthContext";
+import { useAuth } from "../auth/AuthContext"; // New Authentication handling
+// import { supabase } from "../lib/supabase/supabase"; // Old Authentication handling
+// import { useAuthContext } from "../lib/supabase/hooks/useAuthContext"; // Old Authentication handling
 import { Video } from "expo-av";
 
 const LoginScreen = ({ navigation }) => {
+  const { signInWithPassword } = useAuth(); // New Authentication Member
+
   //   const { isLoading: authLoading } = useAuthContext(); // optional: read global loading
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,45 +27,68 @@ const LoginScreen = ({ navigation }) => {
 
   const handleSignIn = async () => {
     setErrorMsg(null);
+
     if (!email || !password) {
       setErrorMsg("Please enter both email and password.");
       return;
     }
 
-    try {
-      setLoading(true);
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    setLoading(true);
 
-      if (error) {
-        setErrorMsg(error.message ?? "Failed to sign in.");
-        console.error("Sign-in error", error);
-      } else {
-        // Signed in — session will be available via AuthProvider's onAuthStateChange.
-        // navigates the user to directory screen upon login:
-        // const resetAction = StackActions.reset({
-        //   index: 0,
-        //   actions: [
-        //     NavigationActions.navigate({ routeName: "Directory_Screen" }),
-        //   ],
-        // });
-        // navigation.dispatch(resetAction);
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "Directory_Screen" }],
-          })
-        );
-      }
-    } catch (err) {
-      console.error("Unexpected sign-in error", err);
-      setErrorMsg("An unexpected error occurred.");
-    } finally {
-      setLoading(false);
+    const { error } = await signInWithPassword({
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setErrorMsg(error.message);
     }
+    // ✅ no navigation here — AuthProvider + navigator handle it
   };
+
+  // const handleSignIn = async () => {
+  //   setErrorMsg(null);
+  //   if (!email || !password) {
+  //     setErrorMsg("Please enter both email and password.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setLoading(true);
+  //     const { data, error } = await supabase.auth.signInWithPassword({
+  //       email,
+  //       password,
+  //     });
+
+  //     if (error) {
+  //       setErrorMsg(error.message ?? "Failed to sign in.");
+  //       console.error("Sign-in error", error);
+  //     } else {
+  //       // Signed in — session will be available via AuthProvider's onAuthStateChange.
+  //       // navigates the user to directory screen upon login:
+  //       // const resetAction = StackActions.reset({
+  //       //   index: 0,
+  //       //   actions: [
+  //       //     NavigationActions.navigate({ routeName: "Directory_Screen" }),
+  //       //   ],
+  //       // });
+  //       // navigation.dispatch(resetAction);
+  //       navigation.dispatch(
+  //         CommonActions.reset({
+  //           index: 0,
+  //           routes: [{ name: "Directory_Screen" }],
+  //         })
+  //       );
+  //     }
+  //   } catch (err) {
+  //     console.error("Unexpected sign-in error", err);
+  //     setErrorMsg("An unexpected error occurred.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>

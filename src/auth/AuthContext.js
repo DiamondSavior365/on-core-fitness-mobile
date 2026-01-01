@@ -43,11 +43,63 @@ export function AuthProvider({ children }) {
   /**
    * Expose auth state to the entire app
    */
+
+  // return (
+  //   <AuthContext.Provider
+  //     value={{
+  //       session,
+  //       initializing,
+
+  //       // auth actions
+  //       signUp: async (args) => {
+  //         return supabase.auth.signUp(args);
+  //       },
+  //       signInWithPassword: async (args) => {
+  //         return supabase.auth.signInWithPassword(args);
+  //       },
+  //       signOut: async () => {
+  //         return supabase.auth.signOut();
+  //       },
+  //     }}
+  //   >
+  //     {children}
+  //   </AuthContext.Provider>
+  // );
+
+  // return (
+  //   <AuthContext.Provider
+  //     value={{
+  //       session,
+  //       initializing,
+  //       signUp: async (args) => supabase.auth.signUp(args),
+  //       signInWithPassword: async (args) =>
+  //         supabase.auth.signInWithPassword(args),
+  //       signOut: async () => supabase.auth.signOut(),
+  //     }}
+  //   >
+  //     {children}
+  //   </AuthContext.Provider>
+  // );
   return (
-    <AuthContext.Provider value={{ session, initializing }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        initializing,
+        user: session?.user ?? null,
+        signOut: () => supabase.auth.signOut(),
+        signInWithPassword: (args) => supabase.auth.signInWithPassword(args),
+        signUp: (args) => supabase.auth.signUp(args),
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
+
+  // return (
+  //   <AuthContext.Provider value={{ session, initializing }}>
+  //     {children}
+  //   </AuthContext.Provider>
+  // );
 }
 
 /**

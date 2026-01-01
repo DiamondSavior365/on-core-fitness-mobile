@@ -8,7 +8,9 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-// import { supabase } from "../lib/supabase/supabase";
+import { useAuth } from "../auth/AuthContext"; // New Authentication Handling
+
+// import { supabase } from "../lib/supabase/supabase"; // Old Authentication Handling
 
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -17,45 +19,37 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { signUp } = useAuth();
 
   const handleSignUp = async () => {
     setErrorMsg(null);
+
     if (!name || !email || !password || !age) {
       setErrorMsg("Please fill in all fields.");
       return;
     }
 
-    try {
-      setLoading(true);
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: name,
-            age: age,
-          },
-        },
-      });
+    setLoading(true);
 
-      if (error) {
-        setErrorMsg(error.message ?? "Failed to sign up.");
-        console.error("Sign-up error", error);
-      } else {
-        // Show a confirmation message.
-        // You might want to tell the user to check their email for confirmation.
-        Alert.alert(
-          "Success!",
-          "Please check your email to confirm your account.",
-          [{ text: "OK", onPress: () => navigation.navigate("Login_Screen") }]
-        );
-      }
-    } catch (err) {
-      console.error("Unexpected sign-up error", err);
-      setErrorMsg("An unexpected error occurred.");
-    } finally {
-      setLoading(false);
+    const { error } = await signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: name,
+          age,
+        },
+      },
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setErrorMsg(error.message);
+      return;
     }
+
+    Alert.alert("Success", "Check your email to confirm your account.");
   };
 
   return (
