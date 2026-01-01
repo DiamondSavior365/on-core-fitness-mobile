@@ -12,7 +12,7 @@ import PricingPlanScreen from "./src/screens/public/PricingPlanScreen";
 import ContactUsScreen from "./src/screens/public/ContactUsScreen";
 import ThankYouScreen from "./src/screens/public/ThankYouScreen";
 import { AuthProvider } from "./src/auth/AuthContext";
-
+import AppNavigator from "./src/navigation/AppNavigator";
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 // import EventListScreen from "./src/screens/other/EventListScreen";
@@ -161,7 +161,11 @@ export default function App() {
     return null;
   }
 
-  return <RootApp />;
+  return (
+    <AuthProvider>
+      <AppNavigator />
+    </AuthProvider>
+  );
 }
 
 // export default function App() {
