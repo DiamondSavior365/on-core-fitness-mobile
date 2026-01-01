@@ -11,6 +11,8 @@ import AboutUsScreen from "./src/screens/public/AboutUsScreen";
 import PricingPlanScreen from "./src/screens/public/PricingPlanScreen";
 import ContactUsScreen from "./src/screens/public/ContactUsScreen";
 import ThankYouScreen from "./src/screens/public/ThankYouScreen";
+import { AuthProvider } from "./src/auth/AuthContext";
+
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 // import EventListScreen from "./src/screens/other/EventListScreen";
