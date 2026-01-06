@@ -13,7 +13,7 @@ import ContactUsScreen from "./src/screens/public/ContactUsScreen";
 import ThankYouScreen from "./src/screens/public/ThankYouScreen";
 import { AuthProvider } from "./src/auth/AuthContext";
 import AppNavigator from "./src/navigation/AppNavigator";
-import MemberHomeScreen from "./src/screens/MemberHomeScreen"; // TEMPORARY HOME SCREEN
+// import MemberHomeScreen from "./src/screens/MemberHomeScreen"; // TEMPORARY HOME SCREEN
 // import { SettingsProvider } from "./src/lib/supabase/hooks/useSettingsContext";
 // import AuthProvider from "./src/lib/supabase/providers/AuthProvider";
 // import EventListScreen from "./src/screens/other/EventListScreen";

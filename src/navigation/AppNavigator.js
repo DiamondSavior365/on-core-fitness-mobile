@@ -8,7 +8,7 @@ import { useAuth } from "../auth/AuthContext";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import DirectoryScreen from "../screens/public/DirectoryScreen";
-import MemberHomeScreen from "../screens/MemberHomeScreen";
+import MemberHomeScreen from "../screens/member/MemberHomeScreen";
 import PersonalTrainingScreen from "../screens/public/PersonalTrainingScreen";
 import WellnessScreen from "../screens/public/WellnessScreen";
 import AboutUsScreen from "../screens/public/AboutUsScreen";
