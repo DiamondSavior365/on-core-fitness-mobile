@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     paddingBottom: 14,
     paddingTop: 10,
     backgroundColor: BRAND_RED,
+    paddingHorizontal: 15,
   },
   tabItem: {
     alignItems: "center",

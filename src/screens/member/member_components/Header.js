@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import SearchIcon from "../../../../assets/icons/search.svg";
 import BellIcon from "../../../../assets/icons/bell.svg";
 import ProfileIcon from "../../../../assets/icons/profile.svg";
@@ -25,14 +25,17 @@ const Header = () => {
 
       {/* Icons */}
       <View style={styles.headerIcons}>
-        <SearchIcon width={22} height={22} color="#ffffff" />
-        <BellIcon width={22} height={22} color="#ffffff" style={styles.icon} />
-        <ProfileIcon
-          width={22}
-          height={22}
-          color="#ffffff"
-          style={styles.icon}
-        />
+        <TouchableOpacity style={styles.iconButton}>
+          <SearchIcon width={22} height={22} color="#ffffff" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.iconButton}>
+          <BellIcon width={22} height={22} color="#ffffff" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.iconButton}>
+          <ProfileIcon width={22} height={22} color="#ffffff" />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -67,6 +70,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  iconButton: {
+    marginLeft: 5,
+    padding: 6, // makes them easier to tap and matches iOS standards
+  },
+
   icon: { marginLeft: 14 },
 });
 

@@ -44,15 +44,21 @@ export default function MemberHomeScreen() {
               <Text style={styles.categoryLabel}>Workout</Text>
             </View>
 
+            <View style={styles.divider} />
+
             <View style={styles.categoryItem}>
               <ClipboardIcon width={26} height={26} />
               <Text style={styles.categoryLabel}>Progress</Text>
             </View>
 
+            <View style={styles.divider} />
+
             <View style={styles.categoryItem}>
               <NutritionIcon width={26} height={26} />
               <Text style={styles.categoryLabel}>Nutrition</Text>
             </View>
+
+            <View style={styles.divider} />
 
             <View style={styles.categoryItem}>
               <MembershipIcon width={26} height={26} />
@@ -268,5 +274,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontSize: 11,
     color: "#ffffff",
+  },
+  divider: {
+    width: 1,
+    height: 40, // tall like screenshot
+    backgroundColor: "#ffffff",
+    opacity: 0.22, // light gray/white
+    marginHorizontal: 18,
   },
 });
