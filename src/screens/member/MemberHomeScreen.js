@@ -1,7 +1,11 @@
 // src/screens/member/MemberHomeScreen.js
 import React from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useAuth } from "../../auth/AuthContext";
+import Header from "./member_components/Header";
+import Footer from "./member_components/Footer";
 
 // SVG icons (react-native-svg + svg transformer)
 // 👉 Adjust paths/names if your files are slightly different
@@ -22,40 +26,11 @@ export default function MemberHomeScreen() {
   const { user } = useAuth();
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <View style={styles.container}>
         {/* -------------------- HEADER -------------------- */}
-        <View style={styles.header}>
-          {/* Left: Logo / Brand */}
-          <View>
-            {/* If you have a logo image, you can replace this text block with <Image /> */}
-            <Text style={styles.logoLine}>
-              <Text style={styles.logoOn}>ON </Text>
-              <Text style={styles.logoCore}>CORE </Text>
-              <Text style={styles.logoFitness}>FITNESS</Text>
-            </Text>
-            {user?.email ? (
-              <Text style={styles.welcomeText}>Welcome, {user.email}</Text>
-            ) : null}
-          </View>
 
-          {/* Right: Header icons */}
-          <View style={styles.headerIcons}>
-            <SearchIcon width={22} height={22} />
-            <BellIcon
-              width={22}
-              height={22}
-              color="#ffffff"
-              style={styles.headerIconSpacing}
-            />
-            <ProfileIcon
-              width={22}
-              height={22}
-              style={styles.headerIconSpacing}
-            />
-          </View>
-        </View>
-
+        <Header />
         {/* -------------------- MAIN CONTENT -------------------- */}
         <ScrollView
           style={styles.scroll}
@@ -117,28 +92,8 @@ export default function MemberHomeScreen() {
         </ScrollView>
 
         {/* -------------------- BOTTOM TAB BAR -------------------- */}
-        <View style={styles.bottomTabBar}>
-          <View style={styles.tabItem}>
-            <HomeIcon width={26} height={26} />
-            <Text style={styles.tabLabel}>Home</Text>
-          </View>
-
-          <View style={styles.tabItem}>
-            <ProgressIcon width={26} height={26} />
-            <Text style={styles.tabLabel}>Progress</Text>
-          </View>
-
-          <View style={styles.tabItem}>
-            <MealIcon width={26} height={26} />
-            <Text style={styles.tabLabel}>Meals</Text>
-          </View>
-
-          <View style={styles.tabItem}>
-            <StoreIcon width={26} height={26} />
-            <Text style={styles.tabLabel}>Store</Text>
-          </View>
-        </View>
       </View>
+      <Footer />
     </SafeAreaView>
   );
 }
@@ -199,7 +154,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 16,
-    paddingBottom: 100, // space above tab bar
+    paddingBottom: 10, // space above tab bar
   },
 
   // Category tabs

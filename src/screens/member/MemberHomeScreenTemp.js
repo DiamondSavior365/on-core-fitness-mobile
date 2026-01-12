@@ -1,28 +1,317 @@
+// src/screens/member/MemberHomeScreen.js
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-// import { useAuth } from "../../auth/AuthContext";
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { useAuth } from "../../auth/AuthContext";
 
+// SVG icons (react-native-svg + svg transformer)
+// 👉 Adjust paths/names if your files are slightly different
+import HomeIcon from "../../../assets/icons/home.svg";
+import ActivityIcon from "../../../assets/icons/activity.svg";
+import ProgressIcon from "../../../assets/icons/history.svg";
+import MealIcon from "../../../assets/icons/meal.svg";
+import NutritionIcon from "../../../assets/icons/vegetable.svg";
+import StoreIcon from "../../../assets/icons/store2.svg";
+import SearchIcon from "../../../assets/icons/search.svg";
+import DumbellIcon from "../../../assets/icons/dumbell.svg";
+import BellIcon from "../../../assets/icons/bell.svg";
+import ProfileIcon from "../../../assets/icons/profile.svg";
+import ClipboardIcon from "../../../assets/icons/clipboard.svg";
+import MembershipIcon from "../../../assets/icons/membership.svg";
+
 export default function MemberHomeScreen() {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
   return (
-    <View style={styles.text}>
-      <Text>Welcome: {user?.email}</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* -------------------- HEADER -------------------- */}
+        <View style={styles.header}>
+          {/* Left: Logo / Brand */}
+          <View>
+            {/* If you have a logo image, you can replace this text block with <Image /> */}
+            <Text style={styles.logoLine}>
+              <Text style={styles.logoOn}>ON </Text>
+              <Text style={styles.logoCore}>CORE </Text>
+              <Text style={styles.logoFitness}>FITNESS</Text>
+            </Text>
+            {user?.email ? (
+              <Text style={styles.welcomeText}>Welcome, {user.email}</Text>
+            ) : null}
+          </View>
 
-      <TouchableOpacity
-        onPress={signOut}
-        style={{ marginTop: 16, padding: 14 }}
-      >
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
+          {/* Right: Header icons */}
+          <View style={styles.headerIcons}>
+            <SearchIcon width={22} height={22} />
+            <BellIcon
+              width={22}
+              height={22}
+              color="#ffffff"
+              style={styles.headerIconSpacing}
+            />
+            <ProfileIcon
+              width={22}
+              height={22}
+              style={styles.headerIconSpacing}
+            />
+          </View>
+        </View>
+
+        {/* -------------------- MAIN CONTENT -------------------- */}
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Top category tabs */}
+          <View style={styles.categoryRow}>
+            <View style={styles.categoryItem}>
+              <DumbellIcon width={26} height={26} />
+              <Text style={styles.categoryLabel}>Workout</Text>
+            </View>
+
+            <View style={styles.categoryItem}>
+              <ClipboardIcon width={26} height={26} />
+              <Text style={styles.categoryLabel}>Progress</Text>
+            </View>
+
+            <View style={styles.categoryItem}>
+              <NutritionIcon width={26} height={26} />
+              <Text style={styles.categoryLabel}>Nutrition</Text>
+            </View>
+
+            <View style={styles.categoryItem}>
+              <MembershipIcon width={26} height={26} />
+              <Text style={styles.categoryLabel}>Community</Text>
+            </View>
+          </View>
+
+          {/* Recommendations header */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Recommendations</Text>
+            <View style={styles.seeAllRow}>
+              <Text style={styles.seeAllText}>See All</Text>
+              <Text style={styles.seeAllArrow}>▸</Text>
+            </View>
+          </View>
+
+          {/* Recommendation cards */}
+          <View style={styles.cardRow}>
+            <View style={styles.recommendationCard}>
+              <Text style={styles.cardTitle}>Hello</Text>
+              <Text style={styles.cardSubtitle}>Sample content</Text>
+            </View>
+
+            <View style={styles.recommendationCard}>
+              <Text style={styles.cardTitle}>Hello</Text>
+              <Text style={styles.cardSubtitle}>Sample content</Text>
+            </View>
+          </View>
+
+          {/* Weekly Challenge */}
+          <View style={styles.weeklySectionOuter}>
+            <View style={styles.weeklySectionInner}>
+              <Text style={styles.weeklyTitle}>Weekly{"\n"}Challenge</Text>
+              <Text style={styles.weeklySubtitle}>Plank With Hip Twist</Text>
+            </View>
+          </View>
+        </ScrollView>
+
+        {/* -------------------- BOTTOM TAB BAR -------------------- */}
+        <View style={styles.bottomTabBar}>
+          <View style={styles.tabItem}>
+            <HomeIcon width={26} height={26} />
+            <Text style={styles.tabLabel}>Home</Text>
+          </View>
+
+          <View style={styles.tabItem}>
+            <ProgressIcon width={26} height={26} />
+            <Text style={styles.tabLabel}>Progress</Text>
+          </View>
+
+          <View style={styles.tabItem}>
+            <MealIcon width={26} height={26} />
+            <Text style={styles.tabLabel}>Meals</Text>
+          </View>
+
+          <View style={styles.tabItem}>
+            <StoreIcon width={26} height={26} />
+            <Text style={styles.tabLabel}>Store</Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
+const BRAND_RED = "#c62828";
+const BG_DARK = "#050505";
+const CARD_DARK = "#171717";
+
 const styles = StyleSheet.create({
-  text: {
-    marginTop: 80,
-    padding: 20,
+  safeArea: {
+    flex: 1,
+    backgroundColor: BG_DARK,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: BG_DARK,
+  },
+
+  // HEADER
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingTop: 4,
+    paddingBottom: 12,
+    backgroundColor: BG_DARK,
+  },
+  logoLine: {
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  logoOn: {
+    color: "#ffffff",
+  },
+  logoCore: {
+    color: BRAND_RED,
+  },
+  logoFitness: {
+    color: "#ffffff",
+  },
+  welcomeText: {
+    marginTop: 4,
+    fontSize: 12,
+    color: "#BBBBBB",
+  },
+  headerIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerIconSpacing: {
+    marginLeft: 14,
+  },
+
+  // SCROLL AREA
+  scroll: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 100, // space above tab bar
+  },
+
+  // Category tabs
+  categoryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+    marginBottom: 18,
+  },
+  categoryItem: {
+    alignItems: "center",
+    flex: 1,
+  },
+  categoryLabel: {
+    color: "#ffffff",
+    fontSize: 12,
+    marginTop: 6,
+  },
+
+  // Recommendations section
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  sectionTitle: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  seeAllRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  seeAllText: {
+    color: "#ffffff",
+    fontSize: 12,
+    marginRight: 4,
+  },
+  seeAllArrow: {
+    color: BRAND_RED,
+    fontSize: 14,
+  },
+
+  cardRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  recommendationCard: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 12,
+    marginRight: 10,
+  },
+  cardTitle: {
+    fontWeight: "600",
+    fontSize: 14,
+    marginBottom: 4,
+    color: "#000",
+  },
+  cardSubtitle: {
+    fontSize: 12,
+    color: "#444",
+  },
+
+  // Weekly challenge section
+  weeklySectionOuter: {
+    backgroundColor: BRAND_RED,
+    borderRadius: 0,
+    paddingVertical: 18,
+    paddingHorizontal: 16,
+    marginBottom: 20,
+  },
+  weeklySectionInner: {
+    backgroundColor: CARD_DARK,
+    borderRadius: 20,
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+  },
+  weeklyTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 6,
+  },
+  weeklySubtitle: {
+    color: "#ffffff",
+    fontSize: 14,
+  },
+
+  // Bottom tab bar
+  bottomTabBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingBottom: 10,
+    paddingTop: 8,
+    paddingHorizontal: 10,
+    backgroundColor: BRAND_RED,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
+  tabItem: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  tabLabel: {
+    marginTop: 4,
+    fontSize: 11,
+    color: "#ffffff",
   },
 });
