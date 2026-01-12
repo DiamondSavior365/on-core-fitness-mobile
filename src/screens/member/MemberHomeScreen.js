@@ -9,8 +9,10 @@ import HomeIcon from "../../../assets/icons/home.svg";
 import ActivityIcon from "../../../assets/icons/activity.svg";
 import ProgressIcon from "../../../assets/icons/history.svg";
 import MealIcon from "../../../assets/icons/meal.svg";
-import StoreIcon from "../../../assets/icons/store.svg";
+import NutritionIcon from "../../../assets/icons/vegetable.svg";
+import StoreIcon from "../../../assets/icons/store2.svg";
 import SearchIcon from "../../../assets/icons/search.svg";
+import DumbellIcon from "../../../assets/icons/dumbell.svg";
 import BellIcon from "../../../assets/icons/bell.svg";
 import ProfileIcon from "../../../assets/icons/profile.svg";
 import ClipboardIcon from "../../../assets/icons/clipboard.svg";
@@ -40,7 +42,12 @@ export default function MemberHomeScreen() {
           {/* Right: Header icons */}
           <View style={styles.headerIcons}>
             <SearchIcon width={22} height={22} />
-            <BellIcon width={22} height={22} style={styles.headerIconSpacing} />
+            <BellIcon
+              width={22}
+              height={22}
+              color="#ffffff"
+              style={styles.headerIconSpacing}
+            />
             <ProfileIcon
               width={22}
               height={22}
@@ -58,7 +65,7 @@ export default function MemberHomeScreen() {
           {/* Top category tabs */}
           <View style={styles.categoryRow}>
             <View style={styles.categoryItem}>
-              <ActivityIcon width={26} height={26} />
+              <DumbellIcon width={26} height={26} />
               <Text style={styles.categoryLabel}>Workout</Text>
             </View>
 
@@ -68,7 +75,7 @@ export default function MemberHomeScreen() {
             </View>
 
             <View style={styles.categoryItem}>
-              <MealIcon width={26} height={26} />
+              <NutritionIcon width={26} height={26} />
               <Text style={styles.categoryLabel}>Nutrition</Text>
             </View>
 
