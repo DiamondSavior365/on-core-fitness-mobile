@@ -1,6 +1,13 @@
 // src/screens/member/MemberHomeScreen.js
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAuth } from "../../auth/AuthContext";
@@ -40,28 +47,28 @@ export default function MemberHomeScreen() {
           {/* Top category tabs */}
           <View style={styles.categoryRow}>
             <View style={styles.categoryItem}>
-              <DumbellIcon width={26} height={26} />
+              <DumbellIcon width={36} height={36} />
               <Text style={styles.categoryLabel}>Workout</Text>
             </View>
 
             <View style={styles.divider} />
 
             <View style={styles.categoryItem}>
-              <ClipboardIcon width={26} height={26} />
+              <ClipboardIcon width={36} height={36} />
               <Text style={styles.categoryLabel}>Progress</Text>
             </View>
 
             <View style={styles.divider} />
 
             <View style={styles.categoryItem}>
-              <NutritionIcon width={26} height={26} />
+              <NutritionIcon width={36} height={36} />
               <Text style={styles.categoryLabel}>Nutrition</Text>
             </View>
 
             <View style={styles.divider} />
 
             <View style={styles.categoryItem}>
-              <MembershipIcon width={26} height={26} />
+              <MembershipIcon width={36} height={36} />
               <Text style={styles.categoryLabel}>Community</Text>
             </View>
           </View>
@@ -217,6 +224,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     marginRight: 10,
+    minHeight: 120,
   },
   cardTitle: {
     fontWeight: "600",
