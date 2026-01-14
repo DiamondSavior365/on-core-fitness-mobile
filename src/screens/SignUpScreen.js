@@ -10,6 +10,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { useAuth } from "../auth/AuthContext"; // New Authentication Handling
+import backgroundImg from "../../assets/Background_Images/sign_up_screen/background_1.png";
 
 // import { supabase } from "../lib/supabase/supabase"; // Old Authentication Handling
 
@@ -54,69 +55,75 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create Account</Text>
+    <ImageBackground
+      source={backgroundImg}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Create Account</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        placeholderTextColor="#999"
-        autoCapitalize="words"
-        autoCorrect={false}
-        value={name}
-        onChangeText={setName}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Name"
+          placeholderTextColor="#999"
+          autoCapitalize="words"
+          autoCorrect={false}
+          value={name}
+          onChangeText={setName}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#999"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={email}
-        onChangeText={setEmail}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#999"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={email}
+          onChangeText={setEmail}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#999"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={password}
-        onChangeText={setPassword}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#999"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={password}
+          onChangeText={setPassword}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Age"
-        placeholderTextColor="#999"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={age}
-        onChangeText={setAge}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Age"
+          placeholderTextColor="#999"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={age}
+          onChangeText={setAge}
+        />
 
-      {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
+        {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
 
-      <TouchableOpacity
-        style={[styles.button, loading && styles.buttonDisabled]}
-        onPress={handleSignUp}
-        disabled={loading}
-      >
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <Text style={styles.buttonText}>Sign Up</Text>
-        )}
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, loading && styles.buttonDisabled]}
+          onPress={handleSignUp}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <Text style={styles.buttonText}>Sign Up</Text>
+          )}
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Login_Screen")}>
-        <Text style={styles.link}>Already have an account? Sign In</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Login_Screen")}>
+          <Text style={styles.link}>Already have an account? Sign In</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -125,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    backgroundColor: "#0f0f0f", // or "#111", "#121212", "#1a1a1a"
+    // backgroundColor: "#0f0f0f", // or "#111", "#121212", "#1a1a1a"
   },
   // title: {
   //   fontSize: 28,
@@ -200,7 +207,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   background: {
-    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
   },
 });
 
