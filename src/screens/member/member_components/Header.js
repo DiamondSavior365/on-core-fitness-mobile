@@ -20,8 +20,10 @@ const Header = () => {
             <Text style={styles.logoFitness}>FITNESS</Text>
           </Text>
 
-          {user?.email && (
-            <Text style={styles.welcomeText}>Welcome, {user.email}</Text>
+          {user && (
+            <Text style={styles.welcomeText}>
+              Welcome, {user.user_metadata?.full_name ?? user.email}
+            </Text>
           )}
         </View>
 
