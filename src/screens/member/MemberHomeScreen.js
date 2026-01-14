@@ -54,7 +54,18 @@ const WEEKLY_CHALLENGES = [
     image: require("../../../assets/Member_Recommendation_Images/pullup_3.jpg"),
   },
 ];
-// -----------------------------------------------------------------------
+// ----------------------------- Articles and Tips ------------------------
+
+const ARTICLES = [
+  {
+    title: "Supplement Guide for Beginners",
+    image: require("../../../assets/Articles_Tips_Images/supplement_2.png"),
+  },
+  {
+    title: "Healthy Eating Essentials",
+    image: require("../../../assets/Articles_Tips_Images/salad_1.png"), // ← your image
+  },
+];
 
 export default function MemberHomeScreen() {
   const { user } = useAuth();
@@ -176,10 +187,13 @@ export default function MemberHomeScreen() {
           {/* Recommendations header */}
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Recommendations</Text>
-            <View style={styles.seeAllRow}>
+            <TouchableOpacity
+              style={styles.seeAllRow}
+              onPress={() => console.log("See All Recommendations")}
+            >
               <Text style={styles.seeAllText}>See All</Text>
               <Text style={styles.seeAllArrow}>▸</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Recommendation cards */}
@@ -267,6 +281,35 @@ export default function MemberHomeScreen() {
                 />
               </Animated.View>
             </TouchableOpacity>
+          </View>
+
+          {/* Articles & Tips */}
+          <View style={{ marginBottom: 20 }}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Articles & Tips</Text>
+
+              <TouchableOpacity
+                style={styles.seeAllRow}
+                onPress={() => console.log("See All Articles")}
+              >
+                <Text style={styles.seeAllText}>See All</Text>
+                <Text style={styles.seeAllArrow}>▸</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.articleRow}>
+              {ARTICLES.map((item, i) => (
+                <TouchableOpacity key={i} style={styles.articleCard}>
+                  <Image source={item.image} style={styles.articleImage} />
+
+                  <View style={styles.articleTextWrap}>
+                    <Text style={styles.articleTitle} numberOfLines={2}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
         </ScrollView>
 
@@ -496,5 +539,33 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     opacity: 0.22, // light gray/white
     marginHorizontal: 18,
+  },
+  // Articles Section
+  articleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  articleCard: {
+    width: "48%",
+    backgroundColor: "#0D0D0D",
+    borderRadius: 16,
+    overflow: "hidden",
+  },
+
+  articleImage: {
+    width: "100%",
+    height: 140,
+    resizeMode: "cover",
+  },
+
+  articleTextWrap: {
+    padding: 10,
+  },
+
+  articleTitle: {
+    color: "#ffffff",
+    fontSize: 13,
+    fontWeight: "600",
   },
 });
