@@ -11,6 +11,7 @@ import {
   Animated,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 import { useAuth } from "../../auth/AuthContext";
 import Header from "./member_components/Header";
@@ -68,6 +69,7 @@ const ARTICLES = [
 ];
 
 export default function MemberHomeScreen() {
+  const navigation = useNavigation();
   const { user } = useAuth();
 
   const [index, setIndex] = React.useState(0);
@@ -157,7 +159,10 @@ export default function MemberHomeScreen() {
         >
           {/* Top category tabs */}
           <View style={styles.categoryRow}>
-            <TouchableOpacity style={styles.categoryItem}>
+            <TouchableOpacity
+              style={styles.categoryItem}
+              onPress={() => navigation.navigate("Workout_Screen")}
+            >
               <DumbellIcon width={36} height={36} />
               <Text style={styles.categoryLabel}>Workout</Text>
             </TouchableOpacity>
