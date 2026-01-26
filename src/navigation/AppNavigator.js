@@ -16,6 +16,7 @@ import PricingPlanScreen from "../screens/public/PricingPlanScreen";
 import ContactUsScreen from "../screens/public/ContactUsScreen";
 import ThankYouScreen from "../screens/public/ThankYouScreen";
 import WorkoutScreen from "../screens/member/top_tab_bar/WorkoutScreen";
+
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -150,6 +151,8 @@ function MemberStack() {
           // headerBackTitleVisible: false,
         }}
       />
+
+      {/* --------------------------- Top Tab Bar --------------------------*/}
       <Stack.Screen
         name="Workout_Screen"
         component={WorkoutScreen}
@@ -160,6 +163,8 @@ function MemberStack() {
           // headerBackTitleVisible: false,
         }}
       />
+
+      {/* --------------------------- Bottom Tab Bar --------------------------*/}
     </Stack.Navigator>
   );
 }
