@@ -6,20 +6,39 @@ import HomeIcon from "../../../../assets/icons/home.svg";
 import ProgressIcon from "../../../../assets/icons/history.svg";
 import MealIcon from "../../../../assets/icons/meal.svg";
 import StoreIcon from "../../../../assets/icons/store2.svg";
+import { useNavigation } from "@react-navigation/native";
 
-const Footer = () => {
+export default function Footer() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.footer}>
-      <TabItem icon={HomeIcon} label="Home" />
-      <TabItem icon={ProgressIcon} label="Progress" />
-      <TabItem icon={MealIcon} label="Meals" />
-      <TabItem icon={StoreIcon} label="Store" />
+      <TabItem
+        icon={HomeIcon}
+        label="Home"
+        onPress={() => navigation.navigate("Home")}
+      />
+      <TabItem
+        icon={ProgressIcon}
+        label="Progress"
+        onPress={() => navigation.navigate("Progress")}
+      />
+      <TabItem
+        icon={MealIcon}
+        label="Meals"
+        onPress={() => navigation.navigate("Meals")}
+      />
+      <TabItem
+        icon={StoreIcon}
+        label="Store"
+        onPress={() => navigation.navigate("Store_Screen")}
+      />
     </View>
   );
-};
+}
 
-const TabItem = ({ icon: Icon, label }) => (
-  <TouchableOpacity style={styles.tabItem}>
+const TabItem = ({ icon: Icon, label, onPress }) => (
+  <TouchableOpacity style={styles.tabItem} onPress={onPress}>
     <Icon width={26} height={26} color="#ffffff" />
     <Text style={styles.tabLabel}>{label}</Text>
   </TouchableOpacity>
@@ -46,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Footer;
+// export default Footer;
