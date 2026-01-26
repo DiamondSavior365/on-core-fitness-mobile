@@ -1,13 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const WorkoutScreen = () => {
+export default function WorkoutScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hello World</Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -22,5 +22,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default WorkoutScreen;
