@@ -146,11 +146,11 @@ export default function MemberHomeScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+    <SafeAreaView style={styles.safeArea} edges={[]}>
       <View style={styles.container}>
         {/* -------------------- HEADER -------------------- */}
 
-        <Header />
+        {/* <Header /> */}
         {/* -------------------- MAIN CONTENT -------------------- */}
         <ScrollView
           style={styles.scroll}
@@ -320,7 +320,7 @@ export default function MemberHomeScreen() {
 
         {/* -------------------- BOTTOM TAB BAR -------------------- */}
       </View>
-      <Footer />
+      {/* <Footer /> */}
     </SafeAreaView>
   );
 }

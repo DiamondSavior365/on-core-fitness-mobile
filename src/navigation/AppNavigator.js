@@ -8,20 +8,26 @@ import { useAuth } from "../auth/AuthContext";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import DirectoryScreen from "../screens/public/DirectoryScreen";
-import MemberHomeScreen from "../screens/member/MemberHomeScreen";
 import PersonalTrainingScreen from "../screens/public/PersonalTrainingScreen";
 import WellnessScreen from "../screens/public/WellnessScreen";
 import AboutUsScreen from "../screens/public/AboutUsScreen";
 import PricingPlanScreen from "../screens/public/PricingPlanScreen";
 import ContactUsScreen from "../screens/public/ContactUsScreen";
 import ThankYouScreen from "../screens/public/ThankYouScreen";
+
+//Member screens
+import MemberHomeScreen from "../screens/member/MemberHomeScreen";
 import WorkoutScreen from "../screens/member/top_tab_bar/WorkoutScreen";
+import MemberLayout from "../screens/member/member_components/MemberLayout";
 import StoreScreen from "../screens/member/bottom_tab_bar/StoreScreen";
 
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
 const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
+const PublicStackNav = createStackNavigator();
+const MemberInnerStack = createStackNavigator();
 
 function LoadingScreen() {
   return (
@@ -139,43 +145,71 @@ function PublicStack() {
   );
 }
 
+// function MemberStack() {
+//   return (
+//     <Stack.Navigator screenOptions={{ headerShown: false }}>
+//       <Stack.Screen
+//         name="Member_Home"
+//         component={MemberHomeScreen}
+//         options={{
+//           headerShown: true,
+//           headerTransparent: true,
+//           headerTitle: "",
+//           // headerBackTitleVisible: false,
+//         }}
+//       />
+
+//       {/* --------------------------- Top Tab Bar --------------------------*/}
+//       <Stack.Screen
+//         name="Workout_Screen"
+//         component={WorkoutScreen}
+//         options={{
+//           headerShown: true,
+//           headerTransparent: true,
+//           headerTitle: "",
+//           // headerBackTitleVisible: false,
+//         }}
+//       />
+
+//       {/* --------------------------- Bottom Tab Bar --------------------------*/}
+//       <Stack.Screen
+//         name="Store_Screen"
+//         component={StoreScreen}
+//         options={{
+//           headerShown: true,
+//           headerTransparent: true,
+//           headerTitle: "",
+//           // headerBackTitleVisible: false,
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
+
+/* ---------------- MEMBER AREA (Header/Footer fixed) ---------------- */
+
+function MemberInnerNavigator() {
+  return (
+    <MemberLayout>
+      <MemberInnerStack.Navigator screenOptions={{ headerShown: false }}>
+        <MemberInnerStack.Screen
+          name="Member_Home"
+          component={MemberHomeScreen}
+        />
+        <MemberInnerStack.Screen
+          name="Workout_Screen"
+          component={WorkoutScreen}
+        />
+        <MemberInnerStack.Screen name="Store_Screen" component={StoreScreen} />
+      </MemberInnerStack.Navigator>
+    </MemberLayout>
+  );
+}
+
 function MemberStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="Member_Home"
-        component={MemberHomeScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          // headerBackTitleVisible: false,
-        }}
-      />
-
-      {/* --------------------------- Top Tab Bar --------------------------*/}
-      <Stack.Screen
-        name="Workout_Screen"
-        component={WorkoutScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          // headerBackTitleVisible: false,
-        }}
-      />
-
-      {/* --------------------------- Bottom Tab Bar --------------------------*/}
-      <Stack.Screen
-        name="Store_Screen"
-        component={StoreScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          // headerBackTitleVisible: false,
-        }}
-      />
+      <Stack.Screen name="Member_Root" component={MemberInnerNavigator} />
     </Stack.Navigator>
   );
 }

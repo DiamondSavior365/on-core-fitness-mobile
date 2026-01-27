@@ -16,22 +16,18 @@ export default function Footer() {
       <TabItem
         icon={HomeIcon}
         label="Home"
-        onPress={() => navigation.navigate("Home")}
+        onPress={() =>
+          navigation.navigate("Member_Root", { screen: "Member_Home" })
+        }
       />
-      <TabItem
-        icon={ProgressIcon}
-        label="Progress"
-        onPress={() => navigation.navigate("Progress")}
-      />
-      <TabItem
-        icon={MealIcon}
-        label="Meals"
-        onPress={() => navigation.navigate("Meals")}
-      />
+      <TabItem icon={ProgressIcon} label="Progress" onPress={() => {}} />
+      <TabItem icon={MealIcon} label="Meals" onPress={() => {}} />
       <TabItem
         icon={StoreIcon}
         label="Store"
-        onPress={() => navigation.navigate("Store_Screen")}
+        onPress={() =>
+          navigation.navigate("Member_Root", { screen: "Store_Screen" })
+        }
       />
     </View>
   );
