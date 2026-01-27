@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function StoreScreen() {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={["#4b0f1b", "#1a0509", "#000000"]}
+      locations={[0, 0.35, 1]}
+      style={styles.container}
+    >
       <Text style={styles.text}>Hello World</Text>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -14,7 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000", // optional, matches your dark theme
   },
   text: {
     fontSize: 32,
