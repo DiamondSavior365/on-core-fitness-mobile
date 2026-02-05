@@ -1,0 +1,446 @@
+import React from "react";
+import {
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+const { width } = Dimensions.get("window");
+export default function StoreScreen() {
+  return (
+    <SafeAreaView style={styles.safeArea} edges={[]}>
+      <View style={styles.container}>
+        {/* Black spacer under global header */}
+        <View style={styles.headerSpacer} />
+
+        <LinearGradient
+          colors={["#4b0f1b", "#1a0509", "#000000"]}
+          locations={[0, 0.4, 1]}
+          style={styles.gradient}
+        >
+          <ScrollView
+            contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* Store Header Row */}
+            <View style={styles.storeHeaderRow}>
+              <Text style={styles.storeTitle}>Store</Text>
+
+              <TouchableOpacity style={styles.cartButton}>
+                <Text style={styles.cartIcon}>🛒</Text>
+
+                <View style={styles.cartBadge}>
+                  <Text style={styles.cartBadgeText}>2</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {/* Flash Sale Banner */}
+            <TouchableOpacity style={styles.flashCard} activeOpacity={0.9}>
+              <View style={styles.flashInner}>
+                <View>
+                  <Text style={styles.flashTitle}>FLASH SALE</Text>
+
+                  <Text style={styles.flashLine}>
+                    UP TO <Text style={styles.flashBold}>50%</Text> OFF
+                  </Text>
+
+                  <View style={styles.flashBtn}>
+                    <Text style={styles.flashBtnText}>Shop Now</Text>
+                  </View>
+                </View>
+
+                <View style={styles.premiumTag}>
+                  <Text style={styles.premiumTagText}>PREMIUM{"\n"}GEAR</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
+            {/* Featured Products */}
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Featured Products</Text>
+              <View style={styles.sectionLine} />
+            </View>
+
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={styles.twoColRow}>
+                {/* Left card */}
+                <TouchableOpacity
+                  style={styles.productCard}
+                  activeOpacity={0.9}
+                >
+                  {/* Badge */}
+                  <View style={styles.cardBadge}>
+                    <Text style={styles.cardBadgeText}>30% OFF</Text>
+                  </View>
+
+                  {/* Text */}
+                  <View style={styles.productTextWrap}>
+                    <Text style={styles.productTitle}>
+                      Adjustable Dumbbells
+                    </Text>
+                    <Text style={styles.productPrice}>$179.99</Text>
+                    <Text style={styles.productSubPrice}>Was $259.99</Text>
+                  </View>
+
+                  {/* Red edge highlight */}
+                  <View style={[styles.edgeHighlight, { left: 0 }]} />
+                </TouchableOpacity>
+
+                {/* Right card */}
+                <TouchableOpacity
+                  style={styles.productCard}
+                  activeOpacity={0.9}
+                >
+                  <View style={styles.productTextWrap}>
+                    <Text style={styles.productTitle}>
+                      Premium Resistance Bands
+                    </Text>
+                    <Text style={styles.productPrice}>From $29.99</Text>
+                  </View>
+
+                  <View style={[styles.edgeHighlight, { right: 0 }]} />
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+
+            {/* Popular Items */}
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Popular Items</Text>
+              <View style={styles.sectionLine} />
+            </View>
+
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingRight: 14 }}
+            >
+              <View style={styles.threeColRow}>
+                {/* Card 1 */}
+                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
+                  <View style={styles.miniTextWrap}>
+                    <Text style={styles.miniTitle} numberOfLines={2}>
+                      Insulated{"\n"}Shaker Bottle
+                    </Text>
+                    <Text style={styles.miniPrice}>$24.99</Text>
+                  </View>
+                </TouchableOpacity>
+
+                {/* Card 2 */}
+                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
+                  <View style={styles.miniTextWrap}>
+                    <Text style={styles.miniTitle} numberOfLines={2}>
+                      Leather{"\n"}Weightlifting...
+                    </Text>
+                    <Text style={styles.miniPrice}>$34.99</Text>
+                  </View>
+                </TouchableOpacity>
+
+                {/* Card 3 */}
+                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
+                  <View style={styles.miniBadge}>
+                    <Text style={styles.miniBadgeText}>Best Seller</Text>
+                  </View>
+
+                  <View style={styles.miniTextWrap}>
+                    <Text style={styles.miniTitle} numberOfLines={2}>
+                      Luxury Yoga{"\n"}Mat
+                    </Text>
+                    <Text style={styles.miniPrice}>$74.99</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </ScrollView>
+        </LinearGradient>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#050505",
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#050505",
+  },
+  gradient: {
+    flex: 1,
+  },
+  content: {
+    paddingTop: 75,
+    paddingHorizontal: 16,
+    paddingBottom: 30,
+  },
+  text: {
+    fontSize: 32,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  //------------------------- Store & Shopping Cart Header ---------------
+  storeHeaderRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+
+  storeTitle: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#ffffff",
+  },
+
+  cartButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+  },
+
+  cartIcon: {
+    fontSize: 20,
+  },
+
+  cartBadge: {
+    position: "absolute",
+    top: 6,
+    right: 6,
+    backgroundColor: "#c62828",
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  cartBadgeText: {
+    color: "#fff",
+    fontSize: 11,
+    fontWeight: "800",
+  },
+  //------------------------- Card Representation ---------------
+  flashCard: {
+    width: "100%",
+    height: 150,
+    borderRadius: 22,
+    backgroundColor: "rgba(0,0,0,0.75)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    overflow: "hidden",
+    marginBottom: 18,
+    marginTop: 10,
+  },
+
+  flashInner: {
+    flex: 1,
+    padding: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+
+  flashTitle: {
+    color: "#fff",
+    fontSize: 28,
+    fontWeight: "900",
+    letterSpacing: 0.6,
+    marginBottom: 10,
+  },
+
+  flashLine: {
+    color: "#e6e6e6",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  flashBold: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
+
+  flashBtn: {
+    marginTop: 16,
+    alignSelf: "flex-start",
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.40)",
+    backgroundColor: "rgba(0,0,0,0.55)",
+  },
+
+  flashBtnText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "800",
+  },
+
+  premiumTag: {
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.12)",
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+
+  premiumTagText: {
+    color: "#fff",
+    fontSize: 12,
+    fontWeight: "900",
+    textAlign: "center",
+    letterSpacing: 0.5,
+  },
+  //-------------- Left/Right Featured Product Cards --------------
+  /* Section header */
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 12,
+    marginTop: 6,
+  },
+  sectionTitle: {
+    paddingTop: 10,
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "800",
+  },
+  sectionLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "rgba(255,255,255,0.10)",
+    marginTop: 2,
+  },
+
+  /* 2 cards row */
+  twoColRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+  productCard: {
+    width: width * 0.447,
+    height: 190,
+    marginRight: 14,
+    borderRadius: 22,
+    backgroundColor: "rgba(0,0,0,0.78)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    overflow: "hidden",
+    justifyContent: "flex-end",
+  },
+  productTextWrap: {
+    padding: 16,
+  },
+  productTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "900",
+    marginBottom: 10,
+  },
+  productPrice: {
+    color: "#fff",
+    fontSize: 26,
+    fontWeight: "900",
+  },
+  productSubPrice: {
+    color: "#bdbdbd",
+    fontSize: 14,
+    fontWeight: "700",
+    marginTop: 4,
+  },
+
+  /* Discount badge */
+  cardBadge: {
+    position: "absolute",
+    top: 14,
+    left: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.65)",
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.35)",
+  },
+  cardBadgeText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "900",
+  },
+
+  /* Red edge highlight */
+  edgeHighlight: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: 4,
+    backgroundColor: "rgba(198,40,40,0.55)",
+  },
+  // ------------- Left Right Popular Items Cards ---------------------
+  threeColRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+
+  miniCard: {
+    width: width * 0.289,
+    marginRight: 12,
+    height: 175,
+    borderRadius: 22,
+    backgroundColor: "rgba(0,0,0,0.78)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    overflow: "hidden",
+    justifyContent: "flex-end",
+  },
+
+  miniTextWrap: {
+    padding: 14,
+  },
+
+  miniTitle: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "900",
+    marginBottom: 10,
+  },
+
+  miniPrice: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "900",
+  },
+
+  miniBadge: {
+    position: "absolute",
+    top: 12,
+    right: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.65)",
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.35)",
+  },
+
+  miniBadgeText: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "900",
+  },
+});

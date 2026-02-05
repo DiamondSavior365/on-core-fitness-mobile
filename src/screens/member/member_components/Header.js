@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     zIndex: 50, // ensures dropdown stays above everything
   },
   header: {
+    marginTop: 40,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

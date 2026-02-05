@@ -17,9 +17,9 @@ import ThankYouScreen from "../screens/public/ThankYouScreen";
 
 //Member screens
 import MemberHomeScreen from "../screens/member/MemberHomeScreen";
-import WorkoutScreen from "../screens/member/top_tab_bar/WorkoutScreen";
+import WorkoutScreen from "../screens/member/top_tab_bar/workout/WorkoutScreen";
 import MemberLayout from "../screens/member/member_components/MemberLayout";
-import StoreScreen from "../screens/member/bottom_tab_bar/StoreScreen";
+import StoreScreen from "../screens/member/bottom_tab_bar/store/StoreScreen";
 
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
