@@ -81,10 +81,11 @@ export default function StoreScreen() {
                   {/* Text */}
                   <View style={styles.productTextWrap}>
                     <Text style={styles.productTitle}>
-                      Adjustable Dumbbells
+                      {" "}
+                      MRE Lite {"\n"} Protein Powder
                     </Text>
-                    <Text style={styles.productPrice}>$179.99</Text>
-                    <Text style={styles.productSubPrice}>Was $259.99</Text>
+                    <Text style={styles.productPrice}>$39.99</Text>
+                    <Text style={styles.productSubPrice}>Was $56.99</Text>
                   </View>
 
                   {/* Red edge highlight */}
@@ -98,7 +99,7 @@ export default function StoreScreen() {
                 >
                   <View style={styles.productTextWrap}>
                     <Text style={styles.productTitle}>
-                      Premium Resistance Bands
+                      Beyond Raw LIT {"\n"}Pre-Workout
                     </Text>
                     <Text style={styles.productPrice}>From $29.99</Text>
                   </View>
