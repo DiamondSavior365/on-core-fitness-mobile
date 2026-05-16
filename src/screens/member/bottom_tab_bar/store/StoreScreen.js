@@ -41,27 +41,6 @@ export default function StoreScreen() {
             </View>
 
             {/* Flash Sale Banner */}
-            {/* <TouchableOpacity style={styles.flashCard} activeOpacity={0.9}>
-              <View style={styles.flashInner}>
-                <View>
-                  <Text style={styles.flashTitle}>FLASH SALE</Text>
-
-                  <Text style={styles.flashLine}>
-                    UP TO <Text style={styles.flashBold}>50%</Text> OFF
-                  </Text>
-
-                  <View style={styles.flashBtn}>
-                    <Text style={styles.flashBtnText}>Shop Now</Text>
-                  </View>
-                </View>
-
-                <View style={styles.premiumTag}>
-                  <Text style={styles.premiumTagText}>PREMIUM{"\n"}GEAR</Text>
-                </View>
-              </View>
-            </TouchableOpacity> */}
-
-            {/* Flash Sale Banner */}
             <TouchableOpacity style={styles.flashCard} activeOpacity={0.9}>
               <ImageBackground
                 source={require("../../../../../assets/On_Core_Fitness_Store_Images/store_image_horizontal_2.png")}
@@ -101,30 +80,6 @@ export default function StoreScreen() {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.twoColRow}>
                 {/* Left card */}
-                {/* <TouchableOpacity
-                  style={styles.productCard}
-                  activeOpacity={0.9}
-                > */}
-                {/* Badge */}
-                {/* <View style={styles.cardBadge}>
-                    <Text style={styles.cardBadgeText}>30% OFF</Text>
-                  </View> */}
-
-                {/* Text */}
-                {/* <View style={styles.productTextWrap}>
-                    <Text style={styles.productTitle}>
-                      {" "}
-                      MRE Lite {"\n"} Protein Powder
-                    </Text>
-                    <Text style={styles.productPrice}>$39.99</Text>
-                    <Text style={styles.productSubPrice}>Was $56.99</Text>
-                  </View> */}
-
-                {/* Red edge highlight */}
-                {/* <View style={[styles.edgeHighlight, { left: 0 }]} />
-                </TouchableOpacity> */}
-
-                {/* Left card */}
                 <TouchableOpacity
                   style={styles.productCard}
                   activeOpacity={0.9}
@@ -155,20 +110,6 @@ export default function StoreScreen() {
                   </ImageBackground>
                 </TouchableOpacity>
 
-                {/* Right card */}
-                {/* <TouchableOpacity
-                  style={styles.productCard}
-                  activeOpacity={0.9}
-                >
-                  <View style={styles.productTextWrap}>
-                    <Text style={styles.productTitle}>
-                      Beyond Raw LIT {"\n"}Pre-Workout
-                    </Text>
-                    <Text style={styles.productPrice}>From $29.99</Text>
-                  </View>
-
-                  <View style={[styles.edgeHighlight, { right: 0 }]} />
-                </TouchableOpacity> */}
                 {/* Right card */}
                 <TouchableOpacity
                   style={styles.productCard}
@@ -207,15 +148,6 @@ export default function StoreScreen() {
             >
               <View style={styles.threeColRow}>
                 {/* Card 1 */}
-                {/* <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <View style={styles.miniTextWrap}>
-                    <Text style={styles.miniTitle} numberOfLines={2}>
-                      Insulated{"\n"}Shaker Bottle
-                    </Text>
-                    <Text style={styles.miniPrice}>$24.99</Text>
-                  </View>
-                </TouchableOpacity> */}
-                {/* Card 1 */}
                 <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
                   <ImageBackground
                     source={require("../../../../../assets/On_Core_Fitness_Store_Images/Insulated_Shaker_Bottle.png")}
@@ -234,15 +166,6 @@ export default function StoreScreen() {
                 </TouchableOpacity>
 
                 {/* Card 2 */}
-                {/* <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <View style={styles.miniTextWrap}>
-                    <Text style={styles.miniTitle} numberOfLines={2}>
-                      Leather{"\n"}Weightlifting...
-                    </Text>
-                    <Text style={styles.miniPrice}>$34.99</Text>
-                  </View>
-                </TouchableOpacity> */}
-                {/* Card 2 */}
                 <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
                   <ImageBackground
                     source={require("../../../../../assets/On_Core_Fitness_Store_Images/Leather_Weightlifting_Gloves.png")}
@@ -260,19 +183,6 @@ export default function StoreScreen() {
                   </ImageBackground>
                 </TouchableOpacity>
 
-                {/* Card 3 */}
-                {/* <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <View style={styles.miniBadge}>
-                    <Text style={styles.miniBadgeText}>Best Seller</Text>
-                  </View>
-
-                  <View style={styles.miniTextWrap}>
-                    <Text style={styles.miniTitle} numberOfLines={2}>
-                      Luxury Yoga{"\n"}Mat
-                    </Text>
-                    <Text style={styles.miniPrice}>$74.99</Text>
-                  </View>
-                </TouchableOpacity> */}
                 {/* Card 3 */}
                 <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
                   <ImageBackground
