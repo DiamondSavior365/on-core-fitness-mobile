@@ -64,7 +64,7 @@ export default function StoreScreen() {
             {/* Flash Sale Banner */}
             <TouchableOpacity style={styles.flashCard} activeOpacity={0.9}>
               <ImageBackground
-                source={require("../../../../../assets/On_Core_Fitness_Store_Images/store_image_horizontal_1.png")}
+                source={require("../../../../../assets/On_Core_Fitness_Store_Images/store_image_horizontal_2.png")}
                 style={styles.flashImage}
                 imageStyle={styles.flashImageStyle}
               >
