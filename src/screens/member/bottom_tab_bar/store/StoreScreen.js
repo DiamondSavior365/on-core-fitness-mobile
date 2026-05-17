@@ -10,8 +10,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+
 const { width } = Dimensions.get("window");
 export default function StoreScreen() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>
       <View style={styles.container}>
@@ -41,7 +44,11 @@ export default function StoreScreen() {
             </View>
 
             {/* Flash Sale Banner */}
-            <TouchableOpacity style={styles.flashCard} activeOpacity={0.9}>
+            <TouchableOpacity
+              style={styles.flashCard}
+              activeOpacity={0.9}
+              onPress={() => navigation.navigate("Full_Store_Screen")}
+            >
               <ImageBackground
                 source={require("../../../../../assets/On_Core_Fitness_Store_Images/store_image_horizontal_2.png")}
                 style={styles.flashImage}

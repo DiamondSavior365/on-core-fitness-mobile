@@ -20,6 +20,7 @@ import MemberHomeScreen from "../screens/member/MemberHomeScreen";
 import WorkoutScreen from "../screens/member/top_tab_bar/workout/WorkoutScreen";
 import MemberLayout from "../screens/member/member_components/MemberLayout";
 import StoreScreen from "../screens/member/bottom_tab_bar/store/StoreScreen";
+import FullStoreScreen from "../screens/member/bottom_tab_bar/store/FullStoreScreen";
 
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
@@ -199,6 +200,10 @@ function MemberInnerNavigator() {
         <MemberInnerStack.Screen
           name="Workout_Screen"
           component={WorkoutScreen}
+        />
+        <MemberInnerStack.Screen
+          name="Full_Store_Screen"
+          component={FullStoreScreen}
         />
         <MemberInnerStack.Screen name="Store_Screen" component={StoreScreen} />
       </MemberInnerStack.Navigator>
