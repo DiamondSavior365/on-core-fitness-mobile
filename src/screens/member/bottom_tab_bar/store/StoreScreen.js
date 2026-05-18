@@ -30,8 +30,9 @@ export default function StoreScreen() {
             contentContainerStyle={styles.content}
             showsVerticalScrollIndicator={false}
           >
+            {/* -------------------------------------------------------------------------------- */}
             {/* Store Header Row */}
-            <View style={styles.storeHeaderRow}>
+            {/* <View style={styles.storeHeaderRow}>
               <Text style={styles.storeTitle}>Store</Text>
 
               <TouchableOpacity style={styles.cartButton}>
@@ -41,7 +42,36 @@ export default function StoreScreen() {
                   <Text style={styles.cartBadgeText}>2</Text>
                 </View>
               </TouchableOpacity>
+            </View> */}
+            {/* -------------------------------------------------------------------------------- */}
+            {/* New Store Header Row */}
+            <View style={styles.storeTopRow}>
+              <TouchableOpacity
+                style={styles.storeBackButton}
+                activeOpacity={0.8}
+                // onPress={() => navigation.goBack()}
+              >
+                <Text style={styles.storeBackIcon}>‹</Text>
+              </TouchableOpacity>
+
+              <Text style={styles.storeLogoText}>
+                ON <Text style={styles.storeLogoCore}>CORE</Text> FITNESS
+              </Text>
+
+              <TouchableOpacity
+                style={styles.storeCartButton}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.storeCartIcon}>🛒</Text>
+
+                <View style={styles.storeCartBadge}>
+                  <Text style={styles.storeCartBadgeText}>2</Text>
+                </View>
+              </TouchableOpacity>
             </View>
+
+            <Text style={styles.storeTitle}>Store</Text>
+            {/* -------------------------------------------------------------------------------- */}
 
             {/* Flash Sale Banner */}
             <TouchableOpacity
@@ -243,51 +273,51 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   //------------------------- Store & Shopping Cart Header ---------------
-  storeHeaderRow: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
+  // storeHeaderRow: {
+  //   width: "100%",
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  //   marginBottom: 16,
+  // },
 
-  storeTitle: {
-    fontSize: 28,
-    fontWeight: "800",
-    color: "#ffffff",
-  },
+  // storeTitle: {
+  //   fontSize: 28,
+  //   fontWeight: "800",
+  //   color: "#ffffff",
+  // },
 
-  cartButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  },
+  // cartButton: {
+  //   width: 44,
+  //   height: 44,
+  //   borderRadius: 14,
+  //   backgroundColor: "rgba(0,0,0,0.5)",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   position: "relative",
+  // },
 
-  cartIcon: {
-    fontSize: 20,
-  },
+  // cartIcon: {
+  //   fontSize: 20,
+  // },
 
-  cartBadge: {
-    position: "absolute",
-    top: 6,
-    right: 6,
-    backgroundColor: "#c62828",
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // cartBadge: {
+  //   position: "absolute",
+  //   top: 6,
+  //   right: 6,
+  //   backgroundColor: "#c62828",
+  //   width: 18,
+  //   height: 18,
+  //   borderRadius: 9,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
 
-  cartBadgeText: {
-    color: "#fff",
-    fontSize: 11,
-    fontWeight: "800",
-  },
+  // cartBadgeText: {
+  //   color: "#fff",
+  //   fontSize: 11,
+  //   fontWeight: "800",
+  // },
   //------------------------- Card Representation ---------------
   flashCard: {
     width: "100%",
@@ -589,5 +619,86 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.0)",
     justifyContent: "flex-end",
+  },
+  //------------------------- Store Top Row Styles ---------------
+  storeTopRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+
+  //------------------------- Store Back Button Styles ---------------
+  storeBackButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.45)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  storeBackIcon: {
+    color: "#fff",
+    fontSize: 38,
+    fontWeight: "600",
+    marginTop: -4,
+  },
+
+  //------------------------- Store Logo Text Styles ---------------
+  storeLogoText: {
+    color: "#fff",
+    fontSize: 22,
+    fontFamily: "BlackOpsOne",
+    letterSpacing: 1,
+  },
+
+  storeLogoCore: {
+    color: "#c62828",
+  },
+
+  //------------------------- Store Cart Button Styles ---------------
+  storeCartButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.45)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+  },
+
+  storeCartIcon: {
+    fontSize: 20,
+  },
+
+  storeCartBadge: {
+    position: "absolute",
+    top: 5,
+    right: 5,
+    backgroundColor: "#c62828",
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  storeCartBadgeText: {
+    color: "#fff",
+    fontSize: 11,
+    fontWeight: "800",
+  },
+
+  //------------------------- Store Title Styles ---------------
+  storeTitle: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#ffffff",
+    marginBottom: 16,
   },
 });
