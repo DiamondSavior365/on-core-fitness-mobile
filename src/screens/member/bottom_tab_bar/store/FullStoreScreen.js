@@ -39,6 +39,11 @@ export default function FullStoreScreen() {
               >
                 <Text style={styles.backIcon}>‹</Text>
               </TouchableOpacity>
+
+              <Text style={styles.fullStoreLogoText}>
+                ON <Text style={styles.fullStoreLogoCore}>CORE</Text> FITNESS
+              </Text>
+
               <TouchableOpacity
                 style={styles.fullStoreCartButton}
                 activeOpacity={0.8}
@@ -929,5 +934,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "900",
     marginTop: 4,
+  },
+  //--------------- Logo Styles -----------------
+  fullStoreLogoText: {
+    color: "#fff",
+    fontSize: 22,
+    fontFamily: "BlackOpsOne",
+    letterSpacing: 1,
+  },
+
+  fullStoreLogoCore: {
+    color: "#c62828",
   },
 });
