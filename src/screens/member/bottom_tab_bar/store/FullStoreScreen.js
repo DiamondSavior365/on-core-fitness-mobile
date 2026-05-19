@@ -27,10 +27,10 @@ export default function FullStoreScreen() {
           locations={[0, 0.4, 1]}
           style={styles.gradient}
         >
-          <ScrollView
-            contentContainerStyle={styles.content}
-            showsVerticalScrollIndicator={false}
-          >
+          {/* FIXED TOP AREA */}
+          <View style={styles.fixedFullStoreHeader}>
+            {/* storeTopRow goes here */}
+            {/* section filter ScrollView goes here */}
             <View style={styles.topRow}>
               <TouchableOpacity
                 style={styles.backButton}
@@ -89,6 +89,12 @@ export default function FullStoreScreen() {
                 <Text style={styles.sectionFilterText}>All Products</Text>
               </TouchableOpacity>
             </ScrollView>
+          </View>
+
+          <ScrollView
+            contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
+          >
             {/* Sale Items Section */}
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Flash Sale</Text>
@@ -352,7 +358,7 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    paddingTop: 75,
+    // paddingTop: 75,
     paddingHorizontal: 16,
     paddingBottom: 30,
   },
@@ -413,6 +419,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 10,
+  },
+  fixedFullStoreHeader: {
+    paddingTop: 75,
+    paddingHorizontal: 16,
+    paddingBottom: 0,
   },
   fullStoreCartButton: {
     width: 42,
