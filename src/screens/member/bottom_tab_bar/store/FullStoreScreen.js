@@ -55,8 +55,40 @@ export default function FullStoreScreen() {
                 </View>
               </TouchableOpacity>
             </View>
-            <Text style={styles.screenTitle}>Full Store</Text>
+            {/* <Text style={styles.screenTitle}>Full Store</Text> */}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.sectionFilterScroll}
+            >
+              <TouchableOpacity
+                style={[
+                  styles.sectionFilterButton,
+                  styles.sectionFilterButtonActive,
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.sectionFilterText,
+                    styles.sectionFilterTextActive,
+                  ]}
+                >
+                  Flash Sale
+                </Text>
+              </TouchableOpacity>
 
+              <TouchableOpacity style={styles.sectionFilterButton}>
+                <Text style={styles.sectionFilterText}>Featured Products</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.sectionFilterButton}>
+                <Text style={styles.sectionFilterText}>Popular Items</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.sectionFilterButton}>
+                <Text style={styles.sectionFilterText}>All Products</Text>
+              </TouchableOpacity>
+            </ScrollView>
             {/* Sale Items Section */}
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Flash Sale</Text>
@@ -945,5 +977,34 @@ const styles = StyleSheet.create({
 
   fullStoreLogoCore: {
     color: "#c62828",
+  },
+  //-------------- Section Filter Button Row --------------
+  sectionFilterScroll: {
+    paddingVertical: 10,
+    gap: 10,
+  },
+
+  sectionFilterButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 9,
+    borderRadius: 14,
+    backgroundColor: "rgba(0,0,0,0.35)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  sectionFilterButtonActive: {
+    backgroundColor: "rgba(0,0,0,0.70)",
+    borderColor: "rgba(198,40,40,0.75)",
+  },
+
+  sectionFilterText: {
+    color: "#cfcfcf",
+    fontSize: 13,
+    fontWeight: "800",
+  },
+
+  sectionFilterTextActive: {
+    color: "#fff",
   },
 });
