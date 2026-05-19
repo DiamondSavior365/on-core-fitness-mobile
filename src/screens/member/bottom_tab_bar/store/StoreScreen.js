@@ -26,25 +26,10 @@ export default function StoreScreen() {
           locations={[0, 0.4, 1]}
           style={styles.gradient}
         >
-          <ScrollView
-            contentContainerStyle={styles.content}
-            showsVerticalScrollIndicator={false}
-          >
-            {/* -------------------------------------------------------------------------------- */}
-            {/* Store Header Row */}
-            {/* <View style={styles.storeHeaderRow}>
-              <Text style={styles.storeTitle}>Store</Text>
-
-              <TouchableOpacity style={styles.cartButton}>
-                <Text style={styles.cartIcon}>🛒</Text>
-
-                <View style={styles.cartBadge}>
-                  <Text style={styles.cartBadgeText}>2</Text>
-                </View>
-              </TouchableOpacity>
-            </View> */}
-            {/* -------------------------------------------------------------------------------- */}
-            {/* New Store Header Row */}
+          {/* FIXED TOP AREA */}
+          <View style={styles.fixedStoreHeader}>
+            {/* storeTopRow goes here */}
+            {/* section filter ScrollView goes here */}
             <View style={styles.storeTopRow}>
               <TouchableOpacity
                 style={styles.storeBackButton}
@@ -104,6 +89,28 @@ export default function StoreScreen() {
                 <Text style={styles.sectionFilterText}>All Products</Text>
               </TouchableOpacity>
             </ScrollView>
+          </View>
+
+          <ScrollView
+            contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* -------------------------------------------------------------------------------- */}
+            {/* Store Header Row */}
+            {/* <View style={styles.storeHeaderRow}>
+              <Text style={styles.storeTitle}>Store</Text>
+
+              <TouchableOpacity style={styles.cartButton}>
+                <Text style={styles.cartIcon}>🛒</Text>
+
+                <View style={styles.cartBadge}>
+                  <Text style={styles.cartBadgeText}>2</Text>
+                </View>
+              </TouchableOpacity>
+            </View> */}
+            {/* -------------------------------------------------------------------------------- */}
+            {/* New Store Header Row */}
+
             {/* 
             -------------------------------------------------------------------------------- */}
 
@@ -297,7 +304,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingTop: 75,
+    // paddingTop: 75,
     paddingHorizontal: 16,
     paddingBottom: 30,
   },
@@ -763,5 +770,10 @@ const styles = StyleSheet.create({
 
   sectionFilterTextActive: {
     color: "#fff",
+  },
+  fixedStoreHeader: {
+    paddingTop: 75,
+    paddingHorizontal: 16,
+    paddingBottom: 6,
   },
 });
