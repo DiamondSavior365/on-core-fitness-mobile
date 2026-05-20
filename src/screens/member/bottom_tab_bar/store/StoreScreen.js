@@ -12,7 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import FeaturedProductCard from "./components/FeaturedProductCard";
-import { featuredProducts } from "./data/products";
+import { featuredProducts, popularProducts } from "./data/products";
+import PopularProductCard from "./components/PopularProductCard";
 
 const { width } = Dimensions.get("window");
 export default function StoreScreen() {
@@ -181,63 +182,13 @@ export default function StoreScreen() {
               contentContainerStyle={{ paddingRight: 14 }}
             >
               <View style={styles.threeColRow}>
-                {/* Card 1 */}
-                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <ImageBackground
-                    source={require("../../../../../assets/On_Core_Fitness_Store_Images/Insulated_Shaker_Bottle.png")}
-                    style={styles.card1Image}
-                    imageStyle={styles.card1ImageStyle}
-                  >
-                    <View style={styles.card1Overlay}>
-                      <View style={styles.miniTextWrap}>
-                        <Text style={styles.miniTitle} numberOfLines={2}>
-                          Insulated{"\n"}Shaker Bottle
-                        </Text>
-                        <Text style={styles.miniPrice}>$24.99</Text>
-                      </View>
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
-
-                {/* Card 2 */}
-                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <ImageBackground
-                    source={require("../../../../../assets/On_Core_Fitness_Store_Images/Leather_Weightlifting_Gloves.png")}
-                    style={styles.card2Image}
-                    imageStyle={styles.card2ImageStyle}
-                  >
-                    <View style={styles.card2Overlay}>
-                      <View style={styles.miniTextWrap}>
-                        <Text style={styles.miniTitle} numberOfLines={2}>
-                          Leather{"\n"}Weightlifting...
-                        </Text>
-                        <Text style={styles.miniPrice}>$34.99</Text>
-                      </View>
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
-
-                {/* Card 3 */}
-                <TouchableOpacity style={styles.miniCard} activeOpacity={0.9}>
-                  <ImageBackground
-                    source={require("../../../../../assets/On_Core_Fitness_Store_Images/Luxury_Yoga_Mat.png")}
-                    style={styles.card3Image}
-                    imageStyle={styles.card3ImageStyle}
-                  >
-                    <View style={styles.card3Overlay}>
-                      <View style={styles.miniBadge}>
-                        <Text style={styles.miniBadgeText}>Best Seller</Text>
-                      </View>
-
-                      <View style={styles.miniTextWrap}>
-                        <Text style={styles.miniTitle} numberOfLines={2}>
-                          Luxury Yoga{"\n"}Mat
-                        </Text>
-                        <Text style={styles.miniPrice}>$74.99</Text>
-                      </View>
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
+                {popularProducts.map((product) => (
+                  <PopularProductCard
+                    key={product.id}
+                    product={product}
+                    style={styles.popularProductCard}
+                  />
+                ))}
               </View>
             </ScrollView>
           </ScrollView>
@@ -479,6 +430,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(198,40,40,0.55)",
   },
   // ------------- Left Right Popular Items Cards ---------------------
+  popularProductCard: {
+    width: width * 0.289,
+    marginRight: 12,
+  },
   threeColRow: {
     flexDirection: "row",
     justifyContent: "space-between",
