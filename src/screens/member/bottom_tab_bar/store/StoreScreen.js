@@ -11,6 +11,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import FeaturedProductCard from "./components/FeaturedProductCard";
+import { featuredProducts } from "./data/products";
 
 const { width } = Dimensions.get("window");
 export default function StoreScreen() {
@@ -157,59 +159,13 @@ export default function StoreScreen() {
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.twoColRow}>
-                {/* Left card */}
-                <TouchableOpacity
-                  style={styles.productCard}
-                  activeOpacity={0.9}
-                >
-                  <ImageBackground
-                    source={require("../../../../../assets/On_Core_Fitness_Store_Images/MRE_Lite_Protien_Powder.png")}
-                    style={styles.productImageLeft}
-                    imageStyle={styles.productImageLeftStyle}
-                  >
-                    <View style={styles.productOverlayLeft}>
-                      {/* Badge */}
-                      <View style={styles.cardBadge}>
-                        <Text style={styles.cardBadgeText}>30% OFF</Text>
-                      </View>
-
-                      {/* Text */}
-                      <View style={styles.productTextWrap}>
-                        <Text style={styles.productTitle}>
-                          MRE Lite{"\n"}Protein Powder
-                        </Text>
-                        <Text style={styles.productPrice}>$39.99</Text>
-                        <Text style={styles.productSubPrice}>Was $56.99</Text>
-                      </View>
-
-                      {/* Red edge highlight */}
-                      <View style={[styles.edgeHighlight, { left: 0 }]} />
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
-
-                {/* Right card */}
-                <TouchableOpacity
-                  style={styles.productCard}
-                  activeOpacity={0.9}
-                >
-                  <ImageBackground
-                    source={require("../../../../../assets/On_Core_Fitness_Store_Images/Beyond_Raw_LIT_Pre_Workout.png")}
-                    style={styles.productImageRight}
-                    imageStyle={styles.productImageRightStyle}
-                  >
-                    <View style={styles.productOverlayRight}>
-                      <View style={styles.productTextWrap}>
-                        <Text style={styles.productTitle}>
-                          Beyond Raw LIT{"\n"}Pre-Workout
-                        </Text>
-                        <Text style={styles.productPrice}>From $29.99</Text>
-                      </View>
-
-                      <View style={[styles.edgeHighlight, { right: 0 }]} />
-                    </View>
-                  </ImageBackground>
-                </TouchableOpacity>
+                {featuredProducts.map((product) => (
+                  <FeaturedProductCard
+                    key={product.id}
+                    product={product}
+                    style={styles.featuredProductCard}
+                  />
+                ))}
               </View>
             </ScrollView>
 
@@ -454,7 +410,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.10)",
     marginTop: 2,
   },
-
+  featuredProductCard: {
+    width: width * 0.447,
+    marginRight: 14,
+  },
   /* 2 cards row */
   twoColRow: {
     flexDirection: "row",
