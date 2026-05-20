@@ -12,7 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import ProductCard from "./components/ProductCard";
-import { allProducts } from "./data/products";
+import { allProducts, flashSaleProducts } from "./data/products";
+import FlashSaleCard from "./components/FlashSaleCard";
 
 const { width } = Dimensions.get("window");
 
@@ -104,61 +105,19 @@ export default function FullStoreScreen() {
             </View>
 
             {/* Later: Sale product cards go here */}
-            <View style={styles.flashSaleRow}>
-              {/* Flash Sale Card 1 */}
-              <TouchableOpacity
-                style={styles.flashSaleCard1}
-                activeOpacity={0.9}
-              >
-                <ImageBackground
-                  source={require("../../../../../assets/On_Core_Fitness_Store_Images/MRE_Lite_Protien_Powder.png")}
-                  style={styles.flashSaleImage1}
-                  imageStyle={styles.flashSaleImageStyle1}
-                >
-                  <View style={styles.flashSaleOverlay1}>
-                    <View style={styles.flashSaleBadge1}>
-                      <Text style={styles.flashSaleBadgeText1}>30% OFF</Text>
-                    </View>
-
-                    <View style={styles.flashSaleInfo1}>
-                      <Text style={styles.flashSaleTitle1}>
-                        MRE Lite{"\n"}Protein Powder
-                      </Text>
-
-                      <Text style={styles.flashSalePrice1}>$39.99</Text>
-                      <Text style={styles.flashSaleOldPrice1}>$56.99</Text>
-                    </View>
-                  </View>
-                </ImageBackground>
-              </TouchableOpacity>
-
-              {/* Flash Sale Card 2 */}
-              <TouchableOpacity
-                style={styles.flashSaleCard2}
-                activeOpacity={0.9}
-              >
-                <ImageBackground
-                  source={require("../../../../../assets/On_Core_Fitness_Store_Images/Beyond_Raw_LIT_Pre_Workout.png")}
-                  style={styles.flashSaleImage2}
-                  imageStyle={styles.flashSaleImageStyle2}
-                >
-                  <View style={styles.flashSaleOverlay2}>
-                    <View style={styles.flashSaleBadge2}>
-                      <Text style={styles.flashSaleBadgeText2}>25% OFF</Text>
-                    </View>
-
-                    <View style={styles.flashSaleInfo2}>
-                      <Text style={styles.flashSaleTitle2}>
-                        Beyond Raw{"\n"}LIT Pre-Workout
-                      </Text>
-
-                      <Text style={styles.flashSalePrice2}>$29.99</Text>
-                      <Text style={styles.flashSaleOldPrice2}>$39.99</Text>
-                    </View>
-                  </View>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.flashSaleScrollContent}
+            >
+              {flashSaleProducts.map((product) => (
+                <FlashSaleCard
+                  key={product.id}
+                  product={product}
+                  style={styles.flashSaleCard}
+                />
+              ))}
+            </ScrollView>
 
             {/* All Items Section */}
             <View style={styles.sectionHeader}>
@@ -305,150 +264,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 5,
   },
+  flashSaleScrollContent: {
+    gap: 14,
+    paddingRight: 16,
+    marginBottom: 5,
+  },
 
-  //-------------- Full Store Flash Sale Card 1 --------------
-  flashSaleCard1: {
+  flashSaleCard: {
     width: width * 0.43,
-    height: 145,
-    borderRadius: 18,
-    backgroundColor: "rgba(0,0,0,0.78)",
-    borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.45)",
-    overflow: "hidden",
   },
 
-  flashSaleImage1: {
-    flex: 1,
-  },
-
-  flashSaleImageStyle1: {
-    borderRadius: 18,
-    resizeMode: "cover",
-  },
-
-  flashSaleOverlay1: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.45)",
-    justifyContent: "center",
-  },
-
-  flashSaleBadge1: {
-    position: "absolute",
-    top: 10,
-    left: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 14,
-    backgroundColor: "rgba(0,0,0,0.75)",
-    borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.55)",
-  },
-
-  flashSaleBadgeText1: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "900",
-  },
-
-  flashSaleInfo1: {
-    position: "absolute",
-    right: 12,
-    bottom: 18,
-    width: "43%",
-  },
-
-  flashSaleTitle1: {
-    color: "#fff",
-    fontSize: 11,
-    fontWeight: "900",
-    marginBottom: 6,
-    lineHeight: 13,
-  },
-
-  flashSalePrice1: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "900",
-  },
-
-  flashSaleOldPrice1: {
-    color: "#9e9e9e",
-    fontSize: 13,
-    fontWeight: "700",
-    textDecorationLine: "line-through",
-  },
-
-  //-------------- Full Store Flash Sale Card 2 --------------
-  flashSaleCard2: {
-    width: width * 0.43,
-    height: 145,
-    borderRadius: 18,
-    backgroundColor: "rgba(0,0,0,0.78)",
-    borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.45)",
-    overflow: "hidden",
-  },
-
-  flashSaleImage2: {
-    flex: 1,
-  },
-
-  flashSaleImageStyle2: {
-    borderRadius: 18,
-    resizeMode: "cover",
-  },
-
-  flashSaleOverlay2: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.30)",
-    justifyContent: "center",
-  },
-
-  flashSaleBadge2: {
-    position: "absolute",
-    top: 10,
-    left: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 14,
-    backgroundColor: "rgba(0,0,0,0.75)",
-    borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.55)",
-  },
-
-  flashSaleBadgeText2: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "900",
-  },
-
-  flashSaleInfo2: {
-    position: "absolute",
-    left: 12,
-    bottom: 18,
-    width: "42%",
-  },
-
-  flashSaleTitle2: {
-    color: "#fff",
-    fontSize: 11,
-    fontWeight: "900",
-    marginBottom: 6,
-    lineHeight: 13,
-  },
-
-  flashSalePrice2: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "900",
-  },
-
-  flashSaleOldPrice2: {
-    color: "#9e9e9e",
-    fontSize: 13,
-    fontWeight: "700",
-    textDecorationLine: "line-through",
-  },
   //-------------- Full Store All Products Grid --------------
   allProductsGrid: {
     flexDirection: "row",
@@ -457,7 +282,6 @@ const styles = StyleSheet.create({
     rowGap: 12,
     marginBottom: 30,
   },
-  // //-------------- All Products Card Syles --------------
   allProductCard: {
     width: width * 0.285,
   },
