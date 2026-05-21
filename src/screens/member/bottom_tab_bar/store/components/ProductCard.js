@@ -6,10 +6,20 @@ import {
   ImageBackground,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProductCard({ product, style }) {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={[styles.card, style]} activeOpacity={0.9}>
+    <TouchableOpacity
+      style={[styles.card, style]}
+      activeOpacity={0.9}
+      onPress={() =>
+        navigation.navigate("Product_Detail_Screen", {
+          productId: product.id,
+        })
+      }
+    >
       <ImageBackground
         source={product.image}
         style={styles.image}
