@@ -14,11 +14,13 @@ import { useNavigation } from "@react-navigation/native";
 import ProductCard from "./components/ProductCard";
 import { allProducts, flashSaleProducts } from "./data/products";
 import FlashSaleCard from "./components/FlashSaleCard";
+import { useCart } from "./context/CartContext";
 
 const { width } = Dimensions.get("window");
 
 export default function FullStoreScreen() {
   const navigation = useNavigation();
+  const { cartCount } = useCart();
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>
       <View style={styles.container}>
@@ -50,11 +52,12 @@ export default function FullStoreScreen() {
               <TouchableOpacity
                 style={styles.fullStoreCartButton}
                 activeOpacity={0.8}
+                onPress={() => navigation.navigate("Cart_Screen")}
               >
                 <Text style={styles.fullStoreCartIcon}>🛒</Text>
 
                 <View style={styles.fullStoreCartBadge}>
-                  <Text style={styles.fullStoreCartBadgeText}>2</Text>
+                  <Text style={styles.fullStoreCartBadgeText}>{cartCount}</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -22,7 +22,8 @@ import MemberLayout from "../screens/member/member_components/MemberLayout";
 import StoreScreen from "../screens/member/bottom_tab_bar/store/StoreScreen";
 import FullStoreScreen from "../screens/member/bottom_tab_bar/store/FullStoreScreen";
 import ProductDetailScreen from "../screens/member/bottom_tab_bar/store/ProductDetailScreen";
-
+import { CartProvider } from "../screens/member/bottom_tab_bar/store/context/CartContext";
+import CartScreen from "../screens/member/bottom_tab_bar/store/CartScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -192,27 +193,33 @@ function PublicStack() {
 
 function MemberInnerNavigator() {
   return (
-    <MemberLayout>
-      <MemberInnerStack.Navigator screenOptions={{ headerShown: false }}>
-        <MemberInnerStack.Screen
-          name="Member_Home"
-          component={MemberHomeScreen}
-        />
-        <MemberInnerStack.Screen
-          name="Workout_Screen"
-          component={WorkoutScreen}
-        />
-        <MemberInnerStack.Screen
-          name="Full_Store_Screen"
-          component={FullStoreScreen}
-        />
-        <MemberInnerStack.Screen
-          name="Product_Detail_Screen"
-          component={ProductDetailScreen}
-        />
-        <MemberInnerStack.Screen name="Store_Screen" component={StoreScreen} />
-      </MemberInnerStack.Navigator>
-    </MemberLayout>
+    <CartProvider>
+      <MemberLayout>
+        <MemberInnerStack.Navigator screenOptions={{ headerShown: false }}>
+          <MemberInnerStack.Screen
+            name="Member_Home"
+            component={MemberHomeScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Workout_Screen"
+            component={WorkoutScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Full_Store_Screen"
+            component={FullStoreScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Product_Detail_Screen"
+            component={ProductDetailScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Store_Screen"
+            component={StoreScreen}
+          />
+          <MemberInnerStack.Screen name="Cart_Screen" component={CartScreen} />
+        </MemberInnerStack.Navigator>
+      </MemberLayout>
+    </CartProvider>
   );
 }
 
