@@ -86,7 +86,10 @@ export default function ProductDetailScreen() {
               <ImageBackground
                 source={product.image}
                 style={styles.productImage}
-                imageStyle={styles.productImageStyle}
+                imageStyle={[
+                  styles.productImageStyle,
+                  product.detailImageStyle,
+                ]}
               >
                 {/* 2. Discount badge */}
                 {product.discountLabel && (
@@ -267,6 +270,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     overflow: "hidden",
     marginBottom: 22,
+    backgroundColor: "#050505",
   },
 
   productImageStyle: {

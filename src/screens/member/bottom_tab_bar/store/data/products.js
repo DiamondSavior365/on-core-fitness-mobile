@@ -45,6 +45,11 @@ export const products = [
     isPopular: true,
     description:
       "Insulated shaker bottle for keeping drinks cold during workouts.",
+
+    // Might remove, better to just use correct image size
+    detailImageStyle: {
+      resizeMode: "contain",
+    },
   },
 
   {

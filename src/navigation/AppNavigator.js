@@ -24,6 +24,7 @@ import FullStoreScreen from "../screens/member/bottom_tab_bar/store/FullStoreScr
 import ProductDetailScreen from "../screens/member/bottom_tab_bar/store/ProductDetailScreen";
 import { CartProvider } from "../screens/member/bottom_tab_bar/store/context/CartContext";
 import CartScreen from "../screens/member/bottom_tab_bar/store/CartScreen";
+import CheckoutScreen from "../screens/member/bottom_tab_bar/store/CheckoutScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -217,6 +218,10 @@ function MemberInnerNavigator() {
             component={StoreScreen}
           />
           <MemberInnerStack.Screen name="Cart_Screen" component={CartScreen} />
+          <MemberInnerStack.Screen
+            name="Checkout_Screen"
+            component={CheckoutScreen}
+          />
         </MemberInnerStack.Navigator>
       </MemberLayout>
     </CartProvider>
