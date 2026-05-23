@@ -11,10 +11,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { useCart } from "./context/CartContext";
+import { useAuth } from "../../../../auth/AuthContext";
 
 export default function CheckoutScreen() {
   const navigation = useNavigation();
   const { cartItems, subtotal } = useCart();
+  const { user } = useAuth();
+
+  const customerName = user?.user_metadata?.full_name ?? "Not available";
+  const customerEmail = user?.email ?? "Not available";
+  const customerPhone = user?.user_metadata?.phone ?? "Not added yet";
 
   const estimatedTax = subtotal * 0.0875;
   const total = subtotal + estimatedTax;
@@ -86,9 +92,21 @@ export default function CheckoutScreen() {
 
               <View style={styles.sectionBox}>
                 <Text style={styles.sectionTitle}>Customer Info</Text>
-                <Text style={styles.placeholderText}>
-                  Name, email, and phone fields will go here.
-                </Text>
+
+                <View style={styles.customerInfoRow}>
+                  <Text style={styles.customerInfoLabel}>Name</Text>
+                  <Text style={styles.customerInfoValue}>{customerName}</Text>
+                </View>
+
+                <View style={styles.customerInfoRow}>
+                  <Text style={styles.customerInfoLabel}>Email</Text>
+                  <Text style={styles.customerInfoValue}>{customerEmail}</Text>
+                </View>
+
+                <View style={styles.customerInfoRow}>
+                  <Text style={styles.customerInfoLabel}>Phone</Text>
+                  <Text style={styles.customerInfoValue}>{customerPhone}</Text>
+                </View>
               </View>
 
               <TouchableOpacity
@@ -270,10 +288,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   paymentButtonText: {
     color: "#fff",
     fontSize: 17,
     fontWeight: "900",
+  },
+  //---------------------- Customer Info Style -------------------
+  customerInfoRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+
+  customerInfoLabel: {
+    color: "#bdbdbd",
+    fontSize: 14,
+    fontWeight: "700",
+  },
+
+  customerInfoValue: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "800",
+    maxWidth: "65%",
+    textAlign: "right",
   },
 });
