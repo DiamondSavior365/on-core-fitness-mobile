@@ -18,6 +18,7 @@ const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -26,7 +27,7 @@ const SignUpScreen = ({ navigation }) => {
   const handleSignUp = async () => {
     setErrorMsg(null);
 
-    if (!name || !email || !password || !age) {
+    if (!name || !email || !password || !age || !phone) {
       setErrorMsg("Please fill in all fields.");
       return;
     }
@@ -40,6 +41,7 @@ const SignUpScreen = ({ navigation }) => {
         data: {
           full_name: name,
           age,
+          phone,
         },
       },
     });
@@ -82,6 +84,16 @@ const SignUpScreen = ({ navigation }) => {
           autoCorrect={false}
           value={email}
           onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Phone Number"
+          placeholderTextColor="#999"
+          keyboardType="phone-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={phone}
+          onChangeText={setPhone}
         />
 
         <TextInput
