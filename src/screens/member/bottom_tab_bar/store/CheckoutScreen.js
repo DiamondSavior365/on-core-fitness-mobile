@@ -6,12 +6,15 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Linking,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { useCart } from "./context/CartContext";
 import { useAuth } from "../../../../auth/AuthContext";
+import { supabase } from "../../../../lib/supabaseClient";
+import * as WebBrowser from "expo-web-browser";
 
 export default function CheckoutScreen() {
   const navigation = useNavigation();
@@ -24,6 +27,33 @@ export default function CheckoutScreen() {
 
   const estimatedTax = subtotal * 0.0875;
   const total = subtotal + estimatedTax;
+  const handleContinueToPayment = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "create-checkout-session",
+        {
+          body: {
+            customerEmail,
+            cartItems,
+          },
+        }
+      );
+
+      if (error) {
+        Alert.alert("Checkout Error", error.message);
+        return;
+      }
+
+      // if (data?.url) {
+      //   Linking.openURL(data.url);
+      // }
+      if (data?.url) {
+        await WebBrowser.openBrowserAsync(data.url);
+      }
+    } catch (err) {
+      Alert.alert("Checkout Error", "Something went wrong starting checkout.");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>
@@ -75,7 +105,7 @@ export default function CheckoutScreen() {
                   <Text style={styles.totalValue}>${subtotal.toFixed(2)}</Text>
                 </View>
 
-                <View style={styles.totalRow}>
+                {/* <View style={styles.totalRow}>
                   <Text style={styles.totalLabel}>Estimated Tax</Text>
                   <Text style={styles.totalValue}>
                     ${estimatedTax.toFixed(2)}
@@ -86,6 +116,17 @@ export default function CheckoutScreen() {
                   <Text style={styles.finalTotalLabel}>Total</Text>
                   <Text style={styles.finalTotalValue}>
                     ${total.toFixed(2)}
+                  </Text>
+                </View> */}
+                <View style={styles.totalRow}>
+                  <Text style={styles.totalLabel}>Tax</Text>
+                  <Text style={styles.totalValue}>Calculated at payment</Text>
+                </View>
+
+                <View style={styles.totalRow}>
+                  <Text style={styles.finalTotalLabel}>Estimated Total</Text>
+                  <Text style={styles.finalTotalValue}>
+                    ${subtotal.toFixed(2)}+
                   </Text>
                 </View>
               </View>
@@ -109,7 +150,7 @@ export default function CheckoutScreen() {
                 </View>
               </View>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.paymentButton}
                 activeOpacity={0.85}
                 onPress={() =>
@@ -118,6 +159,15 @@ export default function CheckoutScreen() {
                     "Stripe checkout will be added later."
                   )
                 }
+              >
+                <Text style={styles.paymentButtonText}>
+                  Continue to Payment
+                </Text>
+              </TouchableOpacity> */}
+              <TouchableOpacity
+                style={styles.paymentButton}
+                activeOpacity={0.85}
+                onPress={handleContinueToPayment}
               >
                 <Text style={styles.paymentButtonText}>
                   Continue to Payment
