@@ -25,6 +25,8 @@ import ProductDetailScreen from "../screens/member/bottom_tab_bar/store/ProductD
 import { CartProvider } from "../screens/member/bottom_tab_bar/store/context/CartContext";
 import CartScreen from "../screens/member/bottom_tab_bar/store/CartScreen";
 import CheckoutScreen from "../screens/member/bottom_tab_bar/store/CheckoutScreen";
+import CheckoutSuccessScreen from "../screens/member/bottom_tab_bar/store/CheckoutSuccessScreen";
+import CheckoutCancelScreen from "../screens/member/bottom_tab_bar/store/CheckoutCancelScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -222,6 +224,15 @@ function MemberInnerNavigator() {
             name="Checkout_Screen"
             component={CheckoutScreen}
           />
+          <MemberInnerStack.Screen
+            name="Checkout_Success_Screen"
+            component={CheckoutSuccessScreen}
+          />
+
+          <MemberInnerStack.Screen
+            name="Checkout_Cancel_Screen"
+            component={CheckoutCancelScreen}
+          />
         </MemberInnerStack.Navigator>
       </MemberLayout>
     </CartProvider>
@@ -235,14 +246,26 @@ function MemberStack() {
     </Stack.Navigator>
   );
 }
-
+const linking = {
+  prefixes: ["oncorefitness://"],
+  config: {
+    screens: {
+      Member_Root: {
+        screens: {
+          Checkout_Success_Screen: "checkout-success",
+          Checkout_Cancel_Screen: "checkout-cancel",
+        },
+      },
+    },
+  },
+};
 export default function AppNavigator() {
   const { session, initializing } = useAuth();
 
   if (initializing) return <LoadingScreen />;
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       {session ? <MemberStack /> : <PublicStack />}
     </NavigationContainer>
   );

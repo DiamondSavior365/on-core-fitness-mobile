@@ -18,7 +18,7 @@ import * as WebBrowser from "expo-web-browser";
 
 export default function CheckoutScreen() {
   const navigation = useNavigation();
-  const { cartItems, subtotal } = useCart();
+  const { cartItems, subtotal, clearCart } = useCart();
   const { user } = useAuth();
 
   const customerName = user?.user_metadata?.full_name ?? "Not available";
@@ -49,6 +49,9 @@ export default function CheckoutScreen() {
       // }
       if (data?.url) {
         await WebBrowser.openBrowserAsync(data.url);
+
+        clearCart();
+        navigation.navigate("Store_Screen");
       }
     } catch (err) {
       Alert.alert("Checkout Error", "Something went wrong starting checkout.");
@@ -120,7 +123,9 @@ export default function CheckoutScreen() {
                 </View> */}
                 <View style={styles.totalRow}>
                   <Text style={styles.totalLabel}>Tax</Text>
-                  <Text style={styles.totalValue}>Calculated at payment</Text>
+                  {/* Stripe requires Head office address, product tax code, and tax registrations to enable automatic tax in the Supabase edge function */}
+                  {/* <Text style={styles.totalValue}>Calculated at payment</Text> */}
+                  <Text style={styles.totalValue}>Taxes may apply</Text>
                 </View>
 
                 <View style={styles.totalRow}>

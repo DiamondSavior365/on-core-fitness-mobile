@@ -2,6 +2,7 @@
   "expo": {
     "name": "On Core Fitness",
     "slug": "rn-starter",
+    "scheme": "oncorefitness",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/fitness_icon.jpeg",
@@ -12,6 +13,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+
     "ios": {
       "supportsTablet": true
     },
@@ -25,8 +27,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-web-browser"
-    ]
+    "plugins": ["expo-web-browser"]
   }
 }
