@@ -33,8 +33,12 @@ export default function CheckoutScreen() {
         "create-checkout-session",
         {
           body: {
+            userId: user?.id,
+            customerName,
             customerEmail,
+            customerPhone,
             cartItems,
+            subtotal,
           },
         }
       );
