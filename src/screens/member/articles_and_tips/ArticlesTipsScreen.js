@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ArticleCard from "../member_components/ArticleCard";
 
 const BRAND_RED = "#c62828";
 const BG_DARK = "#050505";
@@ -54,17 +48,14 @@ export default function ArticlesTipsScreen() {
 
         <View style={styles.articleList}>
           {TEMP_ARTICLES.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.articleCard}>
-              <Image source={item.image} style={styles.articleImage} />
-
-              <View style={styles.articleContent}>
-                <Text style={styles.categoryText}>{item.category}</Text>
-                <Text style={styles.articleTitle}>{item.title}</Text>
-                <Text style={styles.articleDescription} numberOfLines={2}>
-                  {item.description}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <ArticleCard
+              key={index}
+              title={item.title}
+              image={item.image}
+              category={item.category}
+              description={item.description}
+              onPress={() => console.log("Article pressed:", item.title)}
+            />
           ))}
         </View>
       </ScrollView>
@@ -108,44 +99,5 @@ const styles = StyleSheet.create({
 
   articleList: {
     gap: 14,
-  },
-
-  articleCard: {
-    backgroundColor: CARD_DARK,
-    borderRadius: 16,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
-  },
-
-  articleImage: {
-    width: "100%",
-    height: 170,
-    resizeMode: "cover",
-  },
-
-  articleContent: {
-    padding: 12,
-  },
-
-  categoryText: {
-    color: BRAND_RED,
-    fontSize: 12,
-    fontWeight: "700",
-    marginBottom: 5,
-    textTransform: "uppercase",
-  },
-
-  articleTitle: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: 6,
-  },
-
-  articleDescription: {
-    color: "#BBBBBB",
-    fontSize: 13,
-    lineHeight: 18,
   },
 });
