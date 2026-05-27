@@ -295,7 +295,7 @@ export default function MemberHomeScreen() {
 
               <TouchableOpacity
                 style={styles.seeAllRow}
-                onPress={() => console.log("See All Articles")}
+                onPress={() => navigation.navigate("Articles_Tips_Screen")}
               >
                 <Text style={styles.seeAllText}>See All</Text>
                 <Text style={styles.seeAllArrow}>▸</Text>
