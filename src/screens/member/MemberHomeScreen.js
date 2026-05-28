@@ -323,7 +323,11 @@ export default function MemberHomeScreen() {
                   title={item.title}
                   image={item.image}
                   compact={true}
-                  onPress={() => console.log("Article pressed:", item.title)}
+                  onPress={() =>
+                    navigation.navigate("Article_Details_Screen", {
+                      article: item,
+                    })
+                  }
                 />
               ))}
             </View>

@@ -2,6 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ArticleCard from "../member_components/ArticleCard";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { fetchHealthArticles } from "../../../services/ArticlesService";
 
 const BRAND_RED = "#c62828";
 const BG_DARK = "#050505";
@@ -31,6 +34,33 @@ const TEMP_ARTICLES = [
 ];
 
 export default function ArticlesTipsScreen() {
+  const navigation = useNavigation();
+  const [articles, setArticles] = useState(TEMP_ARTICLES);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadArticles() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const fetchedArticles = await fetchHealthArticles();
+
+        if (fetchedArticles.length > 0) {
+          setArticles(fetchedArticles);
+        }
+      } catch (err) {
+        console.log("Using temporary articles for now:", err);
+        setError("Unable to load live articles right now.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadArticles();
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>
       <ScrollView
@@ -46,15 +76,29 @@ export default function ArticlesTipsScreen() {
           </Text>
         </View>
 
+        {/* ---------------------------------------- */}
+        {loading && (
+          <Text style={styles.statusText}>Loading latest articles...</Text>
+        )}
+
+        {error && (
+          <Text style={styles.errorText}>Showing saved articles for now.</Text>
+        )}
+        {/* ---------------------------------------- */}
+
         <View style={styles.articleList}>
-          {TEMP_ARTICLES.map((item, index) => (
+          {articles.map((item, index) => (
             <ArticleCard
               key={index}
               title={item.title}
               image={item.image}
               category={item.category}
               description={item.description}
-              onPress={() => console.log("Article pressed:", item.title)}
+              onPress={() =>
+                navigation.navigate("Article_Details_Screen", {
+                  article: item,
+                })
+              }
             />
           ))}
         </View>
@@ -99,5 +143,17 @@ const styles = StyleSheet.create({
 
   articleList: {
     gap: 14,
+  },
+  // ------------------ Loading Styles --------------------------
+  statusText: {
+    color: "#BBBBBB",
+    fontSize: 13,
+    marginBottom: 12,
+  },
+
+  errorText: {
+    color: "#BBBBBB",
+    fontSize: 13,
+    marginBottom: 12,
   },
 });

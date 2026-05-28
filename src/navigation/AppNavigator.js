@@ -28,6 +28,7 @@ import CheckoutScreen from "../screens/member/bottom_tab_bar/store/CheckoutScree
 import CheckoutSuccessScreen from "../screens/member/bottom_tab_bar/store/CheckoutSuccessScreen";
 import CheckoutCancelScreen from "../screens/member/bottom_tab_bar/store/CheckoutCancelScreen";
 import ArticlesTipsScreen from "../screens/member/articles_and_tips/ArticlesTipsScreen";
+import ArticleDetailsScreen from "../screens/member/articles_and_tips/ArticleDetailsScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -238,6 +239,10 @@ function MemberInnerNavigator() {
             name="Checkout_Cancel_Screen"
             component={CheckoutCancelScreen}
           />
+          <MemberInnerStack.Screen
+            name="Article_Details_Screen"
+            component={ArticleDetailsScreen}
+          />
         </MemberInnerStack.Navigator>
       </MemberLayout>
     </CartProvider>
@@ -251,6 +256,8 @@ function MemberStack() {
     </Stack.Navigator>
   );
 }
+
+// Linking not currently implemented
 const linking = {
   prefixes: ["oncorefitness://"],
   config: {
