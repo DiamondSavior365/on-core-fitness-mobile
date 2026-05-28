@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRoute, useNavigation } from "@react-navigation/native";
@@ -67,6 +68,15 @@ export default function ArticleDetailsScreen() {
 
           {article.source && (
             <Text style={styles.sourceText}>Source: {article.source}</Text>
+          )}
+
+          {article.url && (
+            <TouchableOpacity
+              style={styles.readButton}
+              onPress={() => Linking.openURL(article.url)}
+            >
+              <Text style={styles.readButtonText}>Read Full Article</Text>
+            </TouchableOpacity>
           )}
         </View>
       </ScrollView>
@@ -159,5 +169,18 @@ const styles = StyleSheet.create({
     color: "#BBBBBB",
     fontSize: 13,
     marginTop: 10,
+  },
+  readButton: {
+    backgroundColor: BRAND_RED,
+    borderRadius: 14,
+    paddingVertical: 13,
+    alignItems: "center",
+    marginTop: 18,
+  },
+
+  readButtonText: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "700",
   },
 });
