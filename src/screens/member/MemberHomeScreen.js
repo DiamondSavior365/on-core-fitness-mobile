@@ -31,6 +31,7 @@ import BellIcon from "../../../assets/icons/bell.svg";
 import ProfileIcon from "../../../assets/icons/profile.svg";
 import ClipboardIcon from "../../../assets/icons/clipboard.svg";
 import MembershipIcon from "../../../assets/icons/membership.svg";
+import ArticleCard from "./member_components/ArticleCard";
 
 // ------------------------------- WEEKLY CHALLENGES ---------------------
 const WEEKLY_CHALLENGES = [
@@ -302,7 +303,7 @@ export default function MemberHomeScreen() {
               </TouchableOpacity>
             </View>
 
-            <View style={styles.articleRow}>
+            {/* <View style={styles.articleRow}>
               {ARTICLES.map((item, i) => (
                 <TouchableOpacity key={i} style={styles.articleCard}>
                   <Image source={item.image} style={styles.articleImage} />
@@ -313,6 +314,17 @@ export default function MemberHomeScreen() {
                     </Text>
                   </View>
                 </TouchableOpacity>
+              ))}
+            </View> */}
+            <View style={styles.articleRow}>
+              {ARTICLES.map((item, i) => (
+                <ArticleCard
+                  key={i}
+                  title={item.title}
+                  image={item.image}
+                  compact={true}
+                  onPress={() => console.log("Article pressed:", item.title)}
+                />
               ))}
             </View>
           </View>
@@ -549,28 +561,5 @@ const styles = StyleSheet.create({
   articleRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-
-  articleCard: {
-    width: "48%",
-    backgroundColor: "#0D0D0D",
-    borderRadius: 16,
-    overflow: "hidden",
-  },
-
-  articleImage: {
-    width: "100%",
-    height: 140,
-    resizeMode: "cover",
-  },
-
-  articleTextWrap: {
-    padding: 10,
-  },
-
-  articleTitle: {
-    color: "#ffffff",
-    fontSize: 13,
-    fontWeight: "600",
   },
 });
