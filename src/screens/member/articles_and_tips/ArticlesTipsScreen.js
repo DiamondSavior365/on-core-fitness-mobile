@@ -92,6 +92,7 @@ export default function ArticlesTipsScreen() {
               key={index}
               title={item.title}
               image={item.image}
+              imageUrl={item.imageUrl}
               category={item.category}
               description={item.description}
               onPress={() =>

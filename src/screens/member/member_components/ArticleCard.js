@@ -7,6 +7,7 @@ const CARD_DARK = "#0D0D0D";
 export default function ArticleCard({
   title,
   image,
+  imageUrl,
   category,
   description,
   onPress,
@@ -18,8 +19,12 @@ export default function ArticleCard({
       onPress={onPress}
       activeOpacity={0.85}
     >
-      <Image
+      {/* <Image
         source={image}
+        style={[styles.articleImage, compact && styles.compactImage]}
+      /> */}
+      <Image
+        source={imageUrl ? { uri: imageUrl } : image}
         style={[styles.articleImage, compact && styles.compactImage]}
       />
 

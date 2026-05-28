@@ -32,6 +32,7 @@ import ProfileIcon from "../../../assets/icons/profile.svg";
 import ClipboardIcon from "../../../assets/icons/clipboard.svg";
 import MembershipIcon from "../../../assets/icons/membership.svg";
 import ArticleCard from "./member_components/ArticleCard";
+import { fetchHealthArticles } from "../../services/ArticlesService";
 
 // ------------------------------- WEEKLY CHALLENGES ---------------------
 const WEEKLY_CHALLENGES = [
@@ -78,6 +79,22 @@ export default function MemberHomeScreen() {
   const slideAnim = useRef(new Animated.Value(0)).current; // 0 = centered
   const slide = useRef(new Animated.Value(0)).current; // -1 → 0 → 1 positions
   const opacity = useRef(new Animated.Value(1)).current;
+  const [homeArticles, setHomeArticles] = useState(ARTICLES);
+  useEffect(() => {
+    async function loadHomeArticles() {
+      try {
+        const fetchedArticles = await fetchHealthArticles();
+
+        if (fetchedArticles.length > 0) {
+          setHomeArticles(fetchedArticles.slice(0, 2));
+        }
+      } catch (err) {
+        console.log("Using home fallback articles:", err);
+      }
+    }
+
+    loadHomeArticles();
+  }, []);
 
   // -------------------------- Fade Out Animation -----------------------
   // Auto-rotate every 4 seconds
@@ -317,11 +334,12 @@ export default function MemberHomeScreen() {
               ))}
             </View> */}
             <View style={styles.articleRow}>
-              {ARTICLES.map((item, i) => (
+              {homeArticles.map((item, i) => (
                 <ArticleCard
                   key={i}
                   title={item.title}
                   image={item.image}
+                  imageUrl={item.imageUrl}
                   compact={true}
                   onPress={() =>
                     navigation.navigate("Article_Details_Screen", {

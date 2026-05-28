@@ -44,7 +44,10 @@ export default function ArticleDetailsScreen() {
           <Text style={styles.backText}>‹ Back</Text>
         </TouchableOpacity>
 
-        <Image source={article.image} style={styles.articleImage} />
+        <Image
+          source={article.imageUrl ? { uri: article.imageUrl } : article.image}
+          style={styles.articleImage}
+        />
 
         <View style={styles.contentCard}>
           {article.category && (
@@ -58,10 +61,13 @@ export default function ArticleDetailsScreen() {
           )}
 
           <Text style={styles.bodyText}>
-            This section will later display more article details from the health
-            and fitness API. For now, this screen confirms that article
-            navigation is working correctly.
+            Explore helpful fitness, nutrition, and recovery guidance designed
+            to support your training goals and overall wellness.
           </Text>
+
+          {article.source && (
+            <Text style={styles.sourceText}>Source: {article.source}</Text>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -148,5 +154,10 @@ const styles = StyleSheet.create({
   emptyText: {
     color: "#ffffff",
     fontSize: 16,
+  },
+  sourceText: {
+    color: "#BBBBBB",
+    fontSize: 13,
+    marginTop: 10,
   },
 });
