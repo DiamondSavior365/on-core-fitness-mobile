@@ -29,6 +29,7 @@ import CheckoutSuccessScreen from "../screens/member/bottom_tab_bar/store/Checko
 import CheckoutCancelScreen from "../screens/member/bottom_tab_bar/store/CheckoutCancelScreen";
 import ArticlesTipsScreen from "../screens/member/articles_and_tips/ArticlesTipsScreen";
 import ArticleDetailsScreen from "../screens/member/articles_and_tips/ArticleDetailsScreen";
+import ChatbotScreen from "../screens/member/chatbot/ChatbotScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -242,6 +243,10 @@ function MemberInnerNavigator() {
           <MemberInnerStack.Screen
             name="Article_Details_Screen"
             component={ArticleDetailsScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Chatbot_Screen"
+            component={ChatbotScreen}
           />
         </MemberInnerStack.Navigator>
       </MemberLayout>

@@ -33,6 +33,7 @@ import ClipboardIcon from "../../../assets/icons/clipboard.svg";
 import MembershipIcon from "../../../assets/icons/membership.svg";
 import ArticleCard from "./member_components/ArticleCard";
 import { fetchFeaturedArticles } from "../../services/ArticlesService";
+import ChatbotFloatingButton from "./member_components/ChatbotFloatingButton";
 // ------------------------------- WEEKLY CHALLENGES ---------------------
 const WEEKLY_CHALLENGES = [
   {
@@ -351,6 +352,7 @@ export default function MemberHomeScreen() {
           </View>
         </ScrollView>
 
+        <ChatbotFloatingButton />
         {/* -------------------- BOTTOM TAB BAR -------------------- */}
       </View>
       {/* <Footer /> */}
