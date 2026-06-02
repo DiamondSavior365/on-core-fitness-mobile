@@ -79,32 +79,38 @@ export default function ArticlesTipsScreen() {
         </View>
 
         {/* ---------------------------------------- */}
-        {loading && (
-          <Text style={styles.statusText}>Loading latest articles...</Text>
+        {loading && <Text style={styles.statusText}>Loading articles...</Text>}
+
+        {error && !loading && (
+          <Text style={styles.errorText}>
+            Unable to load curated articles. Showing saved articles for now.
+          </Text>
         )}
 
-        {error && (
-          <Text style={styles.errorText}>Showing saved articles for now.</Text>
+        {!loading && articles.length === 0 && (
+          <Text style={styles.emptyText}>No articles available yet.</Text>
         )}
         {/* ---------------------------------------- */}
 
-        <View style={styles.articleList}>
-          {articles.map((item, index) => (
-            <ArticleCard
-              key={index}
-              title={item.title}
-              image={item.image}
-              imageUrl={item.imageUrl}
-              category={item.category}
-              description={item.description}
-              onPress={() =>
-                navigation.navigate("Article_Details_Screen", {
-                  article: item,
-                })
-              }
-            />
-          ))}
-        </View>
+        {articles.length > 0 && (
+          <View style={styles.articleList}>
+            {articles.map((item, index) => (
+              <ArticleCard
+                key={item.id || index}
+                title={item.title}
+                image={item.image}
+                imageUrl={item.imageUrl}
+                category={item.category}
+                description={item.description}
+                onPress={() =>
+                  navigation.navigate("Article_Details_Screen", {
+                    article: item,
+                  })
+                }
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -158,5 +164,11 @@ const styles = StyleSheet.create({
     color: "#BBBBBB",
     fontSize: 13,
     marginBottom: 12,
+  },
+
+  emptyText: {
+    color: "#BBBBBB",
+    fontSize: 14,
+    marginTop: 12,
   },
 });
