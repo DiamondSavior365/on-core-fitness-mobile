@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ArticleCard from "../member_components/ArticleCard";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { fetchHealthArticles } from "../../../services/ArticlesService";
 import { fetchCuratedArticles } from "../../../services/ArticlesService";
 
 const BRAND_RED = "#c62828";

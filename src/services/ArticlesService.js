@@ -37,3 +37,30 @@ export async function fetchCuratedArticles() {
     isFeatured: article.is_featured,
   }));
 }
+
+export async function fetchFeaturedArticles() {
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("is_active", true)
+    .eq("is_featured", true)
+    .order("published_at", { ascending: false })
+    .limit(2);
+
+  if (error) {
+    console.log("Error fetching featured articles:", error);
+    throw error;
+  }
+
+  return (data || []).map((article) => ({
+    id: article.id,
+    title: article.title,
+    description: article.description,
+    imageUrl: article.image_url,
+    source: article.source,
+    url: article.url,
+    category: article.category,
+    publishedAt: article.published_at,
+    isFeatured: article.is_featured,
+  }));
+}
