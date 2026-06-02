@@ -5,6 +5,7 @@ import ArticleCard from "../member_components/ArticleCard";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { fetchHealthArticles } from "../../../services/ArticlesService";
+import { fetchCuratedArticles } from "../../../services/ArticlesService";
 
 const BRAND_RED = "#c62828";
 const BG_DARK = "#050505";
@@ -45,7 +46,8 @@ export default function ArticlesTipsScreen() {
         setLoading(true);
         setError(null);
 
-        const fetchedArticles = await fetchHealthArticles();
+        // const fetchedArticles = await fetchHealthArticles();
+        const fetchedArticles = await fetchCuratedArticles();
 
         if (fetchedArticles.length > 0) {
           setArticles(fetchedArticles);

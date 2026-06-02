@@ -33,6 +33,7 @@ import ClipboardIcon from "../../../assets/icons/clipboard.svg";
 import MembershipIcon from "../../../assets/icons/membership.svg";
 import ArticleCard from "./member_components/ArticleCard";
 import { fetchHealthArticles } from "../../services/ArticlesService";
+import { fetchCuratedArticles } from "../../services/ArticlesService";
 
 // ------------------------------- WEEKLY CHALLENGES ---------------------
 const WEEKLY_CHALLENGES = [
@@ -83,7 +84,7 @@ export default function MemberHomeScreen() {
   useEffect(() => {
     async function loadHomeArticles() {
       try {
-        const fetchedArticles = await fetchHealthArticles();
+        const fetchedArticles = await fetchCuratedArticles();
 
         if (fetchedArticles.length > 0) {
           setHomeArticles(fetchedArticles.slice(0, 2));
