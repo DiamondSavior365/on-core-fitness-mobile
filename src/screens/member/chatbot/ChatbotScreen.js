@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 14,
+    paddingTop: 8,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(255,255,255,0.06)",
   },
@@ -300,16 +300,16 @@ const styles = StyleSheet.create({
 
   chatContent: {
     paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 24,
+    paddingTop: 12,
+    paddingBottom: 0,
   },
 
   heroCard: {
     backgroundColor: CARD_DARK,
-    borderRadius: 26,
-    padding: 20,
+    borderRadius: 24,
+    padding: 16,
     alignItems: "center",
-    marginBottom: 18,
+    marginBottom: 14,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.08)",
     shadowColor: BRAND_RED,
@@ -320,42 +320,44 @@ const styles = StyleSheet.create({
   },
 
   robotCircle: {
-    width: 104,
-    height: 104,
-    borderRadius: 52,
-    backgroundColor: "transparent",
+    width: 76,
+    height: 76,
+    borderRadius: 46,
+    backgroundColor: "#0D0D0D",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 14,
+    marginBottom: 10,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "rgba(0, 0, 0, 0.45)",
   },
 
   robotImage: {
-    width: 104,
-    height: 104,
-    borderRadius: 52,
+    width: 76,
+    height: 76,
     resizeMode: "contain",
+    borderRadius: 46,
   },
-
   heroLabel: {
     color: BRAND_RED,
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: "900",
     letterSpacing: 1.2,
-    marginBottom: 8,
+    marginBottom: 6,
   },
 
   heroTitle: {
     color: "#ffffff",
-    fontSize: 26,
+    fontSize: 23,
     fontWeight: "900",
     textAlign: "center",
-    marginBottom: 8,
+    marginBottom: 6,
   },
 
   heroSubtitle: {
     color: SOFT_GRAY,
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: 13,
+    lineHeight: 19,
     textAlign: "center",
   },
 
