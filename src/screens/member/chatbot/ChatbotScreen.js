@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -13,15 +14,79 @@ import { useNavigation } from "@react-navigation/native";
 const BRAND_RED = "#c62828";
 const BG_DARK = "#050505";
 const CARD_DARK = "#171717";
-const BUBBLE_DARK = "#1f1f1f";
+const CARD_DARKER = "#0D0D0D";
+const SOFT_GRAY = "#BBBBBB";
 
 export default function ChatbotScreen() {
   const navigation = useNavigation();
+  const [inputText, setInputText] = useState("");
+
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      sender: "bot",
+      text: "Hey! I’m your On Core Coach. Choose a quick prompt below or type your own question.",
+    },
+  ]);
+
+  function getTemporaryBotReply(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+
+    if (lowerMessage.includes("workout")) {
+      return "I can help with workout ideas soon. For now, think about your goal first: strength, endurance, fat loss, or general fitness.";
+    }
+
+    if (
+      lowerMessage.includes("meal") ||
+      lowerMessage.includes("food") ||
+      lowerMessage.includes("nutrition")
+    ) {
+      return "For meals, a good starting point is lean protein, complex carbs, healthy fats, and vegetables. Soon I’ll be able to give more specific meal ideas.";
+    }
+
+    if (
+      lowerMessage.includes("recovery") ||
+      lowerMessage.includes("sore") ||
+      lowerMessage.includes("rest")
+    ) {
+      return "Recovery starts with sleep, hydration, mobility, and giving your body enough time to repair. If you feel pain or injury, check with a professional.";
+    }
+
+    if (
+      lowerMessage.includes("supplement") ||
+      lowerMessage.includes("protein")
+    ) {
+      return "Supplements can help support your goals, but they should not replace good nutrition. Protein, hydration, and consistency matter first.";
+    }
+
+    return "Great question. Soon I’ll be connected to the AI backend so I can give better fitness, nutrition, and recovery guidance.";
+  }
+
+  function handleSend(messageText = inputText) {
+    const trimmedMessage = messageText.trim();
+
+    if (!trimmedMessage) return;
+
+    const userMessage = {
+      id: Date.now(),
+      sender: "user",
+      text: trimmedMessage,
+    };
+
+    const botReply = {
+      id: Date.now() + 1,
+      sender: "bot",
+      text: getTemporaryBotReply(trimmedMessage),
+    };
+
+    setMessages((prevMessages) => [...prevMessages, userMessage, botReply]);
+    setInputText("");
+  }
 
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>
       <View style={styles.container}>
-        {/* Header */}
+        {/* Top Header */}
         <View style={styles.topRow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.backText}>‹ Back</Text>
@@ -37,41 +102,124 @@ export default function ChatbotScreen() {
           contentContainerStyle={styles.chatContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Intro Card */}
-          <View style={styles.introCard}>
-            <Text style={styles.introLabel}>AI FITNESS ASSISTANT</Text>
-            <Text style={styles.introTitle}>How can I help today?</Text>
-            <Text style={styles.introText}>
-              Ask about workouts, nutrition, recovery, supplements, or how to
-              use the app.
+          {/* Hero / Intro Section */}
+          <View style={styles.heroCard}>
+            <View style={styles.robotCircle}>
+              <Image
+                source={require("../../../../assets/Chatbot_Images/chatbot_button_image_2.png")}
+                style={styles.robotImage}
+              />
+            </View>
+
+            <Text style={styles.heroLabel}>AI FITNESS ASSISTANT</Text>
+
+            <Text style={styles.heroTitle}>How can I help you today?</Text>
+
+            <Text style={styles.heroSubtitle}>
+              Ask about workouts, meal ideas, recovery, supplements, or how to
+              use the On Core Fitness app.
             </Text>
           </View>
 
-          {/* Bot Message */}
-          <View style={styles.botBubble}>
-            <Text style={styles.botText}>
-              Hey! I’m your On Core Coach. Choose a quick prompt below or type
-              your own question.
+          {/* Bot Welcome Message */}
+          {/* <View style={styles.messageRow}>
+            <View style={styles.botAvatar}>
+              <Text style={styles.botAvatarText}>AI</Text>
+            </View>
+
+            <View style={styles.botBubble}>
+              <Text style={styles.botText}>
+                Hey! I’m your On Core Coach. Choose a quick prompt below or type
+                your own question.
+              </Text>
+            </View>
+          </View> */}
+
+          {/* Quick Prompt Section */}
+          <View style={styles.quickSection}>
+            <Text style={styles.quickTitle}>Quick Help</Text>
+
+            <View style={styles.promptGrid}>
+              <TouchableOpacity
+                style={styles.promptCard}
+                onPress={() =>
+                  handleSend("Can you help me with a workout plan?")
+                }
+              >
+                <Text style={styles.promptEmoji}>💪</Text>
+                <Text style={styles.promptTitle}>Workout Help</Text>
+                <Text style={styles.promptSubtitle}>Training ideas</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.promptCard}
+                onPress={() =>
+                  handleSend("Give me healthy meal ideas after a workout.")
+                }
+              >
+                <Text style={styles.promptEmoji}>🥗</Text>
+                <Text style={styles.promptTitle}>Meal Ideas</Text>
+                <Text style={styles.promptSubtitle}>Healthy eating</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.promptCard}
+                onPress={() =>
+                  handleSend("How can I recover better after training?")
+                }
+              >
+                <Text style={styles.promptEmoji}>🧘</Text>
+                <Text style={styles.promptTitle}>Recovery Tips</Text>
+                <Text style={styles.promptSubtitle}>Rest & mobility</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.promptCard}
+                onPress={() =>
+                  handleSend("Can you explain basic supplements for fitness?")
+                }
+              >
+                <Text style={styles.promptEmoji}>🧃</Text>
+                <Text style={styles.promptTitle}>Supplements</Text>
+                <Text style={styles.promptSubtitle}>Basic guidance</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Safety Note */}
+          <View style={styles.noteCard}>
+            <Text style={styles.noteTitle}>Quick note</Text>
+            <Text style={styles.noteText}>
+              On Core Coach can help with general fitness, nutrition, and
+              recovery guidance. For injuries, pain, medical conditions, or
+              strict diet needs, check with a qualified professional.
             </Text>
           </View>
 
-          {/* Quick Prompts */}
-          <View style={styles.promptGrid}>
-            <TouchableOpacity style={styles.promptChip}>
-              <Text style={styles.promptText}>Workout Help</Text>
-            </TouchableOpacity>
+          {/* Conversation Messages */}
+          <View style={styles.conversationSection}>
+            {messages.map((message) => {
+              const isUser = message.sender === "user";
 
-            <TouchableOpacity style={styles.promptChip}>
-              <Text style={styles.promptText}>Meal Ideas</Text>
-            </TouchableOpacity>
+              return (
+                <View
+                  key={message.id}
+                  style={[styles.messageRow, isUser && styles.userMessageRow]}
+                >
+                  {!isUser && (
+                    <View style={styles.botAvatar}>
+                      <Text style={styles.botAvatarText}>AI</Text>
+                    </View>
+                  )}
 
-            <TouchableOpacity style={styles.promptChip}>
-              <Text style={styles.promptText}>Recovery Tips</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.promptChip}>
-              <Text style={styles.promptText}>Supplements</Text>
-            </TouchableOpacity>
+                  <View style={[isUser ? styles.userBubble : styles.botBubble]}>
+                    <Text style={isUser ? styles.userText : styles.botText}>
+                      {message.text}
+                    </Text>
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
 
@@ -79,11 +227,18 @@ export default function ChatbotScreen() {
         <View style={styles.inputBar}>
           <TextInput
             style={styles.input}
-            placeholder="Ask something..."
+            placeholder="Ask On Core Coach..."
             placeholderTextColor="#888888"
+            value={inputText}
+            onChangeText={setInputText}
+            onSubmitEditing={() => handleSend()}
+            returnKeyType="send"
           />
 
-          <TouchableOpacity style={styles.sendButton}>
+          <TouchableOpacity
+            style={styles.sendButton}
+            onPress={() => handleSend()}
+          >
             <Text style={styles.sendText}>➤</Text>
           </TouchableOpacity>
         </View>
@@ -110,6 +265,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.06)",
   },
 
   backText: {
@@ -121,7 +278,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#ffffff",
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "800",
   },
 
   placeholder: {
@@ -134,47 +291,95 @@ const styles = StyleSheet.create({
 
   chatContent: {
     paddingHorizontal: 16,
-    paddingBottom: 20,
+    paddingTop: 16,
+    paddingBottom: 24,
   },
 
-  introCard: {
+  heroCard: {
     backgroundColor: CARD_DARK,
-    borderRadius: 22,
-    padding: 18,
+    borderRadius: 26,
+    padding: 20,
+    alignItems: "center",
     marginBottom: 18,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.08)",
+    shadowColor: BRAND_RED,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 12,
+    elevation: 6,
   },
 
-  introLabel: {
+  robotCircle: {
+    width: 104,
+    height: 104,
+    borderRadius: 52,
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 14,
+  },
+
+  robotImage: {
+    width: 104,
+    height: 104,
+    borderRadius: 52,
+    resizeMode: "contain",
+  },
+
+  heroLabel: {
     color: BRAND_RED,
-    fontSize: 12,
-    fontWeight: "800",
-    letterSpacing: 1,
+    fontSize: 11,
+    fontWeight: "900",
+    letterSpacing: 1.2,
     marginBottom: 8,
   },
 
-  introTitle: {
+  heroTitle: {
     color: "#ffffff",
     fontSize: 26,
-    fontWeight: "800",
+    fontWeight: "900",
+    textAlign: "center",
     marginBottom: 8,
   },
 
-  introText: {
-    color: "#BBBBBB",
+  heroSubtitle: {
+    color: SOFT_GRAY,
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: 21,
+    textAlign: "center",
+  },
+
+  messageRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 14,
+  },
+
+  botAvatar: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: BRAND_RED,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+  },
+
+  botAvatarText: {
+    color: "#ffffff",
+    fontSize: 12,
+    fontWeight: "900",
   },
 
   botBubble: {
-    alignSelf: "flex-start",
-    backgroundColor: BUBBLE_DARK,
+    flex: 1,
+    backgroundColor: "#1f1f1f",
     borderRadius: 18,
     borderTopLeftRadius: 4,
     padding: 14,
-    maxWidth: "86%",
-    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.06)",
   },
 
   botText: {
@@ -183,25 +388,69 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
+  quickSection: {
+    marginBottom: 18,
+  },
+
+  quickTitle: {
+    color: "#ffffff",
+    fontSize: 17,
+    fontWeight: "800",
+    marginBottom: 12,
+  },
+
   promptGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 10,
+    justifyContent: "space-between",
+    rowGap: 12,
   },
 
-  promptChip: {
-    backgroundColor: "#0D0D0D",
-    borderRadius: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+  promptCard: {
+    width: "48%",
+    backgroundColor: CARD_DARKER,
+    borderRadius: 18,
+    padding: 14,
     borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.55)",
+    borderColor: "rgba(198,40,40,0.45)",
   },
 
-  promptText: {
+  promptEmoji: {
+    fontSize: 24,
+    marginBottom: 8,
+  },
+
+  promptTitle: {
     color: "#ffffff",
-    fontSize: 13,
-    fontWeight: "600",
+    fontSize: 14,
+    fontWeight: "800",
+    marginBottom: 4,
+  },
+
+  promptSubtitle: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+  },
+
+  noteCard: {
+    backgroundColor: "rgba(198,40,40,0.12)",
+    borderRadius: 18,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.35)",
+  },
+
+  noteTitle: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "800",
+    marginBottom: 6,
+  },
+
+  noteText: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+    lineHeight: 18,
   },
 
   inputBar: {
@@ -218,8 +467,8 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     backgroundColor: "#111111",
-    borderRadius: 18,
-    paddingHorizontal: 14,
+    borderRadius: 20,
+    paddingHorizontal: 15,
     paddingVertical: 12,
     color: "#ffffff",
     fontSize: 14,
@@ -240,6 +489,29 @@ const styles = StyleSheet.create({
   sendText: {
     color: "#ffffff",
     fontSize: 18,
-    fontWeight: "800",
+    fontWeight: "900",
+  },
+  userMessageRow: {
+    justifyContent: "flex-end",
+  },
+
+  userBubble: {
+    alignSelf: "flex-end",
+    backgroundColor: BRAND_RED,
+    borderRadius: 18,
+    borderTopRightRadius: 4,
+    padding: 14,
+    maxWidth: "86%",
+    marginBottom: 14,
+  },
+
+  userText: {
+    color: "#ffffff",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  conversationSection: {
+    marginTop: 18,
+    marginBottom: 10,
   },
 });
