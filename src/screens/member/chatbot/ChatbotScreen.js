@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -20,7 +20,6 @@ const SOFT_GRAY = "#BBBBBB";
 export default function ChatbotScreen() {
   const navigation = useNavigation();
   const [inputText, setInputText] = useState("");
-
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -28,6 +27,7 @@ export default function ChatbotScreen() {
       text: "Hey! I’m your On Core Coach. Choose a quick prompt below or type your own question.",
     },
   ]);
+  const scrollViewRef = useRef(null);
 
   function getTemporaryBotReply(userMessage) {
     const lowerMessage = userMessage.toLowerCase();
@@ -81,6 +81,12 @@ export default function ChatbotScreen() {
 
     setMessages((prevMessages) => [...prevMessages, userMessage, botReply]);
     setInputText("");
+    scrollToBottom();
+  }
+  function scrollToBottom() {
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    }, 100);
   }
 
   return (
@@ -98,9 +104,11 @@ export default function ChatbotScreen() {
         </View>
 
         <ScrollView
+          ref={scrollViewRef}
           style={styles.chatArea}
           contentContainerStyle={styles.chatContent}
           showsVerticalScrollIndicator={false}
+          onContentSizeChange={() => scrollToBottom()}
         >
           {/* Hero / Intro Section */}
           <View style={styles.heroCard}>
@@ -512,6 +520,6 @@ const styles = StyleSheet.create({
   },
   conversationSection: {
     marginTop: 18,
-    marginBottom: 10,
+    marginBottom: 0,
   },
 });
