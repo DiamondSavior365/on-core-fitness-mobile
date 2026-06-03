@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ImageBackground,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -112,23 +113,31 @@ export default function ChatbotScreen() {
           }}
         >
           {/* Hero / Intro Section */}
-          <View style={styles.heroCard}>
-            <View style={styles.robotCircle}>
-              <Image
-                source={require("../../../../assets/Chatbot_Images/chatbot_button_image_2.png")}
-                style={styles.robotImage}
-              />
+          <ImageBackground
+            source={require("../../../../assets/Chatbot_Images/chatbot_hero_card_image_3.png")}
+            style={styles.heroCard}
+            imageStyle={styles.heroBackgroundImage}
+          >
+            <View style={styles.heroOverlay}>
+              <View style={styles.heroContent}>
+                <View style={styles.robotCircle}>
+                  <Image
+                    source={require("../../../../assets/Chatbot_Images/chatbot_button_image_2.png")}
+                    style={styles.robotImage}
+                  />
+                </View>
+
+                <Text style={styles.heroLabel}>AI FITNESS ASSISTANT</Text>
+
+                <Text style={styles.heroTitle}>How can I help you today?</Text>
+
+                <Text style={styles.heroSubtitle}>
+                  Ask about workouts, meal ideas, recovery, supplements, or how
+                  to use the On Core Fitness app.
+                </Text>
+              </View>
             </View>
-
-            <Text style={styles.heroLabel}>AI FITNESS ASSISTANT</Text>
-
-            <Text style={styles.heroTitle}>How can I help you today?</Text>
-
-            <Text style={styles.heroSubtitle}>
-              Ask about workouts, meal ideas, recovery, supplements, or how to
-              use the On Core Fitness app.
-            </Text>
-          </View>
+          </ImageBackground>
 
           {/* Bot Welcome Message */}
           {/* <View style={styles.messageRow}>
@@ -307,8 +316,6 @@ const styles = StyleSheet.create({
   heroCard: {
     backgroundColor: CARD_DARK,
     borderRadius: 24,
-    padding: 16,
-    alignItems: "center",
     marginBottom: 14,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.08)",
@@ -317,6 +324,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 12,
     elevation: 6,
+    overflow: "hidden",
+  },
+
+  heroBackgroundImage: {
+    borderRadius: 24,
+    resizeMode: "cover",
+  },
+
+  heroOverlay: {
+    backgroundColor: "rgba(0,0,0,0.15)",
+    padding: 16,
+  },
+
+  heroContent: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   robotCircle: {
@@ -344,6 +367,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     letterSpacing: 1.2,
     marginBottom: 6,
+    textAlign: "center",
   },
 
   heroTitle: {
