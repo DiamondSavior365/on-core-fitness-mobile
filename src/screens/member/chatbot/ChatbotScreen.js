@@ -20,13 +20,8 @@ const SOFT_GRAY = "#BBBBBB";
 export default function ChatbotScreen() {
   const navigation = useNavigation();
   const [inputText, setInputText] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      sender: "bot",
-      text: "Hey! I’m your On Core Coach. Choose a quick prompt below or type your own question.",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
+  const [hasStartedChat, setHasStartedChat] = useState(false);
   const scrollViewRef = useRef(null);
 
   function getTemporaryBotReply(userMessage) {
@@ -66,6 +61,8 @@ export default function ChatbotScreen() {
     const trimmedMessage = messageText.trim();
 
     if (!trimmedMessage) return;
+
+    setHasStartedChat(true);
 
     const userMessage = {
       id: Date.now(),
@@ -108,7 +105,11 @@ export default function ChatbotScreen() {
           style={styles.chatArea}
           contentContainerStyle={styles.chatContent}
           showsVerticalScrollIndicator={false}
-          onContentSizeChange={() => scrollToBottom()}
+          onContentSizeChange={() => {
+            if (hasStartedChat) {
+              scrollToBottom();
+            }
+          }}
         >
           {/* Hero / Intro Section */}
           <View style={styles.heroCard}>
@@ -518,8 +519,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
+
   conversationSection: {
     marginTop: 18,
     marginBottom: 0,
+  },
+
+  emptyChatCard: {
+    backgroundColor: "#0D0D0D",
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+
+  emptyChatText: {
+    color: "#BBBBBB",
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: "center",
   },
 });
