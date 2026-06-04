@@ -367,6 +367,7 @@ const CARD_DARK = "#171717";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    // backgroundColor: BG_DARK,
     backgroundColor: BG_DARK,
   },
   container: {

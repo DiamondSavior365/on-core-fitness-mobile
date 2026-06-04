@@ -164,7 +164,10 @@ export default function ChatbotScreen() {
                   handleSend("Can you help me with a workout plan?")
                 }
               >
-                <Text style={styles.promptEmoji}>💪</Text>
+                <Image
+                  source={require("../../../../assets/Chatbot_Images/chatbot_workout_card_image_1.png")}
+                  style={styles.promptIcon}
+                />
                 <Text style={styles.promptTitle}>Workout Help</Text>
                 <Text style={styles.promptSubtitle}>Training ideas</Text>
               </TouchableOpacity>
@@ -175,7 +178,10 @@ export default function ChatbotScreen() {
                   handleSend("Give me healthy meal ideas after a workout.")
                 }
               >
-                <Text style={styles.promptEmoji}>🥗</Text>
+                <Image
+                  source={require("../../../../assets/Chatbot_Images/chatbot_meal_card_image_1.png")}
+                  style={styles.promptIcon}
+                />
                 <Text style={styles.promptTitle}>Meal Ideas</Text>
                 <Text style={styles.promptSubtitle}>Healthy eating</Text>
               </TouchableOpacity>
@@ -186,7 +192,10 @@ export default function ChatbotScreen() {
                   handleSend("How can I recover better after training?")
                 }
               >
-                <Text style={styles.promptEmoji}>🧘</Text>
+                <Image
+                  source={require("../../../../assets/Chatbot_Images/chatbot_recovery_card_image_1.png")}
+                  style={styles.promptIcon}
+                />
                 <Text style={styles.promptTitle}>Recovery Tips</Text>
                 <Text style={styles.promptSubtitle}>Rest & mobility</Text>
               </TouchableOpacity>
@@ -197,7 +206,10 @@ export default function ChatbotScreen() {
                   handleSend("Can you explain basic supplements for fitness?")
                 }
               >
-                <Text style={styles.promptEmoji}>🧃</Text>
+                <Image
+                  source={require("../../../../assets/Chatbot_Images/chatbot_supplements_card_image_1.png")}
+                  style={styles.promptIcon}
+                />
                 <Text style={styles.promptTitle}>Supplements</Text>
                 <Text style={styles.promptSubtitle}>Basic guidance</Text>
               </TouchableOpacity>
@@ -268,12 +280,13 @@ export default function ChatbotScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    // backgroundColor: BG_DARK,
     backgroundColor: BG_DARK,
   },
 
   container: {
     flex: 1,
-    backgroundColor: BG_DARK,
+    // backgroundColor: BG_DARK,
   },
 
   topRow: {
@@ -452,6 +465,14 @@ const styles = StyleSheet.create({
 
   promptEmoji: {
     fontSize: 24,
+    marginBottom: 8,
+  },
+
+  promptIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    resizeMode: "cover",
     marginBottom: 8,
   },
 
