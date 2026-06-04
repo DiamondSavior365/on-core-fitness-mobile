@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { sendChatMessage } from "../../../services/ChatbotService";
 
 const BRAND_RED = "#c62828";
 const BG_DARK = "#050505";
@@ -23,45 +24,19 @@ export default function ChatbotScreen() {
   const [inputText, setInputText] = useState("");
   const [messages, setMessages] = useState([]);
   const [hasStartedChat, setHasStartedChat] = useState(false);
+  const [isBotTyping, setIsBotTyping] = useState(false);
   const scrollViewRef = useRef(null);
 
-  function getTemporaryBotReply(userMessage) {
-    const lowerMessage = userMessage.toLowerCase();
-
-    if (lowerMessage.includes("workout")) {
-      return "I can help with workout ideas soon. For now, think about your goal first: strength, endurance, fat loss, or general fitness.";
-    }
-
-    if (
-      lowerMessage.includes("meal") ||
-      lowerMessage.includes("food") ||
-      lowerMessage.includes("nutrition")
-    ) {
-      return "For meals, a good starting point is lean protein, complex carbs, healthy fats, and vegetables. Soon I’ll be able to give more specific meal ideas.";
-    }
-
-    if (
-      lowerMessage.includes("recovery") ||
-      lowerMessage.includes("sore") ||
-      lowerMessage.includes("rest")
-    ) {
-      return "Recovery starts with sleep, hydration, mobility, and giving your body enough time to repair. If you feel pain or injury, check with a professional.";
-    }
-
-    if (
-      lowerMessage.includes("supplement") ||
-      lowerMessage.includes("protein")
-    ) {
-      return "Supplements can help support your goals, but they should not replace good nutrition. Protein, hydration, and consistency matter first.";
-    }
-
-    return "Great question. Soon I’ll be connected to the AI backend so I can give better fitness, nutrition, and recovery guidance.";
+  function scrollToBottom() {
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    }, 100);
   }
 
-  function handleSend(messageText = inputText) {
+  async function handleSend(messageText = inputText) {
     const trimmedMessage = messageText.trim();
 
-    if (!trimmedMessage) return;
+    if (!trimmedMessage || isBotTyping) return;
 
     setHasStartedChat(true);
 
@@ -71,20 +46,49 @@ export default function ChatbotScreen() {
       text: trimmedMessage,
     };
 
-    const botReply = {
+    const typingMessage = {
       id: Date.now() + 1,
       sender: "bot",
-      text: getTemporaryBotReply(trimmedMessage),
+      text: "On Core Coach is thinking...",
+      isTyping: true,
     };
 
-    setMessages((prevMessages) => [...prevMessages, userMessage, botReply]);
+    const updatedMessages = [...messages, userMessage];
+
+    setMessages([...updatedMessages, typingMessage]);
     setInputText("");
+    setIsBotTyping(true);
     scrollToBottom();
-  }
-  function scrollToBottom() {
-    setTimeout(() => {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
-    }, 100);
+
+    try {
+      const history = updatedMessages.slice(-6).map((message) => ({
+        role: message.sender === "user" ? "user" : "assistant",
+        content: message.text,
+      }));
+
+      const reply = await sendChatMessage(trimmedMessage, history);
+
+      const botReply = {
+        id: Date.now() + 2,
+        sender: "bot",
+        text: reply,
+      };
+
+      setMessages([...updatedMessages, botReply]);
+    } catch (error) {
+      console.log("Chatbot error:", error);
+
+      const errorReply = {
+        id: Date.now() + 3,
+        sender: "bot",
+        text: "I’m having trouble connecting right now. Please check your connection and try again in a moment.",
+      };
+
+      setMessages([...updatedMessages, errorReply]);
+    } finally {
+      setIsBotTyping(false);
+      scrollToBottom();
+    }
   }
 
   return (
@@ -243,7 +247,12 @@ export default function ChatbotScreen() {
                   )}
 
                   <View style={[isUser ? styles.userBubble : styles.botBubble]}>
-                    <Text style={isUser ? styles.userText : styles.botText}>
+                    <Text
+                      style={[
+                        isUser ? styles.userText : styles.botText,
+                        message.isTyping && styles.typingText,
+                      ]}
+                    >
                       {message.text}
                     </Text>
                   </View>
@@ -585,5 +594,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     textAlign: "center",
+  },
+  typingText: {
+    color: "#AAAAAA",
+    fontStyle: "italic",
   },
 });
