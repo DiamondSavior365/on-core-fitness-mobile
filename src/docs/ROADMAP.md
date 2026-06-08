@@ -14,6 +14,7 @@
 ## In Progress
 
 - Develop Sports Section
+
   - Create Sports home screen
   - Add league selection
   - Display upcoming games and schedules
@@ -27,9 +28,39 @@
   - Later: add live score updates
   - Later: add play-by-play tracking
 
+- Develop Events Section
+
+  - Create Events home screen
+  - Add local event discovery
+  - Add event categories such as concerts, raves, fitness, wellness, and sports
+  - Display event name, image, date, venue, city, and ticket/details link
+  - Add event detail pages
+  - Explore Ticketmaster, SeatGeek, and other event APIs
+  - Protect event API keys using Supabase Edge Functions
+  - Later: add location-based recommendations
+  - Later: add save event feature
+  - Later: add share event feature
+  - Later: add map/location view
+
+- Develop Route Generator Section
+  - Create route generator screen
+  - Add user location support
+  - Let users choose walking, jogging, running, or biking
+  - Let users enter target distance in miles
+  - Generate route options near the user
+  - Display route map preview
+  - Show distance, estimated time, pace, and calories
+  - Explore Google Maps Routes API
+  - Protect Google Maps API keys using Supabase Edge Functions
+  - Later: add loop route generation
+  - Later: add scenic route preferences
+  - Later: add saved routes
+  - Later: add route sharing
+  - Later: add completed route posts with captions, reactions, and comments
+
 ## Planned Features
 
-### Sections
+### App Sections
 
 - Sports Section
 - Trainer Section
