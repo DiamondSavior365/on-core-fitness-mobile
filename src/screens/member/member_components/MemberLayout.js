@@ -18,7 +18,8 @@ export default function MemberLayout({ children }) {
   const focusedRouteName = getFocusedRouteNameFromRoute(route) ?? "Member_Home";
 
   // Hide header ONLY on Store screen
-  const hideHeader = focusedRouteName === "Store_Screen";
+  const hideHeader =
+    focusedRouteName === "Store_Screen" || focusedRouteName === "Sports_Screen";
 
   return (
     <SafeAreaView style={styles.safeArea} edges={[]}>

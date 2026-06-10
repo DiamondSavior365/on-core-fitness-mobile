@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HomeIcon from "../../../../assets/icons/home.svg";
 import ProgressIcon from "../../../../assets/icons/history.svg";
 import MealIcon from "../../../../assets/icons/meal.svg";
+import SportIcon from "../../../../assets/icons/sport_icon_3.svg";
 import StoreIcon from "../../../../assets/icons/store2.svg";
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,7 +22,13 @@ export default function Footer() {
         }
       />
       <TabItem icon={ProgressIcon} label="Progress" onPress={() => {}} />
-      <TabItem icon={MealIcon} label="Meals" onPress={() => {}} />
+      <TabItem
+        icon={SportIcon}
+        label="Sports"
+        onPress={() =>
+          navigation.navigate("Member_Root", { screen: "Sports_Screen" })
+        }
+      />
       <TabItem
         icon={StoreIcon}
         label="Store"
@@ -33,9 +40,9 @@ export default function Footer() {
   );
 }
 
-const TabItem = ({ icon: Icon, label, onPress }) => (
+const TabItem = ({ icon: Icon, label, onPress, iconSize = 26 }) => (
   <TouchableOpacity style={styles.tabItem} onPress={onPress}>
-    <Icon width={26} height={26} color="#ffffff" />
+    <Icon width={iconSize} height={iconSize} fill="#ffffff" color="#ffffff" />
     <Text style={styles.tabLabel}>{label}</Text>
   </TouchableOpacity>
 );
