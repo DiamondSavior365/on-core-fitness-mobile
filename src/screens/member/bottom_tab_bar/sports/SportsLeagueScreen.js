@@ -9,15 +9,76 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { TODAY_GAMES, LIVE_GAMES, UPCOMING_GAMES } from "./data/sportsData";
 
 const BRAND_RED = "#c62828";
 const SOFT_GRAY = "#BBBBBB";
+
+const LEAGUE_TEAMS = {
+  NBA: ["Lakers", "Warriors", "Celtics", "Bulls"],
+  NFL: ["Cowboys", "49ers", "Chiefs", "Eagles"],
+  MLB: ["Dodgers", "Padres", "Yankees", "Mets"],
+  NHL: ["Kings", "Ducks", "Bruins", "Rangers"],
+  Soccer: ["LAFC", "Galaxy", "Inter Miami", "Arsenal"],
+  UFC: ["Main Card", "Prelims", "Rankings", "Events"],
+};
+
+function LeagueGameCard({ game, navigation }) {
+  const isLive = game.status?.toLowerCase().includes("live");
+
+  return (
+    <TouchableOpacity
+      style={styles.gameCard}
+      activeOpacity={0.85}
+      onPress={() =>
+        navigation.navigate("Sports_Game_Details_Screen", {
+          game,
+        })
+      }
+    >
+      <View style={styles.gameTopRow}>
+        <Text style={styles.gameLeague}>{game.league}</Text>
+
+        <View style={[styles.statusPill, isLive && styles.livePill]}>
+          <Text style={styles.statusText}>{game.status}</Text>
+        </View>
+      </View>
+
+      <View style={styles.matchupRow}>
+        <Text style={styles.teamText}>{game.awayTeam}</Text>
+
+        <Text style={styles.vsText}>{game.score || "vs"}</Text>
+
+        <Text style={styles.teamText}>{game.homeTeam}</Text>
+      </View>
+
+      {game.time && <Text style={styles.gameTime}>{game.time}</Text>}
+
+      {isLive && (
+        <Text style={styles.liveHint}>Tap to view live game session</Text>
+      )}
+    </TouchableOpacity>
+  );
+}
+function EmptyCard({ text }) {
+  return (
+    <View style={styles.emptyCard}>
+      <Text style={styles.emptyText}>{text}</Text>
+    </View>
+  );
+}
 
 export default function SportsLeagueScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
   const league = route.params?.league || "League";
+
+  const allGames = [...TODAY_GAMES, ...LIVE_GAMES, ...UPCOMING_GAMES];
+
+  const leagueGames = allGames.filter((game) => game.league === league);
+
+  const leagueTeams = LEAGUE_TEAMS[league] || [];
 
   return (
     <LinearGradient
@@ -55,14 +116,45 @@ export default function SportsLeagueScreen() {
             Schedules, scores, standings, team stats, and live game sessions
             will appear here.
           </Text>
+
+          <View style={styles.heroStatsRow}>
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>{leagueGames.length}</Text>
+              <Text style={styles.heroMiniLabel}>Games</Text>
+            </View>
+
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>{leagueTeams.length}</Text>
+              <Text style={styles.heroMiniLabel}>Teams</Text>
+            </View>
+
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>Live</Text>
+              <Text style={styles.heroMiniLabel}>Soon</Text>
+            </View>
+          </View>
         </View>
 
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Today’s {league} Games</Text>
           <Text style={styles.cardText}>
             League-specific game data will be connected here later.
           </Text>
+        </View> */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>{league} Games</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>See All ▸</Text>
+          </TouchableOpacity>
         </View>
+
+        {leagueGames.length > 0 ? (
+          leagueGames.map((game) => (
+            <LeagueGameCard key={game.id} game={game} navigation={navigation} />
+          ))
+        ) : (
+          <EmptyCard text={`No ${league} games are available yet.`} />
+        )}
 
         <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>{league} Standings</Text>
@@ -193,6 +285,146 @@ const styles = StyleSheet.create({
 
   cardText: {
     color: "#ffffff",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  // -----------------------------------
+  heroStatsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 18,
+  },
+
+  heroMiniStat: {
+    width: "31%",
+    backgroundColor: "rgba(17,17,17,0.9)",
+    borderRadius: 16,
+    paddingVertical: 12,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+
+  heroMiniNumber: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "900",
+  },
+
+  heroMiniLabel: {
+    color: SOFT_GRAY,
+    fontSize: 11,
+    marginTop: 4,
+  },
+  // -------------------
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 12,
+    marginTop: 4,
+  },
+
+  sectionTitle: {
+    color: "#ffffff",
+    fontSize: 24,
+    fontWeight: "900",
+  },
+
+  seeAllText: {
+    color: "#d7d7d7",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+
+  gameCard: {
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  gameTopRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
+
+  gameLeague: {
+    color: BRAND_RED,
+    fontSize: 13,
+    fontWeight: "900",
+    letterSpacing: 0.8,
+  },
+
+  statusPill: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  livePill: {
+    backgroundColor: "rgba(198,40,40,0.25)",
+    borderColor: "rgba(198,40,40,0.75)",
+  },
+
+  statusText: {
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "800",
+  },
+
+  matchupRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+
+  teamText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+    flex: 1,
+  },
+
+  vsText: {
+    color: SOFT_GRAY,
+    fontSize: 15,
+    fontWeight: "900",
+    marginHorizontal: 12,
+  },
+
+  gameTime: {
+    color: SOFT_GRAY,
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  liveHint: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+    fontWeight: "600",
+    marginTop: 2,
+  },
+
+  emptyCard: {
+    backgroundColor: "rgba(0,0,0,0.45)",
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+
+  emptyText: {
+    color: SOFT_GRAY,
     fontSize: 14,
     lineHeight: 20,
   },
