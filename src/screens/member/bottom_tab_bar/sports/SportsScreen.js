@@ -40,7 +40,10 @@ export default function SportsScreen() {
           <TouchableOpacity
             style={styles.sportsBackButton}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("Member_Home")}
+            // onPress={() => navigation.navigate("Member_Home")}
+            onPress={() =>
+              navigation.navigate("Member_Root", { screen: "Member_Home" })
+            }
           >
             <Text style={styles.sportsBackIcon}>‹</Text>
           </TouchableOpacity>

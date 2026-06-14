@@ -39,7 +39,9 @@ export default function StoreScreen() {
               <TouchableOpacity
                 style={styles.storeBackButton}
                 activeOpacity={0.8}
-                onPress={() => navigation.goBack()}
+                onPress={() =>
+                  navigation.navigate("Member_Root", { screen: "Member_Home" })
+                }
               >
                 <Text style={styles.storeBackIcon}>‹</Text>
               </TouchableOpacity>
