@@ -23,6 +23,39 @@ const LEAGUE_TEAMS = {
   UFC: ["Main Card", "Prelims", "Rankings", "Events"],
 };
 
+const STANDINGS_PREVIEW = {
+  NBA: [
+    { team: "Lakers", record: "0-0" },
+    { team: "Warriors", record: "0-0" },
+    { team: "Celtics", record: "0-0" },
+  ],
+  NFL: [
+    { team: "Cowboys", record: "0-0" },
+    { team: "49ers", record: "0-0" },
+    { team: "Chiefs", record: "0-0" },
+  ],
+  MLB: [
+    { team: "Dodgers", record: "0-0" },
+    { team: "Padres", record: "0-0" },
+    { team: "Yankees", record: "0-0" },
+  ],
+  NHL: [
+    { team: "Kings", record: "0-0" },
+    { team: "Ducks", record: "0-0" },
+    { team: "Bruins", record: "0-0" },
+  ],
+  Soccer: [
+    { team: "LAFC", record: "0-0-0" },
+    { team: "Galaxy", record: "0-0-0" },
+    { team: "Inter Miami", record: "0-0-0" },
+  ],
+  UFC: [
+    { team: "Upcoming Event", record: "TBD" },
+    { team: "Main Card", record: "TBD" },
+    { team: "Prelims", record: "TBD" },
+  ],
+};
+
 function LeagueGameCard({ game, navigation }) {
   const isLive = game.status?.toLowerCase().includes("live");
 
@@ -44,12 +77,24 @@ function LeagueGameCard({ game, navigation }) {
         </View>
       </View>
 
-      <View style={styles.matchupRow}>
+      {/* <View style={styles.matchupRow}>
         <Text style={styles.teamText}>{game.awayTeam}</Text>
 
         <Text style={styles.vsText}>{game.score || "vs"}</Text>
 
         <Text style={styles.teamText}>{game.homeTeam}</Text>
+      </View> */}
+
+      <View style={styles.matchupRow}>
+        <Text style={[styles.teamText, styles.awayTeamText]}>
+          {game.awayTeam}
+        </Text>
+
+        <Text style={styles.vsText}>{game.score || "vs"}</Text>
+
+        <Text style={[styles.teamText, styles.homeTeamText]}>
+          {game.homeTeam}
+        </Text>
       </View>
 
       {game.time && <Text style={styles.gameTime}>{game.time}</Text>}
@@ -79,6 +124,8 @@ export default function SportsLeagueScreen() {
   const leagueGames = allGames.filter((game) => game.league === league);
 
   const leagueTeams = LEAGUE_TEAMS[league] || [];
+
+  const standings = STANDINGS_PREVIEW[league] || [];
 
   return (
     <LinearGradient
@@ -156,7 +203,7 @@ export default function SportsLeagueScreen() {
           <EmptyCard text={`No ${league} games are available yet.`} />
         )}
 
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>{league} Standings</Text>
           <Text style={styles.cardText}>
             Team rankings and records will appear here once the sports API is
@@ -170,6 +217,54 @@ export default function SportsLeagueScreen() {
             Live scores, clocks, stats, and play-by-play will be added in a
             later version.
           </Text>
+        </View> */}
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Standings Preview</Text>
+        </View>
+
+        <View style={styles.standingsCard}>
+          {standings.map((item, index) => (
+            <View key={item.team} style={styles.standingRow}>
+              <Text style={styles.standingRank}>{index + 1}</Text>
+              <Text style={styles.standingTeam}>{item.team}</Text>
+              <Text style={styles.standingRecord}>{item.record}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Featured Teams</Text>
+        </View>
+
+        {/* <View style={styles.teamGrid}>
+          {leagueTeams.map((team) => (
+            <TouchableOpacity
+              key={team}
+              style={styles.teamCard}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.teamCardText}>{team}</Text>
+            </TouchableOpacity>
+          ))}
+        </View> */}
+
+        <View style={styles.teamGrid}>
+          {leagueTeams.map((team) => (
+            <TouchableOpacity
+              key={team}
+              style={styles.teamCard}
+              activeOpacity={0.85}
+              onPress={() =>
+                navigation.navigate("Sports_Team_Details_Screen", {
+                  league,
+                  team,
+                })
+              }
+            >
+              <Text style={styles.teamCardText}>{team}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     </LinearGradient>
@@ -380,6 +475,27 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
 
+  // matchupRow: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  //   marginBottom: 10,
+  // },
+
+  // teamText: {
+  //   color: "#ffffff",
+  //   fontSize: 18,
+  //   fontWeight: "900",
+  //   flex: 1,
+  // },
+
+  // vsText: {
+  //   color: SOFT_GRAY,
+  //   fontSize: 15,
+  //   fontWeight: "900",
+  //   marginHorizontal: 12,
+  // },
+
   matchupRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -394,11 +510,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  awayTeamText: {
+    // textAlign: "left",
+    textAlign: "center",
+  },
+
+  homeTeamText: {
+    // textAlign: "right",
+    textAlign: "center",
+  },
+
   vsText: {
     color: SOFT_GRAY,
     fontSize: 15,
     fontWeight: "900",
-    marginHorizontal: 12,
+    width: 42,
+    textAlign: "center",
   },
 
   gameTime: {
@@ -427,5 +554,66 @@ const styles = StyleSheet.create({
     color: SOFT_GRAY,
     fontSize: 14,
     lineHeight: 20,
+  },
+  // --------------------------------
+  standingsCard: {
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.35)",
+  },
+
+  standingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255,255,255,0.06)",
+  },
+
+  standingRank: {
+    color: BRAND_RED,
+    fontSize: 15,
+    fontWeight: "900",
+    width: 30,
+  },
+
+  standingTeam: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "800",
+    flex: 1,
+  },
+
+  standingRecord: {
+    color: SOFT_GRAY,
+    fontSize: 14,
+    fontWeight: "700",
+  },
+
+  teamGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 12,
+    marginBottom: 20,
+  },
+
+  teamCard: {
+    width: "48%",
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 18,
+    paddingVertical: 20,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.35)",
+  },
+
+  teamCardText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "900",
   },
 });

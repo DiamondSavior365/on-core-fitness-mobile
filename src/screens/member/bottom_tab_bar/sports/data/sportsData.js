@@ -47,4 +47,12 @@ export const UPCOMING_GAMES = [
     time: "Sat • 7:00 PM",
     status: "Scheduled",
   },
+  {
+    id: "3",
+    league: "UFC",
+    awayTeam: "Main Card",
+    homeTeam: "Fight Night",
+    time: "Sat • 7:00 PM",
+    status: "Scheduled",
+  },
 ];

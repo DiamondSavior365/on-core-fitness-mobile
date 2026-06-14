@@ -90,12 +90,24 @@ function GameCard({ game, isLive = false, navigation }) {
         </View>
       </View>
 
-      <View style={styles.matchupRow}>
+      {/* <View style={styles.matchupRow}>
         <Text style={styles.teamText}>{game.awayTeam}</Text>
 
         <Text style={styles.vsText}>{isLive ? game.score : "vs"}</Text>
 
         <Text style={styles.teamText}>{game.homeTeam}</Text>
+      </View> */}
+
+      <View style={styles.matchupRow}>
+        <Text style={[styles.teamText, styles.awayTeamText]}>
+          {game.awayTeam}
+        </Text>
+
+        <Text style={styles.vsText}>{isLive ? game.score : "vs"}</Text>
+
+        <Text style={[styles.teamText, styles.homeTeamText]}>
+          {game.homeTeam}
+        </Text>
       </View>
 
       {!isLive && <Text style={styles.gameTime}>{game.time}</Text>}
@@ -509,6 +521,27 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
 
+  // matchupRow: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  //   marginBottom: 10,
+  // },
+
+  // teamText: {
+  //   color: "#ffffff",
+  //   fontSize: 18,
+  //   fontWeight: "900",
+  //   flex: 1,
+  // },
+
+  // vsText: {
+  //   color: SOFT_GRAY,
+  //   fontSize: 15,
+  //   fontWeight: "900",
+  //   marginHorizontal: 12,
+  // },
+
   matchupRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -523,11 +556,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  awayTeamText: {
+    // textAlign: "left",
+    textAlign: "center",
+  },
+
+  homeTeamText: {
+    // textAlign: "right",
+    textAlign: "center",
+  },
+
   vsText: {
     color: SOFT_GRAY,
     fontSize: 15,
     fontWeight: "900",
-    marginHorizontal: 12,
+    width: 42,
+    textAlign: "center",
   },
 
   gameTime: {

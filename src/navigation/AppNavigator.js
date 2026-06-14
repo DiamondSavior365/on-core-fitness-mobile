@@ -33,6 +33,7 @@ import ChatbotScreen from "../screens/member/chatbot/ChatbotScreen";
 import SportsScreen from "../screens/member/bottom_tab_bar/sports/SportsScreen";
 import SportsLeagueScreen from "../screens/member/bottom_tab_bar/sports/SportsLeagueScreen";
 import SportsGameDetailsScreen from "../screens/member/bottom_tab_bar/sports/SportsGameDetailsScreen";
+import SportsTeamDetailsScreen from "../screens/member/bottom_tab_bar/sports/SportsTeamDetailScreen";
 // Member screens (example)
 // import MemberHomeScreen from "../screens/members/MemberHomeScreen";
 
@@ -262,6 +263,10 @@ function MemberInnerNavigator() {
           <MemberInnerStack.Screen
             name="Sports_Game_Details_Screen"
             component={SportsGameDetailsScreen}
+          />
+          <MemberInnerStack.Screen
+            name="Sports_Team_Details_Screen"
+            component={SportsTeamDetailsScreen}
           />
         </MemberInnerStack.Navigator>
       </MemberLayout>
