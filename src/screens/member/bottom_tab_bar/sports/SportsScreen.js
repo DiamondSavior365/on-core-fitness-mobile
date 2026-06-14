@@ -65,9 +65,17 @@ const UPCOMING_GAMES = [
   },
 ];
 
-function GameCard({ game, isLive = false }) {
+function GameCard({ game, isLive = false, navigation }) {
   return (
-    <TouchableOpacity style={styles.gameCard} activeOpacity={0.85}>
+    <TouchableOpacity
+      style={styles.gameCard}
+      activeOpacity={0.85}
+      onPress={() =>
+        navigation.navigate("Sports_Game_Details_Screen", {
+          game,
+        })
+      }
+    >
       <View style={styles.gameTopRow}>
         <Text style={styles.gameLeague}>{game.league}</Text>
 
@@ -168,7 +176,19 @@ export default function SportsScreen() {
 
         <View style={styles.leagueGrid}>
           {LEAGUES.map((league) => (
-            <TouchableOpacity key={league} style={styles.leagueCard}>
+            // <TouchableOpacity key={league} style={styles.leagueCard}>
+            //   <Text style={styles.leagueText}>{league}</Text>
+            // </TouchableOpacity>
+            <TouchableOpacity
+              key={league}
+              style={styles.leagueCard}
+              activeOpacity={0.85}
+              onPress={() =>
+                navigation.navigate("Sports_League_Screen", {
+                  league,
+                })
+              }
+            >
               <Text style={styles.leagueText}>{league}</Text>
             </TouchableOpacity>
           ))}
@@ -204,7 +224,7 @@ export default function SportsScreen() {
         </View>
 
         {TODAY_GAMES.map((game) => (
-          <GameCard key={game.id} game={game} />
+          <GameCard key={game.id} game={game} navigation={navigation} />
         ))}
 
         <View style={styles.sectionHeader}>
@@ -215,7 +235,7 @@ export default function SportsScreen() {
         </View>
 
         {LIVE_GAMES.map((game) => (
-          <GameCard key={game.id} game={game} isLive />
+          <GameCard key={game.id} game={game} isLive navigation={navigation} />
         ))}
 
         <View style={styles.sectionHeader}>
@@ -226,7 +246,7 @@ export default function SportsScreen() {
         </View>
 
         {UPCOMING_GAMES.map((game) => (
-          <GameCard key={game.id} game={game} />
+          <GameCard key={game.id} game={game} navigation={navigation} />
         ))}
       </ScrollView>
     </LinearGradient>
