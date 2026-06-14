@@ -16,6 +16,83 @@ const SOFT_GRAY = "#BBBBBB";
 
 const LEAGUES = ["NBA", "NFL", "MLB", "NHL", "Soccer", "UFC"];
 
+const TODAY_GAMES = [
+  {
+    id: "1",
+    league: "NBA",
+    awayTeam: "Lakers",
+    homeTeam: "Warriors",
+    time: "7:30 PM",
+    status: "Upcoming",
+  },
+  {
+    id: "2",
+    league: "NFL",
+    awayTeam: "Cowboys",
+    homeTeam: "49ers",
+    time: "5:20 PM",
+    status: "Upcoming",
+  },
+];
+
+const LIVE_GAMES = [
+  {
+    id: "1",
+    league: "MLB",
+    awayTeam: "Dodgers",
+    homeTeam: "Padres",
+    score: "3 - 2",
+    status: "Live • 6th Inning",
+  },
+];
+
+const UPCOMING_GAMES = [
+  {
+    id: "1",
+    league: "NHL",
+    awayTeam: "Kings",
+    homeTeam: "Ducks",
+    time: "Tomorrow • 6:00 PM",
+    status: "Scheduled",
+  },
+  {
+    id: "2",
+    league: "Soccer",
+    awayTeam: "LAFC",
+    homeTeam: "Galaxy",
+    time: "Sat • 7:00 PM",
+    status: "Scheduled",
+  },
+];
+
+function GameCard({ game, isLive = false }) {
+  return (
+    <TouchableOpacity style={styles.gameCard} activeOpacity={0.85}>
+      <View style={styles.gameTopRow}>
+        <Text style={styles.gameLeague}>{game.league}</Text>
+
+        <View style={[styles.statusPill, isLive && styles.livePill]}>
+          <Text style={styles.statusText}>{game.status}</Text>
+        </View>
+      </View>
+
+      <View style={styles.matchupRow}>
+        <Text style={styles.teamText}>{game.awayTeam}</Text>
+
+        <Text style={styles.vsText}>{isLive ? game.score : "vs"}</Text>
+
+        <Text style={styles.teamText}>{game.homeTeam}</Text>
+      </View>
+
+      {!isLive && <Text style={styles.gameTime}>{game.time}</Text>}
+
+      {isLive && (
+        <Text style={styles.liveHint}>Tap to view live game session</Text>
+      )}
+    </TouchableOpacity>
+  );
+}
+
 export default function SportsScreen() {
   const navigation = useNavigation();
 
@@ -25,15 +102,6 @@ export default function SportsScreen() {
       locations={[0, 0.4, 1]}
       style={styles.gradient}
     >
-      {/* <View style={styles.topRow}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backText}>‹ Back</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.headerTitle}>Sports</Text>
-
-        <View style={styles.placeholder} />
-      </View> */}
       {/* FIXED SPORTS HEADER */}
       <View style={styles.fixedSportsHeader}>
         <View style={styles.sportsTopRow}>
@@ -61,10 +129,38 @@ export default function SportsScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.heroTitle}>Sports Center</Text>
+        {/* <Text style={styles.heroTitle}>Sports Center</Text>
         <Text style={styles.heroSubtitle}>
           Follow scores, schedules, stats, and live games.
-        </Text>
+        </Text> */}
+
+        <View style={styles.heroCard}>
+          <Text style={styles.heroLabel}>LIVE SPORTS HUB</Text>
+
+          <Text style={styles.heroTitle}>Sports Center</Text>
+
+          <Text style={styles.heroSubtitle}>
+            Follow scores, schedules, stats, and live game sessions across your
+            favorite leagues.
+          </Text>
+
+          <View style={styles.heroStatsRow}>
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>6</Text>
+              <Text style={styles.heroMiniLabel}>Leagues</Text>
+            </View>
+
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>Live</Text>
+              <Text style={styles.heroMiniLabel}>Games</Text>
+            </View>
+
+            <View style={styles.heroMiniStat}>
+              <Text style={styles.heroMiniNumber}>Stats</Text>
+              <Text style={styles.heroMiniLabel}>Coming</Text>
+            </View>
+          </View>
+        </View>
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Leagues</Text>
@@ -78,7 +174,7 @@ export default function SportsScreen() {
           ))}
         </View>
 
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Today’s Games</Text>
           <Text style={styles.cardText}>
             Upcoming schedules and live scores will appear here.
@@ -99,7 +195,39 @@ export default function SportsScreen() {
             Team pages, player stats, favorite teams, schedules, and live game
             updates.
           </Text>
+        </View> */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Today’s Games</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>See All ▸</Text>
+          </TouchableOpacity>
         </View>
+
+        {TODAY_GAMES.map((game) => (
+          <GameCard key={game.id} game={game} />
+        ))}
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Live Games</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>See All ▸</Text>
+          </TouchableOpacity>
+        </View>
+
+        {LIVE_GAMES.map((game) => (
+          <GameCard key={game.id} game={game} isLive />
+        ))}
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Upcoming Games</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>See All ▸</Text>
+          </TouchableOpacity>
+        </View>
+
+        {UPCOMING_GAMES.map((game) => (
+          <GameCard key={game.id} game={game} />
+        ))}
       </ScrollView>
     </LinearGradient>
   );
@@ -108,33 +236,6 @@ export default function SportsScreen() {
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
-  },
-
-  topRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingTop: 52,
-    paddingBottom: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.08)",
-  },
-
-  backText: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  headerTitle: {
-    color: "#ffffff",
-    fontSize: 22,
-    fontWeight: "900",
-  },
-
-  placeholder: {
-    width: 52,
   },
 
   scroll: {
@@ -161,8 +262,16 @@ const styles = StyleSheet.create({
     marginBottom: 22,
   },
 
+  // sectionHeader: {
+  //   marginBottom: 12,
+  // },
+
   sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 12,
+    marginTop: 4,
   },
 
   sectionTitle: {
@@ -179,20 +288,35 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  // leagueCard: {
+  //   width: "48%",
+  //   backgroundColor: "rgba(17,17,17,0.9)",
+  //   borderRadius: 18,
+  //   paddingVertical: 22,
+  //   alignItems: "center",
+  //   borderWidth: 1,
+  //   borderColor: "rgba(255,255,255,0.08)",
+  // },
   leagueCard: {
     width: "48%",
-    backgroundColor: "rgba(17,17,17,0.9)",
+    backgroundColor: "rgba(0,0,0,0.55)",
     borderRadius: 18,
     paddingVertical: 22,
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "rgba(198,40,40,0.35)",
   },
 
+  // leagueText: {
+  //   color: "#ffffff",
+  //   fontSize: 18,
+  //   fontWeight: "900",
+  // },
   leagueText: {
     color: "#ffffff",
     fontSize: 18,
     fontWeight: "900",
+    letterSpacing: 0.5,
   },
 
   infoCard: {
@@ -260,5 +384,136 @@ const styles = StyleSheet.create({
   sportsHeaderPlaceholder: {
     width: 42,
     height: 42,
+  },
+
+  // --------------------------
+
+  heroCard: {
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 24,
+    padding: 18,
+    marginBottom: 22,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  heroLabel: {
+    color: BRAND_RED,
+    fontSize: 11,
+    fontWeight: "900",
+    letterSpacing: 1.3,
+    marginBottom: 8,
+  },
+
+  heroStatsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 16,
+  },
+
+  heroMiniStat: {
+    width: "31%",
+    backgroundColor: "rgba(17,17,17,0.9)",
+    borderRadius: 16,
+    paddingVertical: 12,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+  },
+
+  heroMiniNumber: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "900",
+  },
+
+  heroMiniLabel: {
+    color: SOFT_GRAY,
+    fontSize: 11,
+    marginTop: 4,
+  },
+
+  // -----------------
+  seeAllText: {
+    color: "#d7d7d7",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+
+  gameCard: {
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  gameTopRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
+
+  gameLeague: {
+    color: BRAND_RED,
+    fontSize: 13,
+    fontWeight: "900",
+    letterSpacing: 0.8,
+  },
+
+  statusPill: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  livePill: {
+    backgroundColor: "rgba(198,40,40,0.25)",
+    borderColor: "rgba(198,40,40,0.75)",
+  },
+
+  statusText: {
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "800",
+  },
+
+  matchupRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+
+  teamText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "900",
+    flex: 1,
+  },
+
+  vsText: {
+    color: SOFT_GRAY,
+    fontSize: 15,
+    fontWeight: "900",
+    marginHorizontal: 12,
+  },
+
+  gameTime: {
+    color: SOFT_GRAY,
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  liveHint: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+    fontWeight: "600",
+    marginTop: 2,
   },
 });
