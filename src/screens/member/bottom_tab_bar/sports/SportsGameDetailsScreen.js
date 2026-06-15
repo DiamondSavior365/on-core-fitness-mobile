@@ -48,7 +48,7 @@ export default function SportsGameDetailsScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.heroCard}>
+        {/* <View style={styles.heroCard}>
           <Text style={styles.heroLabel}>
             {game?.league || "LIVE GAME SESSION"}
           </Text>
@@ -64,6 +64,43 @@ export default function SportsGameDetailsScreen() {
           <View style={styles.scoreBox}>
             <Text style={styles.scoreText}>{game?.score || "Preview"}</Text>
           </View>
+        </View> */}
+        <View style={styles.heroCard}>
+          <View style={styles.heroTopRow}>
+            <Text style={styles.heroLabel}>
+              {game?.league || "LIVE GAME SESSION"}
+            </Text>
+
+            <View style={styles.statusPill}>
+              <Text style={styles.statusText}>{game?.status || "Preview"}</Text>
+            </View>
+          </View>
+
+          <View style={styles.scoreboardRow}>
+            <View style={styles.teamBlock}>
+              <Text style={styles.teamName}>{game?.awayTeam || "Away"}</Text>
+              <Text style={styles.teamLabel}>Away</Text>
+            </View>
+
+            <View style={styles.centerScoreBlock}>
+              <Text style={styles.scoreText}>{game?.score || "vs"}</Text>
+              <Text style={styles.gameTimeText}>
+                {game?.time || "Game Session"}
+              </Text>
+            </View>
+
+            <View style={styles.teamBlock}>
+              <Text style={[styles.teamName, styles.homeTeamName]}>
+                {game?.homeTeam || "Home"}
+              </Text>
+              <Text style={[styles.teamLabel, styles.homeTeamName]}>Home</Text>
+            </View>
+          </View>
+
+          <Text style={styles.heroSubtitle}>
+            Live score tracking, team stats, play-by-play, and AI insights will
+            appear here.
+          </Text>
         </View>
 
         <View style={styles.infoCard}>
@@ -171,33 +208,33 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  matchupTitle: {
-    color: "#ffffff",
-    fontSize: 28,
-    fontWeight: "900",
-    marginBottom: 8,
-  },
+  // matchupTitle: {
+  //   color: "#ffffff",
+  //   fontSize: 28,
+  //   fontWeight: "900",
+  //   marginBottom: 8,
+  // },
 
-  gameStatus: {
-    color: SOFT_GRAY,
-    fontSize: 14,
-    marginBottom: 16,
-  },
+  // gameStatus: {
+  //   color: SOFT_GRAY,
+  //   fontSize: 14,
+  //   marginBottom: 16,
+  // },
 
-  scoreBox: {
-    backgroundColor: "rgba(17,17,17,0.9)",
-    borderRadius: 18,
-    paddingVertical: 18,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.45)",
-  },
+  // scoreBox: {
+  //   backgroundColor: "rgba(17,17,17,0.9)",
+  //   borderRadius: 18,
+  //   paddingVertical: 18,
+  //   alignItems: "center",
+  //   borderWidth: 1,
+  //   borderColor: "rgba(198,40,40,0.45)",
+  // },
 
-  scoreText: {
-    color: "#ffffff",
-    fontSize: 34,
-    fontWeight: "900",
-  },
+  // scoreText: {
+  //   color: "#ffffff",
+  //   fontSize: 34,
+  //   fontWeight: "900",
+  // },
 
   infoCard: {
     backgroundColor: "rgba(0,0,0,0.55)",
@@ -219,5 +256,80 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 14,
     lineHeight: 20,
+  },
+
+  // ----------------------------------
+  heroTopRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+
+  statusPill: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "rgba(198,40,40,0.25)",
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.75)",
+  },
+
+  statusText: {
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "900",
+  },
+
+  scoreboardRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+
+  teamBlock: {
+    flex: 1,
+  },
+
+  teamName: {
+    color: "#ffffff",
+    fontSize: 22,
+    fontWeight: "900",
+  },
+
+  homeTeamName: {
+    textAlign: "right",
+  },
+
+  teamLabel: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+    fontWeight: "700",
+    marginTop: 4,
+  },
+
+  centerScoreBlock: {
+    width: 90,
+    alignItems: "center",
+  },
+
+  gameTimeText: {
+    color: SOFT_GRAY,
+    fontSize: 11,
+    fontWeight: "700",
+    marginTop: 4,
+    textAlign: "center",
+  },
+
+  heroSubtitle: {
+    color: SOFT_GRAY,
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  scoreText: {
+    color: "#ffffff",
+    fontSize: 30,
+    fontWeight: "900",
   },
 });
