@@ -111,14 +111,46 @@ export default function SportsGameDetailsScreen() {
           </Text>
         </View>
 
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Team Stats</Text>
           <Text style={styles.cardText}>
             Shooting, possession, yards, hits, shots, or league-specific stats
             will be shown here.
           </Text>
-        </View>
+        </View> */}
+        <View style={styles.infoCard}>
+          <Text style={styles.cardTitle}>Team Stats</Text>
 
+          <View style={styles.statRow}>
+            <Text style={styles.statTeam}>{game?.awayTeam || "Away"}</Text>
+            <Text style={styles.statLabel}>Possession</Text>
+            <Text style={styles.statTeamRight}>{game?.homeTeam || "Home"}</Text>
+          </View>
+
+          <View style={styles.statBarRow}>
+            <View style={[styles.statBar, { flex: 0.48 }]} />
+            <View style={styles.statBarDivider} />
+            <View style={[styles.statBar, { flex: 0.52 }]} />
+          </View>
+
+          <View style={styles.statRow}>
+            <Text style={styles.statValue}>48%</Text>
+            <Text style={styles.statLabel}>Projected Control</Text>
+            <Text style={styles.statValueRight}>52%</Text>
+          </View>
+
+          <View style={styles.statRow}>
+            <Text style={styles.statValue}>--</Text>
+            <Text style={styles.statLabel}>Shots / Attempts</Text>
+            <Text style={styles.statValueRight}>--</Text>
+          </View>
+
+          <View style={styles.statRow}>
+            <Text style={styles.statValue}>--</Text>
+            <Text style={styles.statLabel}>Key Plays</Text>
+            <Text style={styles.statValueRight}>--</Text>
+          </View>
+        </View>
         <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Play-by-Play</Text>
           <Text style={styles.cardText}>
@@ -208,34 +240,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  // matchupTitle: {
-  //   color: "#ffffff",
-  //   fontSize: 28,
-  //   fontWeight: "900",
-  //   marginBottom: 8,
-  // },
-
-  // gameStatus: {
-  //   color: SOFT_GRAY,
-  //   fontSize: 14,
-  //   marginBottom: 16,
-  // },
-
-  // scoreBox: {
-  //   backgroundColor: "rgba(17,17,17,0.9)",
-  //   borderRadius: 18,
-  //   paddingVertical: 18,
-  //   alignItems: "center",
-  //   borderWidth: 1,
-  //   borderColor: "rgba(198,40,40,0.45)",
-  // },
-
-  // scoreText: {
-  //   color: "#ffffff",
-  //   fontSize: 34,
-  //   fontWeight: "900",
-  // },
-
   infoCard: {
     backgroundColor: "rgba(0,0,0,0.55)",
     borderRadius: 18,
@@ -258,7 +262,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
-  // ----------------------------------
+  // ----------------Top Card Styling ------------------
+
   heroTopRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -331,5 +336,69 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 30,
     fontWeight: "900",
+  },
+
+  // -------------- Team Stats Card Styling --------------------
+  statRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 8,
+  },
+
+  statTeam: {
+    color: "#ffffff",
+    fontSize: 13,
+    fontWeight: "900",
+    flex: 1,
+  },
+
+  statTeamRight: {
+    color: "#ffffff",
+    fontSize: 13,
+    fontWeight: "900",
+    flex: 1,
+    textAlign: "right",
+  },
+
+  statLabel: {
+    color: SOFT_GRAY,
+    fontSize: 12,
+    fontWeight: "700",
+    textAlign: "center",
+    flex: 1.2,
+  },
+
+  statValue: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "800",
+    flex: 1,
+  },
+
+  statValueRight: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "800",
+    flex: 1,
+    textAlign: "right",
+  },
+
+  statBarRow: {
+    flexDirection: "row",
+    height: 8,
+    borderRadius: 999,
+    overflow: "hidden",
+    backgroundColor: "rgba(255,255,255,0.08)",
+    marginVertical: 8,
+  },
+
+  statBar: {
+    backgroundColor: "rgba(198,40,40,0.75)",
+  },
+
+  statBarDivider: {
+    width: 2,
+    backgroundColor: "#000000",
   },
 });
