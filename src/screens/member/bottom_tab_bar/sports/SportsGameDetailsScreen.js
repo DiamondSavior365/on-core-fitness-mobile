@@ -151,11 +151,50 @@ export default function SportsGameDetailsScreen() {
             <Text style={styles.statValueRight}>--</Text>
           </View>
         </View>
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Play-by-Play</Text>
           <Text style={styles.cardText}>
             Live game events and updates will be added in a later version.
           </Text>
+        </View> */}
+        <View style={styles.infoCard}>
+          <View style={styles.cardHeaderRow}>
+            <Text style={styles.cardTitle}>Play-by-Play</Text>
+            <Text style={styles.cardBadge}>Coming Soon</Text>
+          </View>
+
+          <View style={styles.playRow}>
+            <View style={styles.playDot} />
+            <View style={styles.playTextBlock}>
+              <Text style={styles.playTime}>Pregame</Text>
+              <Text style={styles.playText}>
+                Game updates, scoring plays, substitutions, and momentum shifts
+                will appear here once live data is connected.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.playRow}>
+            <View style={styles.playDotMuted} />
+            <View style={styles.playTextBlock}>
+              <Text style={styles.playTime}>Live Feed</Text>
+              <Text style={styles.playText}>
+                This section will later refresh with real-time events from the
+                sports API.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.playRow}>
+            <View style={styles.playDotMuted} />
+            <View style={styles.playTextBlock}>
+              <Text style={styles.playTime}>AI Notes</Text>
+              <Text style={styles.playText}>
+                Future AI summaries can highlight key plays, team momentum, and
+                possible turning points.
+              </Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -339,6 +378,7 @@ const styles = StyleSheet.create({
   },
 
   // -------------- Team Stats Card Styling --------------------
+
   statRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -400,5 +440,67 @@ const styles = StyleSheet.create({
   statBarDivider: {
     width: 2,
     backgroundColor: "#000000",
+  },
+
+  // -------------- Play-by-Play Card Styling --------------------
+
+  cardHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+
+  cardBadge: {
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "900",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+    backgroundColor: "rgba(198,40,40,0.25)",
+    borderWidth: 1,
+    borderColor: "rgba(198,40,40,0.65)",
+  },
+
+  playRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    paddingVertical: 10,
+  },
+
+  playDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: BRAND_RED,
+    marginTop: 5,
+    marginRight: 12,
+  },
+
+  playDotMuted: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "rgba(255,255,255,0.25)",
+    marginTop: 5,
+    marginRight: 12,
+  },
+
+  playTextBlock: {
+    flex: 1,
+  },
+
+  playTime: {
+    color: "#ffffff",
+    fontSize: 13,
+    fontWeight: "900",
+    marginBottom: 4,
+  },
+
+  playText: {
+    color: SOFT_GRAY,
+    fontSize: 13,
+    lineHeight: 19,
   },
 });
