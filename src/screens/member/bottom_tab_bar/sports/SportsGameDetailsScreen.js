@@ -230,6 +230,10 @@ export default function SportsGameDetailsScreen() {
   const insightText = getLeagueInsightText(game?.league);
   const playByPlayText = getLeaguePlayByPlayText(game?.league);
 
+  const isLiveGame = game?.status?.toLowerCase().includes("live");
+  const centerDisplay = isLiveGame && game?.score ? game.score : "VS";
+  const gameTimeDisplay = game?.time || game?.status || "Game Session";
+
   const [isFollowing, setIsFollowing] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -337,8 +341,17 @@ export default function SportsGameDetailsScreen() {
               {game?.league || "LIVE GAME SESSION"}
             </Text>
 
-            <View style={styles.statusPill}>
+            {/* <View style={styles.statusPill}>
               <Text style={styles.statusText}>{game?.status || "Preview"}</Text>
+            </View> */}
+            <View
+              style={[styles.statusPill, isLiveGame && styles.liveStatusPill]}
+            >
+              <Text
+                style={[styles.statusText, isLiveGame && styles.liveStatusText]}
+              >
+                {game?.status || "Preview"}
+              </Text>
             </View>
           </View>
 
@@ -349,10 +362,12 @@ export default function SportsGameDetailsScreen() {
             </View>
 
             <View style={styles.centerScoreBlock}>
-              <Text style={styles.scoreText}>{game?.score || "vs"}</Text>
+              {/* <Text style={styles.scoreText}>{game?.score || "vs"}</Text>
               <Text style={styles.gameTimeText}>
                 {game?.time || "Game Session"}
-              </Text>
+              </Text> */}
+              <Text style={styles.scoreText}>{centerDisplay}</Text>
+              <Text style={styles.gameTimeText}>{gameTimeDisplay}</Text>
             </View>
 
             <View style={styles.teamBlock}>
@@ -685,19 +700,40 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
 
+  // statusPill: {
+  //   paddingHorizontal: 12,
+  //   paddingVertical: 6,
+  //   borderRadius: 999,
+  //   backgroundColor: "rgba(198,40,40,0.25)",
+  //   borderWidth: 1,
+  //   borderColor: "rgba(198,40,40,0.75)",
+  // },
   statusPill: {
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 999,
-    backgroundColor: "rgba(198,40,40,0.25)",
+    backgroundColor: "rgba(255,255,255,0.08)",
     borderWidth: 1,
-    borderColor: "rgba(198,40,40,0.75)",
+    borderColor: "rgba(255,255,255,0.14)",
   },
 
+  // statusText: {
+  //   color: "#ffffff",
+  //   fontSize: 11,
+  //   fontWeight: "900",
+  // },
   statusText: {
-    color: "#ffffff",
+    color: SOFT_GRAY,
     fontSize: 11,
     fontWeight: "900",
+  },
+  liveStatusPill: {
+    backgroundColor: "rgba(198,40,40,0.28)",
+    borderColor: "rgba(198,40,40,0.85)",
+  },
+
+  liveStatusText: {
+    color: "#ffffff",
   },
 
   scoreboardRow: {
@@ -748,8 +784,9 @@ const styles = StyleSheet.create({
   },
   scoreText: {
     color: "#ffffff",
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "900",
+    letterSpacing: 1,
   },
 
   // -------------- Game Overview Card Styling --------------------
