@@ -384,7 +384,7 @@ export default function SportsGameDetailsScreen() {
           </Text>
         </View>
 
-        <View style={styles.infoCard}>
+        {/* <View style={styles.infoCard}>
           <Text style={styles.cardTitle}>Game Overview</Text>
 
           <View style={styles.overviewRow}>
@@ -408,6 +408,40 @@ export default function SportsGameDetailsScreen() {
             <Text style={styles.overviewLabel}>Matchup</Text>
             <Text style={styles.overviewValue}>
               {game?.awayTeam || "Away"} vs {game?.homeTeam || "Home"}
+            </Text>
+          </View>
+        </View> */}
+        <View style={styles.infoCard}>
+          <View style={styles.cardHeaderRow}>
+            <Text style={styles.cardTitle}>Game Overview</Text>
+            <Text style={styles.cardBadge}>Details</Text>
+          </View>
+
+          <View style={styles.overviewRow}>
+            <Text style={styles.overviewLabel}>League</Text>
+            <Text style={styles.overviewValue}>{game?.league || "Sports"}</Text>
+          </View>
+
+          <View style={styles.overviewRow}>
+            <Text style={styles.overviewLabel}>Matchup</Text>
+            <Text style={styles.overviewValue}>
+              {game?.awayTeam || "Away"} vs {game?.homeTeam || "Home"}
+            </Text>
+          </View>
+
+          <View style={styles.overviewRow}>
+            <Text style={styles.overviewLabel}>Status</Text>
+            <Text style={styles.overviewValue}>
+              {game?.status || "Preview"}
+            </Text>
+          </View>
+
+          <View style={styles.overviewRow}>
+            <Text style={styles.overviewLabel}>
+              {isLiveGame ? "Current Score" : "Start Time"}
+            </Text>
+            <Text style={styles.overviewValue}>
+              {isLiveGame ? centerDisplay : gameTimeDisplay}
             </Text>
           </View>
         </View>
@@ -543,6 +577,18 @@ export default function SportsGameDetailsScreen() {
           <Text style={styles.cardTitle}>Game Actions</Text>
 
           <View style={styles.actionGrid}>
+            {/* <TouchableOpacity
+              style={[
+                styles.actionButton,
+                isFollowing && styles.actionButtonActive,
+              ]}
+              activeOpacity={0.85}
+              onPress={handleFollowGame}
+            >
+              <Text style={styles.actionButtonText}>
+                {isFollowing ? "Following" : "Follow Game"}
+              </Text>
+            </TouchableOpacity> */}
             <TouchableOpacity
               style={[
                 styles.actionButton,
@@ -554,8 +600,24 @@ export default function SportsGameDetailsScreen() {
               <Text style={styles.actionButtonText}>
                 {isFollowing ? "Following" : "Follow Game"}
               </Text>
+
+              <Text style={styles.actionButtonSubtext}>
+                {isFollowing ? "Updates enabled soon" : "Track this matchup"}
+              </Text>
             </TouchableOpacity>
 
+            {/* <TouchableOpacity
+              style={[
+                styles.actionButton,
+                isSaved && styles.actionButtonActive,
+              ]}
+              activeOpacity={0.85}
+              onPress={handleSaveMatchup}
+            >
+              <Text style={styles.actionButtonText}>
+                {isSaved ? "Saved" : "Save Matchup"}
+              </Text>
+            </TouchableOpacity> */}
             <TouchableOpacity
               style={[
                 styles.actionButton,
@@ -567,24 +629,54 @@ export default function SportsGameDetailsScreen() {
               <Text style={styles.actionButtonText}>
                 {isSaved ? "Saved" : "Save Matchup"}
               </Text>
+
+              <Text style={styles.actionButtonSubtext}>
+                {isSaved ? "Added to saved games" : "Save for later"}
+              </Text>
             </TouchableOpacity>
 
+            {/* <TouchableOpacity
+              style={styles.actionButton}
+              activeOpacity={0.85}
+              onPress={handleViewPrediction}
+            >
+              <Text style={styles.actionButtonText}>View Prediction</Text>
+            </TouchableOpacity> */}
             <TouchableOpacity
               style={styles.actionButton}
               activeOpacity={0.85}
               onPress={handleViewPrediction}
             >
               <Text style={styles.actionButtonText}>View Prediction</Text>
+              <Text style={styles.actionButtonSubtext}>AI preview</Text>
             </TouchableOpacity>
 
+            {/* <TouchableOpacity
+              style={styles.actionButton}
+              activeOpacity={0.85}
+              onPress={handleShareGame}
+            >
+              <Text style={styles.actionButtonText}>Share Game</Text>
+            </TouchableOpacity> */}
             <TouchableOpacity
               style={styles.actionButton}
               activeOpacity={0.85}
               onPress={handleShareGame}
             >
               <Text style={styles.actionButtonText}>Share Game</Text>
+              <Text style={styles.actionButtonSubtext}>Send matchup</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.devNoteCard}>
+          <Text style={styles.devNoteTitle}>Sports Data Roadmap</Text>
+
+          <Text style={styles.devNoteText}>
+            This live game session is currently using mock sports data. Future
+            versions will connect real schedules, scores, team stats,
+            play-by-play, predictions, and algorithm success rate tracking
+            through a protected sports API backend.
+          </Text>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -1000,5 +1092,34 @@ const styles = StyleSheet.create({
   actionButtonActive: {
     backgroundColor: "rgba(255,255,255,0.12)",
     borderColor: "rgba(255,255,255,0.35)",
+  },
+  actionButtonSubtext: {
+    color: SOFT_GRAY,
+    fontSize: 10,
+    fontWeight: "700",
+    marginTop: 4,
+    textAlign: "center",
+  },
+  // -------------- Data Roadmap Card Styling --------------------
+  devNoteCard: {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+  },
+
+  devNoteTitle: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "900",
+    marginBottom: 8,
+  },
+
+  devNoteText: {
+    color: SOFT_GRAY,
+    fontSize: 13,
+    lineHeight: 19,
   },
 });
